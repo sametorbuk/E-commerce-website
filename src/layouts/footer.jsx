@@ -29,7 +29,7 @@ const footerData = [
   },
   {
     title: "Resourses",
-    row1: "IOS & Adnroid",
+    row1: "IOS & Android",
     row2: "Watch a demo",
     row3: "Customers",
     row4: "API",
