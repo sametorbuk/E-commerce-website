@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  @apply bg-white md:bg-white relative text-black  md:absolute  px-[2.5rem]  py-[0.7rem]  font-bold;
+}
+
+.btnBuyGreen {
+  @apply px-[1rem] w-[9rem] bg-[#23A6F0] py-[0.5rem] md:bg-[#2DC071] md:py-[0.7rem] md:px-[0.7rem] md:w-[8rem] rounded-md font-bold text-white;
+}
+
+.btnTransparent {
+  @apply px-[1rem] w-[9rem]   bg-white  md:text-[#2DC071] py-[0.5rem] md:bg-white md:py-[0.7rem] md:px-[0.7rem] md:w-[8rem] rounded-md font-bold text-white;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0; /* Ayrıca margin'i sıfırlamak faydalı olabilir */
+}
