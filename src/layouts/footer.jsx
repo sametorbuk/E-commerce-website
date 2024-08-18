@@ -39,7 +39,7 @@ const footerData = [
 export default function Footer() {
   return (
     <>
-      <div className="flex flex-col  w-screen md:justify-center items-center mt-[6rem] ">
+      <div className="flex flex-col  w-screen md:justify-center items-center mt-[4rem] ">
         <div className="flex flex-col md:flex md:justify-between md:flex-row px-[2rem] md:px-[0rem] gap-[2rem] md:items-center w-screen md:w-[60rem] pb-[2rem] border-b-2 border-gray-200">
           <h2 className="font-bold text-2xl ">Bandage</h2>
 
