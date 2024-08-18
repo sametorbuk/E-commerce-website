@@ -1,10 +1,24 @@
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faChevronRight,
+  faList,
+  faTableCellsLarge,
+} from "@fortawesome/free-solid-svg-icons";
 import Header from "../layouts/header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { useState } from "react";
 import "../App.css";
 import Product from "../components/product";
+import Footer from "../layouts/footer";
+import {
+  faAws,
+  faHooli,
+  faLyft,
+  faPiedPiperHat,
+  faRedditAlien,
+  faStripe,
+} from "@fortawesome/free-brands-svg-icons";
 
 const catImgData = [
   "./images/shop-page-category/shop-page-category-image1.jpg",
@@ -27,11 +41,31 @@ const productData = [
   "./images/bestseller-product/best-seller-6.jpg",
   "./images/bestseller-product/best-seller-7.jpg",
   "./images/bestseller-product/best-seller-8.jpg",
+  "./images/bestseller-product/best-seller-1.jpg",
+  "./images/bestseller-product/best-seller-6.jpg",
+  "./images/bestseller-product/best-seller-3.jpg",
+  "./images/bestseller-product/best-seller-7.jpg",
+  "./images/bestseller-product/best-seller-5.jpg",
+  "./images/bestseller-product/best-seller-3.jpg",
+  "./images/bestseller-product/best-seller-7.jpg",
+  "./images/bestseller-product/best-seller-8.jpg",
+  "./images/bestseller-product/best-seller-1.jpg",
+  "./images/bestseller-product/best-seller-4.jpg",
+  "./images/bestseller-product/best-seller-2.jpg",
+  "./images/bestseller-product/best-seller-5.jpg",
+  "./images/bestseller-product/best-seller-1.jpg",
+  "./images/bestseller-product/best-seller-8.jpg",
+  "./images/bestseller-product/best-seller-5.jpg",
+  "./images/bestseller-product/best-seller-7.jpg",
+  "./images/bestseller-product/best-seller-1.jpg",
+  "./images/bestseller-product/best-seller-6.jpg",
+  "./images/bestseller-product/best-seller-7.jpg",
+  "./images/bestseller-product/best-seller-4.jpg",
+  "./images/bestseller-product/best-seller-5.jpg",
+  "./images/bestseller-product/best-seller-1.jpg",
+  "./images/bestseller-product/best-seller-2.jpg",
+  "./images/bestseller-product/best-seller-4.jpg",
 ];
-
-const firstFour = productData.slice(0, 4);
-const secondFour = productData.slice(4, 8);
-const thirdFour = productData.slice(8, 12);
 
 export default function ShopPage() {
   const [activePage, setActivePage] = useState(1);
@@ -41,11 +75,25 @@ export default function ShopPage() {
     setActivePage(pageNumber);
     console.log(activePage);
   };
+
+  const currenPaginationData = () => {
+    let data = null;
+    if (activePage === 1) {
+      data = productData.slice(0, 12);
+    } else if (activePage === 2) {
+      data = productData.slice(12, 24);
+    } else if (activePage === 3) {
+      data = productData.slice(24, 36);
+    }
+
+    return data;
+  };
+
   return (
     <>
       <Header />
 
-      <main className=" flex-col  md:flex md:h-screen md:flex-col border-2 items-center border-red-500 md:px-[5rem] gap-[2rem]">
+      <main className=" flex-col  md:flex md:flex-col items-center justify-center  md:px-[5rem] gap-[2rem]">
         <div className="flex flex-col mt-[2rem] gap-[2rem]  items-center md:flex-row w-full justify-between">
           <h2 className="font-bold text-xl">Shop</h2>
 
@@ -83,67 +131,114 @@ export default function ShopPage() {
           })}
         </section>
 
-        <div className="flex flex-col w-screen md:flex md:w-screen md:flex-col gap-[7rem] items-center md:w-screen mt-[4rem] md:mt-[6rem] mb-[6rem] ">
-          <div className="flex flex-col md:flex md:flex-row justify-between">
-            {firstFour.map((item, ind) => {
-              return <Product key={ind} item={item} />;
-            })}
-          </div>
-          <div className="flex flex-col md:flex md:flex-row justify-between">
-            {secondFour.map((item, ind) => {
-              return <Product key={ind} item={item} />;
-            })}
+        <div className="flex flex-col md:flex md:flex-row justify-center gap-[1rem] justify-between mt-[2rem] w-full items-center  ">
+          <p className="text-[#737373] font-bold">Showing all 12 results </p>
+
+          <div className="flex gap-[1rem]  items-center ">
+            <p className="text-[#737373] font-bold ">Views:</p>
+            <button className="p-[0.7rem] border border-gray-300 rounded-md ">
+              <FontAwesomeIcon icon={faTableCellsLarge} />
+            </button>
+            <button className="p-[0.7rem] border border-gray-300 rounded-md">
+              <FontAwesomeIcon icon={faList} />
+            </button>
           </div>
 
-          <div className="flex flex-col md:flex md:flex-row justify-between">
-            {thirdFour.map((item, ind) => {
-              return <Product key={ind} item={item} />;
-            })}
+          <div className="flex gap-[1.5rem]">
+            <button className="items-center  border border-gray-500 p-[0.5rem] w-[7rem] rounded-md ">
+              Popularity <FontAwesomeIcon icon={faChevronDown} />
+            </button>
+            <button className=" text-white font-bold p-[0.5rem] w-[6rem] rounded-md bg-[#23A6F0]">
+              Filter
+            </button>
           </div>
         </div>
 
-        <Pagination aria-label="Page navigation example">
-          <PaginationItem disabled={activePage === 1}>
-            <PaginationLink
-              onClick={() => handlePageChange(1)}
-              first
-              href="#"
-            />
-          </PaginationItem>
-          <PaginationItem disabled={activePage === 1}>
-            <PaginationLink
-              onClick={() => handlePageChange(activePage - 1)}
-              previous
-              href="#"
-            />
-          </PaginationItem>
-          <PaginationItem active={activePage === 1}>
-            <PaginationLink onClick={() => handlePageChange(1)} href="#">
-              1
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem active={activePage === 2}>
-            <PaginationLink onClick={() => handlePageChange(2)} href="#">
-              2
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem active={activePage === 3}>
-            <PaginationLink onClick={() => handlePageChange(3)} href="#">
-              3
-            </PaginationLink>
-          </PaginationItem>
-          <PaginationItem disabled={activePage === 3}>
-            <PaginationLink
-              onClick={() => handlePageChange(activePage + 1)}
-              next
-              href="#"
-            />
-          </PaginationItem>
-          <PaginationItem disabled={activePage === 3}>
-            <PaginationLink onClick={() => handlePageChange(3)} last href="#" />
-          </PaginationItem>
-        </Pagination>
+        <div className="flex flex-col gap-[2.7rem] items-center">
+          <div className="flex flex-col w-screen md:flex md:w-screen md:flex-col gap-[2rem]  md:gap-[5rem] items-center md:w-screen mt-[4rem] md:mt-[2rem]  ">
+            <div className="flex flex-col gap-[2.5rem] md:gap-[0rem]  md:flex md:flex-row justify-between">
+              {currenPaginationData()
+                .slice(0, 4)
+                .map((item, ind) => {
+                  return <Product key={ind} item={item} />;
+                })}
+            </div>
+            <div className="flex flex-col gap-[2.5rem] md:gap-[0rem] md:flex md:flex-row justify-between">
+              {currenPaginationData()
+                .slice(4, 8)
+                .map((item, ind) => {
+                  return <Product key={ind} item={item} />;
+                })}
+            </div>
+
+            <div className="flex flex-col  gap-[2.5rem] md:gap-[0rem]  md:flex md:flex-row justify-between">
+              {currenPaginationData()
+                .slice(8, 12)
+                .map((item, ind) => {
+                  return <Product key={ind} item={item} />;
+                })}
+            </div>
+          </div>
+
+          <Pagination aria-label="Page navigation example">
+            <PaginationItem disabled={activePage === 1}>
+              <PaginationLink
+                onClick={() => handlePageChange(1)}
+                first
+                href="#"
+              />
+            </PaginationItem>
+            <PaginationItem disabled={activePage === 1}>
+              <PaginationLink
+                onClick={() => handlePageChange(activePage - 1)}
+                previous
+                href="#"
+              />
+            </PaginationItem>
+            <PaginationItem active={activePage === 1}>
+              <PaginationLink onClick={() => handlePageChange(1)} href="#">
+                1
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem active={activePage === 2}>
+              <PaginationLink onClick={() => handlePageChange(2)} href="#">
+                2
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem active={activePage === 3}>
+              <PaginationLink onClick={() => handlePageChange(3)} href="#">
+                3
+              </PaginationLink>
+            </PaginationItem>
+            <PaginationItem disabled={activePage === 3}>
+              <PaginationLink
+                onClick={() => handlePageChange(activePage + 1)}
+                next
+                href="#"
+              />
+            </PaginationItem>
+            <PaginationItem disabled={activePage === 3}>
+              <PaginationLink
+                onClick={() => handlePageChange(3)}
+                last
+                href="#"
+              />
+            </PaginationItem>
+          </Pagination>
+        </div>
       </main>
+
+      <div className="flex flex-col md:flex-row justify-center items-center   text-8xl mt-[3rem]  gap-[2rem] md:gap-[3.5rem]  text-gray-500">
+        <FontAwesomeIcon icon={faHooli} />
+
+        <FontAwesomeIcon icon={faLyft} />
+        <FontAwesomeIcon icon={faPiedPiperHat} />
+        <FontAwesomeIcon icon={faStripe} />
+        <FontAwesomeIcon icon={faAws} />
+        <FontAwesomeIcon icon={faRedditAlien} />
+      </div>
+
+      <Footer />
     </>
   );
 }

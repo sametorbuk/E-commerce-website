@@ -31,7 +31,7 @@ export default function Header() {
       <div className=" hidden md:flex md:flex-col">
         <div
           className={` hidden md:flex md:bg-slate-800 md:h-[3.5rem] md:items-center md:px-[2rem] justify-between ${
-            pathname === "/shop" ? "md:py-[2rem] md:px-[11em]" : ""
+            pathname === "/shop" ? "md:py-[2rem] md:px-[12.5em]" : ""
           } `}
         >
           <div className="flex gap-[2rem]">
@@ -88,7 +88,7 @@ export default function Header() {
 
           <div className="flex justify-between md:text-[#23A6F0] md:grow-[0.05] items-center ">
             <div className="hidden md:flex ">
-              <div className="flex items-center gap-[1rem]">
+              <div className="flex items-center gap-[1rem] text-[#23A6F0]">
                 <FontAwesomeIcon icon={faUser} />
 
                 <button className="font-bold">Login</button>
@@ -98,8 +98,18 @@ export default function Header() {
             </div>
 
             <div className="flex justiy-between gap-[2rem] ">
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-              <FontAwesomeIcon icon={faCartShopping} />
+              <FontAwesomeIcon
+                className={`${
+                  pathname === "/shop" ? "hidden" : "block"
+                } md:block`}
+                icon={faMagnifyingGlass}
+              />
+              <FontAwesomeIcon
+                className={`${
+                  pathname === "/shop" ? "hidden" : "block"
+                } md:block`}
+                icon={faCartShopping}
+              />
               <FontAwesomeIcon className="hidden md:block" icon={faHeart} />
               <FontAwesomeIcon className="md:hidden" icon={faBarsStaggered} />
             </div>
@@ -107,11 +117,41 @@ export default function Header() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-[1.5rem] font-bold text-gray-500 md:hidden">
+      <div
+        className={` flex flex-col ${
+          pathname === "/shop" ? "hidden" : ""
+        } gap-[1.5rem] font-bold text-gray-500 md:hidden`}
+      >
         <button className="font-normal">Home</button>
         <button>Product</button>
         <button>Pricing</button>
         <button>Contact</button>
+      </div>
+
+      <div
+        className={`${
+          pathname === "/shop" ? "flex" : "hidden"
+        } flex-col gap-[1.5rem] font-bold items-center text-gray-500 md:hidden`}
+      >
+        <button className="font-normal">Home</button>
+        <button>Shop</button>
+        <button>About</button>
+        <button>Blog</button>
+        <button>Contact</button>
+
+        <div className="flex items-center gap-[1rem] text-[#23A6F0]">
+          <FontAwesomeIcon icon={faUser} />
+
+          <button className="font-bold">Login</button>
+          <p className="font-bold">/</p>
+          <button className="font-bold">Register</button>
+        </div>
+
+        <div className="flex flex-col text-[#23A6F0] text-lg justiy-between gap-[2rem] ">
+          <FontAwesomeIcon className="" icon={faMagnifyingGlass} />
+          <FontAwesomeIcon className="" icon={faCartShopping} />
+          <FontAwesomeIcon className="" icon={faHeart} />
+        </div>
       </div>
     </>
   );
