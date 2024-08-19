@@ -67,9 +67,9 @@ const productData = [
   "./images/bestseller-product/best-seller-4.jpg",
 ];
 
-export default function ShopPage() {
+export default function ShopPage(props) {
   const [activePage, setActivePage] = useState(1);
-
+  const { setCurrentProduct } = props;
   const handlePageChange = (pageNumber) => {
     event.preventDefault();
     setActivePage(pageNumber);
@@ -160,14 +160,26 @@ export default function ShopPage() {
               {currenPaginationData()
                 .slice(0, 4)
                 .map((item, ind) => {
-                  return <Product key={ind} item={item} />;
+                  return (
+                    <Product
+                      key={ind}
+                      setCurrentProduct={setCurrentProduct}
+                      item={item}
+                    />
+                  );
                 })}
             </div>
             <div className="flex flex-col gap-[2.5rem] md:gap-[0rem] md:flex md:flex-row justify-between">
               {currenPaginationData()
                 .slice(4, 8)
                 .map((item, ind) => {
-                  return <Product key={ind} item={item} />;
+                  return (
+                    <Product
+                      key={ind}
+                      setCurrentProduct={setCurrentProduct}
+                      item={item}
+                    />
+                  );
                 })}
             </div>
 
@@ -175,7 +187,13 @@ export default function ShopPage() {
               {currenPaginationData()
                 .slice(8, 12)
                 .map((item, ind) => {
-                  return <Product key={ind} item={item} />;
+                  return (
+                    <Product
+                      key={ind}
+                      setCurrentProduct={setCurrentProduct}
+                      item={item}
+                    />
+                  );
                 })}
             </div>
           </div>

@@ -69,7 +69,12 @@ export default function Header() {
       >
         <div className="flex justify-around items-center mt-[1.4rem] mb-[1.4rem]   md:flex  md:justify-between md:w-screen md:px-[3rem]">
           <div className="md:flex md:justify-between md:grow-[0.4]">
-            <h2 className="font-bold text-xl ">Bandage</h2>
+            <h2
+              onClick={() => history.push("/")}
+              className="font-bold text-xl cursor-pointer "
+            >
+              Bandage
+            </h2>
 
             <div className="hidden md:flex md:justify-between grow-[0.5] font-bold text-gray-500">
               <button onClick={() => history.push("/")}>Home</button>
@@ -133,8 +138,10 @@ export default function Header() {
           pathname === "/shop" ? "flex" : "hidden"
         } flex-col gap-[1.5rem] font-bold items-center text-gray-500 md:hidden`}
       >
-        <button className="font-normal">Home</button>
-        <button>Shop</button>
+        <button onClick={() => history.push("/")} className="font-normal">
+          Home
+        </button>
+        <button onClick={() => history.push("/shop")}>Shop</button>
         <button>About</button>
         <button>Blog</button>
         <button>Contact</button>

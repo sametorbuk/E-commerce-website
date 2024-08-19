@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 import {
   Carousel,
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
-  CarouselCaption,
 } from "reactstrap";
 
 const items = [
@@ -31,6 +31,8 @@ const items = [
 function Hero(args) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
+
+  const history = useHistory();
 
   const next = () => {
     if (animating) return;
@@ -77,7 +79,10 @@ function Hero(args) {
                   We know how large objects will act, but things on a smal scale
                 </h2>
 
-                <button className=" px-[1rem] py-[0.5rem] bg-[#2DC071] md:py-[1rem] md:px-[2rem] md:w-[15rem] rounded-md">
+                <button
+                  onClick={() => history.push("/shop")}
+                  className=" px-[1rem] py-[0.5rem] bg-[#2DC071] md:py-[1rem] md:px-[2rem] md:w-[15rem] rounded-md"
+                >
                   SHOP NOW
                 </button>
               </div>
@@ -112,8 +117,6 @@ function Hero(args) {
             )}
           </div>
         </div>
-
-        <CarouselCaption />
       </CarouselItem>
     );
   });

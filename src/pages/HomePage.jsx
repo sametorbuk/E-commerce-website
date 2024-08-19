@@ -7,7 +7,7 @@ import Footer from "../layouts/footer";
 
 import Header from "../layouts/header";
 
-export default function HomePage() {
+export default function HomePage({ setCurrentProduct }) {
   return (
     <>
       <Header />
@@ -15,7 +15,7 @@ export default function HomePage() {
 
       <EditorsPick />
 
-      <BestSellerProducts />
+      <BestSellerProducts setCurrentProduct={setCurrentProduct} />
 
       <Hero />
 

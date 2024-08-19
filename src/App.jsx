@@ -3,16 +3,24 @@ import "./App.css";
 
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+import { useState } from "react";
 
 function App() {
+  const [currentProduct, setCurrentProduct] = useState(null);
+  console.log(currentProduct);
   return (
     <>
       <Route path="/" exact>
-        <HomePage />
+        <HomePage setCurrentProduct={setCurrentProduct} />
       </Route>
 
       <Route path="/shop">
-        <ShopPage />
+        <ShopPage setCurrentProduct={setCurrentProduct} />
+      </Route>
+
+      <Route path="/product-detail-page">
+        <ProductDetailPage currentProduct={currentProduct} />
       </Route>
     </>
   );

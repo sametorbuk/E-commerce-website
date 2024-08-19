@@ -11,7 +11,7 @@ const data = [
   "./images/bestseller-product/best-seller-8.jpg",
 ];
 
-export default function BestSellerProducts() {
+export default function BestSellerProducts({ setCurrentProduct }) {
   const firstFour = data.slice(0, 4);
   const secondFour = data.slice(4, 8);
 
@@ -28,12 +28,24 @@ export default function BestSellerProducts() {
 
         <div className="flex flex-col md:flex md:flex-row justify-between">
           {firstFour.map((item, ind) => {
-            return <Product key={ind} item={item} />;
+            return (
+              <Product
+                key={ind}
+                setCurrentProduct={setCurrentProduct}
+                item={item}
+              />
+            );
           })}
         </div>
         <div className="flex flex-col md:flex md:flex-row justify-between">
           {secondFour.map((item, ind) => {
-            return <Product key={ind} item={item} />;
+            return (
+              <Product
+                key={ind}
+                setCurrentProduct={setCurrentProduct}
+                item={item}
+              />
+            );
           })}
         </div>
       </div>

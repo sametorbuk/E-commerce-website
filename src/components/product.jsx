@@ -1,8 +1,20 @@
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 export default function Product(props) {
-  const { item } = props;
+  const { item, setCurrentProduct } = props;
+  const history = useHistory();
+
+  const navigateToDetailPageHandler = () => {
+    history.push("/product-detail-page");
+    setCurrentProduct(item);
+  };
+
   return (
     <>
-      <div className="flex flex-col gap-[1.1rem] md:flex md:flex-col items-center md:items-center md:w-[17rem]">
+      <div
+        onClick={navigateToDetailPageHandler}
+        className="flex flex-col gap-[1.1rem] md:flex md:flex-col items-center md:items-center md:w-[17rem]"
+      >
         <img className="max-w-[80%]" src={item} alt="" />
         <p className="font-bold text-xl">Grapich Design</p>
         <p className="text-[#737373] font-bold">English Department</p>
