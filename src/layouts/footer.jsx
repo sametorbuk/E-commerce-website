@@ -74,9 +74,7 @@ export default function Footer() {
                 type="text"
                 placeholder="   Your email"
               />
-              <button className="bg-[#23A6F0] w-[6rem] text-white">
-                Subscribe
-              </button>
+              <button className="btnBlueWithWhiteText">Subscribe</button>
             </div>
           </div>
         </div>

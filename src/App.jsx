@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import { useState } from "react";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -19,8 +20,17 @@ function App() {
         <ShopPage setCurrentProduct={setCurrentProduct} />
       </Route>
 
-      <Route path="/product-detail-page">
+      <Route path="/product-detail">
         <ProductDetailPage currentProduct={currentProduct} />
+      </Route>
+
+      <Route path="/contact">
+      
+      
+      <ContactPage/>
+      
+      
+      
       </Route>
     </>
   );

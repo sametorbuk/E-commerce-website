@@ -19,3 +19,7 @@ body {
 
   margin: 0;
 }
+
+.btnBlueWithWhiteText {
+  @apply bg-[#23A6F0] w-[6rem] text-white;
+}

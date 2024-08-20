@@ -5,7 +5,7 @@ export default function Product(props) {
   const history = useHistory();
 
   const navigateToDetailPageHandler = () => {
-    history.push("/product-detail-page");
+    history.push("/product-detail");
     setCurrentProduct(item);
   };
 
@@ -13,7 +13,7 @@ export default function Product(props) {
     <>
       <div
         onClick={navigateToDetailPageHandler}
-        className="flex flex-col gap-[1.1rem] md:flex md:flex-col items-center md:items-center md:w-[17rem]"
+        className=" cursor-pointer flex flex-col gap-[1.1rem] md:flex md:flex-col items-center md:items-center md:w-[17rem]"
       >
         <img className="max-w-[80%]" src={item} alt="" />
         <p className="font-bold text-xl">Grapich Design</p>

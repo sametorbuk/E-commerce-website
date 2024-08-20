@@ -31,7 +31,9 @@ export default function Header() {
       <div className=" hidden md:flex md:flex-col">
         <div
           className={` hidden md:flex md:bg-slate-800 md:h-[3.5rem] md:items-center md:px-[2rem] justify-between ${
-            pathname === "/shop" ? "md:py-[2rem] md:px-[12.5em]" : ""
+            pathname === "/shop" || pathname === "/product-detail"
+              ? "md:py-[2rem] md:px-[12em]"
+              : ""
           } `}
         >
           <div className="flex gap-[2rem]">
@@ -64,7 +66,9 @@ export default function Header() {
 
       <div
         className={`md:flex ${
-          pathname === "/shop" ? "md:py-[0rem] md:px-[4em]" : ""
+          pathname === "/shop" || pathname === "/product-detail"
+            ? "md:py-[0rem] md:px-[6em]"
+            : ""
         }`}
       >
         <div className="flex justify-around items-center mt-[1.4rem] mb-[1.4rem]   md:flex  md:justify-between md:w-screen md:px-[3rem]">
@@ -86,7 +90,7 @@ export default function Header() {
               </button>
               <button>About</button>
               <button>Blog</button>
-              <button>Contact</button>
+              <button onClick={() => history.push("/contact")}>Contact</button>
               <button>Pages</button>
             </div>
           </div>
@@ -120,6 +124,8 @@ export default function Header() {
             </div>
           </div>
         </div>
+     
+     
       </div>
 
       <div
@@ -130,7 +136,7 @@ export default function Header() {
         <button className="font-normal">Home</button>
         <button>Product</button>
         <button>Pricing</button>
-        <button>Contact</button>
+        <button onClick={() => history.push("/contact")}>Contact</button>
       </div>
 
       <div
@@ -144,7 +150,7 @@ export default function Header() {
         <button onClick={() => history.push("/shop")}>Shop</button>
         <button>About</button>
         <button>Blog</button>
-        <button>Contact</button>
+        <button onClick={() => history.push("/contact")}>Contact</button>
 
         <div className="flex items-center gap-[1rem] text-[#23A6F0]">
           <FontAwesomeIcon icon={faUser} />
