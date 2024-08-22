@@ -78,8 +78,8 @@ export default function ContactPage() {
             <p className="text-xl">Fax : +451 215 215</p>
 
             <div className="flex gap-[1.5rem] text-2xl ">
-              <FontAwesomeIcon icon={faTwitter} />
-              <FontAwesomeIcon icon={faFacebook} />
+             <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon icon={faFacebook} /> 
               <FontAwesomeIcon icon={faInstagram} />
               <FontAwesomeIcon icon={faLinkedin} />
             </div>

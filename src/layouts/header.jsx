@@ -90,6 +90,7 @@ export default function Header() {
               </button>
               <button>About</button>
               <button>Blog</button>
+              <button onClick={() => history.push("/team")}>Team</button>
               <button onClick={() => history.push("/contact")}>Contact</button>
               <button>Pages</button>
             </div>
@@ -124,8 +125,6 @@ export default function Header() {
             </div>
           </div>
         </div>
-     
-     
       </div>
 
       <div
