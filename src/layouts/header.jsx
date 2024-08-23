@@ -88,7 +88,7 @@ export default function Header() {
               >
                 Shop <FontAwesomeIcon icon={faAngleDown} />
               </button>
-              <button>About</button>
+              <button onClick={() => history.push("/about-us")}>About</button>
               <button>Blog</button>
               <button onClick={() => history.push("/team")}>Team</button>
               <button onClick={() => history.push("/contact")}>Contact</button>
@@ -147,7 +147,7 @@ export default function Header() {
           Home
         </button>
         <button onClick={() => history.push("/shop")}>Shop</button>
-        <button>About</button>
+        <button onClick={() => history.push("/about-us")}>About</button>
         <button>Blog</button>
         <button onClick={() => history.push("/contact")}>Contact</button>
 

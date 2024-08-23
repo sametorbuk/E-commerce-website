@@ -7,6 +7,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import { useState } from "react";
 import ContactPage from "./pages/ContactPage";
 import TeamPage from "./pages/TeamPage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -31,6 +32,10 @@ function App() {
 
       <Route path="/team">
         <TeamPage />
+      </Route>
+
+      <Route path="/about-us">
+        <AboutUsPage />
       </Route>
     </>
   );

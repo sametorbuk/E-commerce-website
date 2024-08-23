@@ -11,7 +11,7 @@ import {
 import Footer from "../layouts/footer";
 import Header from "../layouts/header";
 
-const membersData = [
+export const membersData = [
   {
     name: "Gökhan Özdemir",
     profession: "Scrum Master",
