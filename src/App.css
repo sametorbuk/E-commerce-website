@@ -24,4 +24,50 @@ body {
   @apply bg-[#23A6F0] w-[6rem] text-white;
 }
 
+.shine-border {
+  position: relative;
+  padding: 3px;
+  border-radius: 8px;
+  background-color: #1f485b;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+}
 
+.shine-border::before {
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
+
+.shine-border::after {
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.scrollable-div {
+  @apply w-80 h-48 overflow-auto;
+}
+
+.scrollable-div::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

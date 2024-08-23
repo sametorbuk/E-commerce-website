@@ -103,7 +103,7 @@ export default function Header() {
 
                 <button className="font-bold">Login</button>
                 <p className="font-bold">/</p>
-                <button className="font-bold">Register</button>
+                <button onClick={()=> history.push("/signup")}  className="font-bold">Register</button>
               </div>
             </div>
 
@@ -156,7 +156,7 @@ export default function Header() {
 
           <button className="font-bold">Login</button>
           <p className="font-bold">/</p>
-          <button className="font-bold">Register</button>
+          <button onClick={()=> history.push("/signup")} className="font-bold">Register</button>
         </div>
 
         <div className="flex flex-col text-[#23A6F0] text-lg justiy-between gap-[2rem] ">

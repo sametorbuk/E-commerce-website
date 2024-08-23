@@ -8,10 +8,11 @@ import { useState } from "react";
 import ContactPage from "./pages/ContactPage";
 import TeamPage from "./pages/TeamPage";
 import AboutUsPage from "./pages/AboutUsPage";
+import SignUpPage from "./pages/SignUpPage";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
-  console.log(currentProduct);
+
   return (
     <>
       <Route path="/" exact>
@@ -36,6 +37,10 @@ function App() {
 
       <Route path="/about-us">
         <AboutUsPage />
+      </Route>
+
+      <Route path="/signup">
+        <SignUpPage />
       </Route>
     </>
   );
