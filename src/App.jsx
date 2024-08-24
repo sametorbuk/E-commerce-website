@@ -1,6 +1,6 @@
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import "./App.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-toastify/dist/ReactToastify.css";
 import HomePage from "./pages/HomePage";
@@ -11,12 +11,14 @@ import ContactPage from "./pages/ContactPage";
 import TeamPage from "./pages/TeamPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import SignUpPage from "./pages/SignUpPage";
+import ScrollToTop from "./hooks/ScrollToTop";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
 
   return (
     <>
+      <ScrollToTop />
       <ToastContainer />
       <Route path="/" exact>
         <HomePage setCurrentProduct={setCurrentProduct} />
