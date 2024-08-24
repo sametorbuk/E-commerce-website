@@ -1,6 +1,8 @@
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import "./App.css";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
@@ -15,6 +17,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <Route path="/" exact>
         <HomePage setCurrentProduct={setCurrentProduct} />
       </Route>

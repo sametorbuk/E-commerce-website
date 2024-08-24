@@ -3,6 +3,7 @@ import { useForm, Controller } from "react-hook-form";
 import useAxios from "../hooks/useAxios";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import DownloadMarketComponent from "../components/download-market-comp";
+import { toast } from "react-toastify";
 
 export default function SignUpPage() {
   const { MakeRequest, data = [], METHODS } = useAxios();
@@ -55,8 +56,46 @@ export default function SignUpPage() {
 
   console.log(theFormDataRequiredFormat);
 
-  const onSubmit = () => {
-    history.goBack();
+  const onSubmit = async () => {
+    const Request = new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Data submitted successfully");
+      }, 3000);
+    });
+
+    try {
+      await toast.promise(Request, {
+        pending: {
+          render() {
+            return (
+              <div className="spinner-container">
+                <div className="spinner"></div>
+                <span>Receiving user registration...</span>
+              </div>
+            );
+          },
+          icon: false,
+        },
+        success: {
+          render() {
+            toast.warning(
+              "You need to click link in email to activate your account!"
+            );
+            history.goBack();
+            return "Registration received successfully";
+          },
+          icon: "🟢",
+        },
+        error: {
+          render({ data }) {
+            return `Registration failed: ${data.message}`;
+          },
+          icon: "🔴",
+        },
+      });
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   };
 
   return (
@@ -68,7 +107,7 @@ export default function SignUpPage() {
             <DownloadMarketComponent color="black" market="apple" />
             <DownloadMarketComponent color="black" market="amazon" />
           </div>
-          <div className="w-[68%] scrollable-div static md:absolute   md:left-[26rem] h-[100.3%] bg-white rounded-3xl md:rounded-r-sm md:rounded-l-3xl p-[2rem] md:p-[4rem]">
+          <div className="w-[68%] scrollable-div static md:absolute   md:left-[26rem] h-[100.3%] bg-white rounded-l-3xl rounded-r-sm md:rounded-r-sm md:rounded-l-3xl p-[2rem] md:p-[4rem]">
             <div className="w-full flex justify-center items-center mb-[3rem]">
               <h2 className="text-2xl font-bold text-center">
                 WELCOME TO THE BANDAGE

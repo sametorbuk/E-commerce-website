@@ -33,5 +33,5 @@ export default function useAxios() {
       });
   };
 
-  return { data, MakeRequest, setData, METHODS };
+  return { data, MakeRequest, setData, METHODS, loading };
 }
