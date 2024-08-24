@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import useAxios from "../hooks/useAxios";
+
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import DownloadMarketComponent from "../components/download-market-comp";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchRoles } from "../thunk/fetchRolesThunk";
 
 export default function SignUpPage() {
-  const { MakeRequest, data = [], METHODS } = useAxios();
+  const dispatch = useDispatch();
+  const { roles } = useSelector((state) => state.client);
+  const { fetchState } = useSelector((state) => state.product);
   const [selectedRoleId, setSelectedRoleId] = useState(3);
   const history = useHistory();
   const {
@@ -33,10 +37,13 @@ export default function SignUpPage() {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
 
   useEffect(() => {
-    MakeRequest({ url: "/roles", method: METHODS.GET });
-  }, []);
-
-  console.log(data);
+    if (fetchState === "NOT_FETCHED") {
+      dispatch(
+        fetchRoles("https://workintech-fe-ecommerce.onrender.com/roles")
+      );
+    }
+    console.log(roles);
+  }, [dispatch, fetchState]);
 
   const formData = getValues();
   console.log(formData);
@@ -208,8 +215,9 @@ export default function SignUpPage() {
                         field.onChange(e);
                       }}
                     >
-                      {data !== null ? (
-                        data.map((option) => {
+                      {roles[0] != null ? (
+                        roles[0].map((option) => {
+                          console.log(roles);
                           return (
                             <option
                               id="role_id"
