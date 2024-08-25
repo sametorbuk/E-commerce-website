@@ -44,22 +44,26 @@ export default function LoginPage() {
           alt=""
         />
 
-        <div className="flex-flex-col w-[40%] p-[1.5rem] ">
-          <h2 className="font-bold text-2xl">Bandage</h2>
+        <div className="flex-flex-col w-full md:w-[40%] p-[1.5rem] ">
+          <h2 className="font-bold text-3xl text-center md:text-left">
+            Bandage
+          </h2>
 
           <div className="flex flex-col mt-[3rem]">
-            <h3 className="font-bold text-xl">Nice to see you again</h3>
+            <h3 className="font-bold text-xl text-center md:text-left ">
+              Nice to see you again
+            </h3>
 
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="flex flex-col gap-[2rem] mt-[3rem]"
+              className="flex flex-col gap-[2rem] mt-[3rem] items-center"
             >
               <div className="flex flex-col  gap-[0.4rem]">
                 <label className="font-bold" htmlFor="email">
                   Email
                 </label>
                 <input
-                  className="w-[25.1rem] h-[3rem] bg-gray-300 rounded-lg"
+                  className="w-[19rem]  md:w-[25.1rem] h-[3rem] bg-gray-300 rounded-lg"
                   type="email"
                   id="email"
                   placeholder="     Enter email"
@@ -84,7 +88,7 @@ export default function LoginPage() {
                   Password
                 </label>
                 <input
-                  className="w-[25.1rem] h-[3rem] bg-gray-300 rounded-lg"
+                  className="w-[19rem]  md:w-[25.1rem] h-[3rem] bg-gray-300 rounded-lg"
                   type="password"
                   id="password"
                   placeholder="     Enter password"
@@ -100,7 +104,7 @@ export default function LoginPage() {
                 )}
               </div>
 
-              <div className="flex gap-[0.4rem] w-[25.1rem] justify-between">
+              <div className="flex gap-[0.4rem] w-[19rem]  md:w-[25.1rem] justify-between">
                 <div className="flex gap-[0.3rem]">
                   <label className="switch ">
                     <input
@@ -120,14 +124,14 @@ export default function LoginPage() {
 
               <div className="flex flex-col justify-center gap-[2.5rem]">
                 <button
-                  className="btnBlueWithWhiteText w-[25.1rem] rounded-lg  cursor-pointer h-[2.5rem] font-bold"
+                  className="btnBlueWithWhiteText w-[19rem]  md:w-[25.1rem] rounded-lg  cursor-pointer h-[2.5rem] font-bold"
                   disabled={!isValid}
                   type="submit"
                 >
                   Sign in
                 </button>
 
-                <button className="w-[25.1rem] text-white rounded-lg bg-[#1b1b1b]  flex justify-center items-center gap-[0.5rem]  cursor-pointer h-[2.5rem] ">
+                <button className="w-[19rem]  md:w-[25.1rem] text-white rounded-lg bg-[#1b1b1b]  flex justify-center items-center gap-[0.5rem]  cursor-pointer h-[2.5rem] ">
                   <img
                     className="w-[2rem] bg-black"
                     src="./images/login-page/google-logo-black.png"
@@ -136,7 +140,7 @@ export default function LoginPage() {
                   Or sign in with Google
                 </button>
 
-                <div className="flex justify-around">
+                <div className="w-[19rem]  md:w-[25.1rem]  flex justify-around">
                   <p>Dont have an account ?</p>
 
                   <p
