@@ -29,7 +29,9 @@ export default function InnerPagesHeader() {
 
         <div className="flex gap-[1.7rem]">
           <button className="bg-white text-[#23A6F0] w-[5rem] font-bold">
-            {!user["name"] && "Login"}
+            {!user["name"] && (
+              <button onClick={() => history.push("/login")}> Login </button>
+            )}
 
             {user["name"] && user["name"]}
           </button>
