@@ -1,9 +1,11 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function InnerPagesHeader() {
   const history = useHistory();
+  const { user } = useSelector((state) => state.client);
 
   return (
     <>
@@ -27,8 +29,11 @@ export default function InnerPagesHeader() {
 
         <div className="flex gap-[1.7rem]">
           <button className="bg-white text-[#23A6F0] w-[5rem] font-bold">
-            Login
+            {!user["name"] && "Login"}
+
+            {user["name"] && user["name"]}
           </button>
+
           <button className="btnBlueWithWhiteText w-[12rem] h-[2.6rem] rounded-sm items-center ">
             Become a member{" "}
             <FontAwesomeIcon className="ml-[1rem]" icon={faArrowRight} />

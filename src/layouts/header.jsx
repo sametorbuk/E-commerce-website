@@ -17,6 +17,7 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 
 import {
   useHistory,
@@ -24,8 +25,10 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Header() {
+  const { user } = useSelector((state) => state.client);
   const { pathname } = useLocation();
   const history = useHistory();
+
   return (
     <>
       <div className=" hidden md:flex md:flex-col">
@@ -98,13 +101,35 @@ export default function Header() {
 
           <div className="flex justify-between md:text-[#23A6F0] md:grow-[0.05] items-center ">
             <div className="hidden md:flex ">
-              <div className="flex items-center gap-[1rem] text-[#23A6F0]">
-                <FontAwesomeIcon icon={faUser} />
-
-                <button className="font-bold">Login</button>
-                <p className="font-bold">/</p>
-                <button onClick={()=> history.push("/signup")}  className="font-bold">Register</button>
-              </div>
+              {!user["name"] && (
+                <div className="flex items-center gap-[1rem] text-[#23A6F0]">
+                  <FontAwesomeIcon icon={faUser} />
+                  <button
+                    onClick={() => history.push("/login")}
+                    className="font-bold"
+                  >
+                    Login
+                  </button>
+                  <p className="font-bold">/</p>
+                  <button
+                    onClick={() => history.push("/signup")}
+                    className="font-bold"
+                  >
+                    Register
+                  </button>
+                </div>
+              )}
+              {console.log(user)}
+              {user["name"] && (
+                <div className="flex items-center gap-[1rem] text-[#23A6F0]">
+                  <img
+                    src={user.gravatarUrl}
+                    alt="User"
+                    className="w-8 h-8 rounded-full"
+                  />
+                  <p className="font-bold">{user.name}</p>
+                </div>
+              )}
             </div>
 
             <div className="flex justiy-between gap-[2rem] ">
@@ -151,13 +176,38 @@ export default function Header() {
         <button>Blog</button>
         <button onClick={() => history.push("/contact")}>Contact</button>
 
-        <div className="flex items-center gap-[1rem] text-[#23A6F0]">
-          <FontAwesomeIcon icon={faUser} />
+        {!user["name"] && (
+          <div className="flex items-center gap-[1rem] text-[#23A6F0]">
+            <div
+              onClick={() => history.push("/login")}
+              className="flex items-center gap-[0.5rem]"
+            >
+              <FontAwesomeIcon icon={faUser} />
+              <button className="font-bold">Login</button>
+            </div>
+            <p className="font-bold">/</p>
 
-          <button className="font-bold">Login</button>
-          <p className="font-bold">/</p>
-          <button onClick={()=> history.push("/signup")} className="font-bold">Register</button>
-        </div>
+            <button
+              onClick={() => history.push("/signup")}
+              className="font-bold"
+            >
+              Register
+            </button>
+          </div>
+        )}
+
+        {user["name"] && (
+          <div className="flex items-center gap-[1rem] text-[#23A6F0]">
+            <div className="flex items-center gap-[0.5rem]">
+              <img
+                src={user.gravatarUrl}
+                alt="User"
+                className="w-8 h-8 rounded-full"
+              />
+              <p className="font-bold">{user.name}</p>
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-col text-[#23A6F0] text-lg justiy-between gap-[2rem] ">
           <FontAwesomeIcon className="" icon={faMagnifyingGlass} />
