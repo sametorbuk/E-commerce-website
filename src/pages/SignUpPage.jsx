@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import DownloadMarketComponent from "../components/download-market-comp";
+
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoles } from "../thunk/fetchRolesThunk";
+import DownloadMarketComponent from "../components/download-market-comp";
 
 export default function SignUpPage() {
   const dispatch = useDispatch();
@@ -110,11 +111,18 @@ export default function SignUpPage() {
       <main className="bg-sky-700 bg-opacity-85 flex w-screen h-screen  md:px-[9rem] md:py-[3rem]">
         <div className="flex flex-col md:flex-row  items-center shine-border w-full bg-sky-900 h-full rounded-3xl">
           <div className="hidden order-[1] mt-[3rem] mb-[2rem]  md:mt-[0rem] md:ml-[4.6rem] md:flex flex-col gap-[1rem] 2xl:gap-[5rem]">
-            <DownloadMarketComponent color="black" market="google" />
-            <DownloadMarketComponent color="black" market="apple" />
-            <DownloadMarketComponent color="black" market="amazon" />
+            <img
+              className="w-[33%] absolute bottom-[2rem] left-[3rem] h-[86%] 2xl:w-[25%] 2xl:static 2xl:h-[60%] rounded-xl"
+              src="./images/sign-up-page/signup-page-vase.jpg"
+              alt=""
+            />
+
+            <div className="hidden  md:hidden 2xl:flex 2xl:flex-col gap-[1rem] ">
+              <DownloadMarketComponent color="black" market="apple" />
+              <DownloadMarketComponent color="black" market="google" />
+            </div>
           </div>
-          <div className="w-[68%] scrollable-div static md:absolute   md:left-[26rem] h-[100.3%] bg-white rounded-l-3xl rounded-r-sm md:rounded-r-sm md:rounded-l-3xl p-[2rem] md:p-[4rem]">
+          <div className=" w-[89%] md:w-[68%] scrollable-div static md:absolute   md:left-[26rem] h-[100.3%] bg-white rounded-l-3xl rounded-r-md md:rounded-r-sm md:rounded-l-3xl p-[2rem] md:p-[4rem]">
             <div className="w-full flex justify-center items-center mb-[3rem]">
               <h2 className="text-2xl font-bold text-center">
                 WELCOME TO THE BANDAGE
@@ -217,7 +225,6 @@ export default function SignUpPage() {
                     >
                       {roles[0] != null ? (
                         roles[0].map((option) => {
-                          console.log(roles);
                           return (
                             <option
                               id="role_id"
