@@ -7,7 +7,7 @@ import {
 import Header from "../layouts/header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
-import { useState } from "react";
+
 import "../App.css";
 import Product from "../components/product";
 import Footer from "../layouts/footer";
@@ -19,14 +19,9 @@ import {
   faRedditAlien,
   faStripe,
 } from "@fortawesome/free-brands-svg-icons";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
-const catImgData = [
-  "./images/shop-page-category/shop-page-category-image1.jpg",
-  "./images/shop-page-category/shop-page-category-image2.jpg",
-  "./images/shop-page-category/shop-page-category-image3.jpg",
-  "./images/shop-page-category/shop-page-category-image4.jpg",
-  "./images/shop-page-category/shop-page-category-image5.jpg",
-];
 
 const productData = [
   "./images/bestseller-product/best-seller-1.jpg",
@@ -89,6 +84,13 @@ export default function ShopPage(props) {
     return data;
   };
 
+  const { categories } = useSelector((state) => state.product);
+
+  console.log(categories);
+  const sortedCategories = [...categories].sort((a, b) => b.rating - a.rating);
+  const topFiveCategories = sortedCategories.slice(0, 5);
+  console.log(topFiveCategories);
+
   return (
     <>
       <Header />
@@ -108,8 +110,9 @@ export default function ShopPage(props) {
         </div>
 
         <section className="flex items-center mt-[3rem] md:mt-[0rem] gap-[1rem]  md:gap-[1rem] flex-col md:flex-row justify-between">
-          {catImgData.map((item, ind) => {
-            const imgUrl = `${window.location.origin}/${item}`;
+          {topFiveCategories.map((item, ind) => {
+            const imgUrl = item.img;
+            console.log(imgUrl);
 
             return (
               <div key={ind} className="relative w-[13rem] h-[10rem]">
@@ -122,8 +125,10 @@ export default function ShopPage(props) {
 
                 <div className="relative flex justify-center items-center h-full text-white">
                   <div className="flex flex-col items-center">
-                    <h2 className="font-bold text-xl">CLOTHS</h2>
-                    <p className="font-bold text-md">5 items</p>
+                    <h2 className="font-bold text-xl">
+                      {item.gender == "k" ? "Kadın" : "Erkek"}
+                    </h2>
+                    <p className="font-bold text-md">{item.title}</p>
                   </div>
                 </div>
               </div>

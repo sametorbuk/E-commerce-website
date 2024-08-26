@@ -17,6 +17,8 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+
 import { useSelector } from "react-redux";
 
 import {
@@ -28,6 +30,14 @@ export default function Header() {
   const { user } = useSelector((state) => state.client);
   const { pathname } = useLocation();
   const history = useHistory();
+
+  const [hoveredDropDownMenu, setHoveredDropDownMenu] = useState(false);
+  const [hoveredCategoriesArea, setHoveredCategoriesArea] = useState(false);
+
+  const { categories } = useSelector((state) => state.product);
+
+  const womenCats = categories.filter((item) => item.gender === "k");
+  const menCats = categories.filter((item) => item.gender === "e");
 
   return (
     <>
@@ -85,12 +95,64 @@ export default function Header() {
 
             <div className="hidden md:flex md:justify-between grow-[0.5] font-bold text-gray-500">
               <button onClick={() => history.push("/")}>Home</button>
+
               <button
                 onClick={() => history.push("/shop")}
+                onMouseEnter={() => setHoveredDropDownMenu(true)}
+                onMouseLeave={() => setHoveredDropDownMenu(false)}
                 className="flex items-center gap-[0.4rem]"
               >
                 Shop <FontAwesomeIcon icon={faAngleDown} />
               </button>
+
+              {(hoveredCategoriesArea || hoveredDropDownMenu) && (
+                <div
+                  onMouseEnter={() => setHoveredCategoriesArea(true)}
+                  onMouseLeave={() => setHoveredCategoriesArea(false)}
+                  className="flex bg-white absolute top-[6.7rem] left-[17rem] py-[1.3rem] rounded-sm w-[20rem] justify-around z-10"
+                >
+                  <div className="flex flex-col gap-[2rem] ">
+                    <p className="font-bold text-black  text-lg ">Kadın</p>
+                    <div className="flex flex-col gap-[1.4rem]">
+                      <button className="catAreaBtn">View all</button>
+
+                      {womenCats.map((item, ind) => {
+                        return (
+                          <button
+                            onClick={() =>
+                              history.push(`shop/${item.gender}/${item.title}`)
+                            }
+                            key={ind}
+                            className="catAreaBtn"
+                          >
+                            {item.title}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-[2rem]">
+                    <p className="font-bold text-black text-lg">Erkek</p>
+                    <div className="flex flex-col gap-[1.4rem] ">
+                      <button className="catAreaBtn">View all</button>
+                      {menCats.map((item, ind) => {
+                        return (
+                          <button
+                            onClick={() =>
+                              history.push(`shop/${item.gender}/${item.title}`)
+                            }
+                            key={ind}
+                            className="catAreaBtn"
+                          >
+                            {item.title}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <button onClick={() => history.push("/about-us")}>About</button>
               <button onClick={() => localStorage.clear()}>temizle</button>
               <button>Blog</button>
@@ -120,7 +182,7 @@ export default function Header() {
                   </button>
                 </div>
               )}
-              {console.log(user)}
+
               {user["name"] && (
                 <div className="flex items-center gap-[1rem] text-[#23A6F0]">
                   <img

@@ -12,8 +12,9 @@ import SignUpPage from "./pages/SignUpPage";
 import ScrollToTop from "./hooks/ScrollToTop";
 import LoginPage from "./pages/LoginPage";
 import useAxios from "./hooks/useAxios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./redux/clientSlice";
+import { fetchCategories } from "./thunk/fetchCategoriesThunk";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -46,6 +47,17 @@ function App() {
       return;
     }
   }, []);
+
+  const { categories } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    if (categories.length === 0) {
+      dispatch(fetchCategories("/categories"));
+    }
+  }, []);
+
+  const womenCats = categories.filter((item) => item.gender === "k");
+  const menCats = categories.filter((item) => item.gender === "e");
 
   return (
     <>
@@ -82,6 +94,18 @@ function App() {
       <Route path="/login">
         <LoginPage />
       </Route>
+
+      {womenCats.map((cat, ind) => {
+        return (
+          <Route key={ind} path={`/shop/${cat.gender}/${cat.title}`}></Route>
+        );
+      })}
+
+      {menCats.map((cat, ind) => {
+        return (
+          <Route key={ind} path={`/shop/${cat.gender}/${cat.title}`}></Route>
+        );
+      })}
     </>
   );
 }
