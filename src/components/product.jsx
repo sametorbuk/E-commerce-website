@@ -30,8 +30,8 @@ export default function Product(props) {
           {description}
         </p>
         <div className="flex md:flex gap-[1rem]">
-          <p className="text-[#BDBDBD] text-2xl font-bold">{price}₺</p>
-          <p className="text-[#23856D] text-2xl font-bold">{rating}★</p>
+          <p className="text-yellow-500 text-2xl font-bold">{rating}★</p>
+          <p className="text-[#23856D] text-2xl font-bold">{price}₺</p>
         </div>
         <div className="flex md:flex gap-[0.4rem]">
           <button className="rounded-full w-[1.4rem] bg-black">.</button>

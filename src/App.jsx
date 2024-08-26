@@ -42,8 +42,6 @@ function App() {
       if (data !== null) {
         dispatch(setUser(data));
         localStorage.setItem("token", data.token);
-      } else {
-        localStorage.clear();
       }
     } else {
       return;

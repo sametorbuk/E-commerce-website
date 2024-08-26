@@ -154,7 +154,7 @@ export default function Header() {
               )}
 
               <button onClick={() => history.push("/about-us")}>About</button>
-              <button onClick={() => localStorage.clear()}>temizle</button>
+
               <button>Blog</button>
               <button onClick={() => history.push("/team")}>Team</button>
               <button onClick={() => history.push("/contact")}>Contact</button>

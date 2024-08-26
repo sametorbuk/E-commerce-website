@@ -31,6 +31,9 @@ export default function useAxios() {
       })
       .catch((err) => {
         setErr(!err);
+        if (url === "/verify") {
+          return localStorage.clear("token");
+        }
       });
   };
 
