@@ -35,7 +35,7 @@ export const loginUser = createAsyncThunk(
       .catch((error) => {
         toast.warning("Login failed! Please check your details.");
 
-        throw error;
+        return error;
       });
   }
 );

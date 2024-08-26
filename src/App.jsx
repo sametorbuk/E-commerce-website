@@ -4,16 +4,48 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContactPage from "./pages/ContactPage";
 import TeamPage from "./pages/TeamPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import SignUpPage from "./pages/SignUpPage";
 import ScrollToTop from "./hooks/ScrollToTop";
 import LoginPage from "./pages/LoginPage";
+import useAxios from "./hooks/useAxios";
+import { useDispatch } from "react-redux";
+import { setUser } from "./redux/clientSlice";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
+  const { MakeRequest, data, METHODS } = useAxios();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const requestData = {
+        headers: {
+          Authorization: token,
+        },
+      };
+
+      MakeRequest({
+        url: "/verify",
+        method: METHODS.GET,
+        data: requestData,
+      });
+
+      if (data !== null) {
+        dispatch(setUser(data));
+        localStorage.setItem("token", data.token);
+      } else {
+        localStorage.clear();
+      }
+    } else {
+      return;
+    }
+  }, []);
 
   return (
     <>

@@ -27,6 +27,7 @@ export default function useAxios() {
         setData(response.data);
 
         setLoading(false);
+        return response.data;
       })
       .catch((err) => {
         setErr(!err);
