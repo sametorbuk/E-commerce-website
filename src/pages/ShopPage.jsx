@@ -19,48 +19,9 @@ import {
   faRedditAlien,
   faStripe,
 } from "@fortawesome/free-brands-svg-icons";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-
-
-const productData = [
-  "./images/bestseller-product/best-seller-1.jpg",
-  "./images/bestseller-product/best-seller-2.jpg",
-  "./images/bestseller-product/best-seller-3.jpg",
-  "./images/bestseller-product/best-seller-4.jpg",
-  "./images/bestseller-product/best-seller-5.jpg",
-  "./images/bestseller-product/best-seller-6.jpg",
-  "./images/bestseller-product/best-seller-7.jpg",
-  "./images/bestseller-product/best-seller-8.jpg",
-  "./images/bestseller-product/best-seller-5.jpg",
-  "./images/bestseller-product/best-seller-6.jpg",
-  "./images/bestseller-product/best-seller-7.jpg",
-  "./images/bestseller-product/best-seller-8.jpg",
-  "./images/bestseller-product/best-seller-1.jpg",
-  "./images/bestseller-product/best-seller-6.jpg",
-  "./images/bestseller-product/best-seller-3.jpg",
-  "./images/bestseller-product/best-seller-7.jpg",
-  "./images/bestseller-product/best-seller-5.jpg",
-  "./images/bestseller-product/best-seller-3.jpg",
-  "./images/bestseller-product/best-seller-7.jpg",
-  "./images/bestseller-product/best-seller-8.jpg",
-  "./images/bestseller-product/best-seller-1.jpg",
-  "./images/bestseller-product/best-seller-4.jpg",
-  "./images/bestseller-product/best-seller-2.jpg",
-  "./images/bestseller-product/best-seller-5.jpg",
-  "./images/bestseller-product/best-seller-1.jpg",
-  "./images/bestseller-product/best-seller-8.jpg",
-  "./images/bestseller-product/best-seller-5.jpg",
-  "./images/bestseller-product/best-seller-7.jpg",
-  "./images/bestseller-product/best-seller-1.jpg",
-  "./images/bestseller-product/best-seller-6.jpg",
-  "./images/bestseller-product/best-seller-7.jpg",
-  "./images/bestseller-product/best-seller-4.jpg",
-  "./images/bestseller-product/best-seller-5.jpg",
-  "./images/bestseller-product/best-seller-1.jpg",
-  "./images/bestseller-product/best-seller-2.jpg",
-  "./images/bestseller-product/best-seller-4.jpg",
-];
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../thunk/fetchProductsThunk";
 
 export default function ShopPage(props) {
   const [activePage, setActivePage] = useState(1);
@@ -74,22 +35,33 @@ export default function ShopPage(props) {
   const currenPaginationData = () => {
     let data = null;
     if (activePage === 1) {
-      data = productData.slice(0, 12);
+      data = productList.slice(2, 14);
     } else if (activePage === 2) {
-      data = productData.slice(12, 24);
+      data = productList.slice(12, 24);
     } else if (activePage === 3) {
-      data = productData.slice(24, 36);
+      data = productList.slice(7, 19);
     }
 
     return data;
   };
 
-  const { categories } = useSelector((state) => state.product);
+  const { categories, fetchState, productList } = useSelector(
+    (state) => state.product
+  );
 
-  console.log(categories);
   const sortedCategories = [...categories].sort((a, b) => b.rating - a.rating);
   const topFiveCategories = sortedCategories.slice(0, 5);
-  console.log(topFiveCategories);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (productList.length === 0) {
+      dispatch(fetchProducts("/products"));
+    } else {
+      return;
+    }
+  }, []);
+
+  console.log(productList);
 
   return (
     <>
@@ -159,6 +131,7 @@ export default function ShopPage(props) {
           </div>
         </div>
 
+        {fetchState === "FETCHING" && <div className="loading-spinner"></div>}
         <div className="flex flex-col gap-[2.7rem] items-center">
           <div className="flex flex-col w-screen md:flex md:w-screen md:flex-col gap-[2rem]  md:gap-[5rem] items-center md:w-screen mt-[4rem] md:mt-[2rem]  ">
             <div className="flex flex-col gap-[2.5rem] md:gap-[0rem]  md:flex md:flex-row justify-between">

@@ -15,6 +15,8 @@ import useAxios from "./hooks/useAxios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "./redux/clientSlice";
 import { fetchCategories } from "./thunk/fetchCategoriesThunk";
+import { setProductList } from "./redux/productSlice";
+import { fetchProducts } from "./thunk/fetchProductsThunk";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -43,6 +45,14 @@ function App() {
       } else {
         localStorage.clear();
       }
+    } else {
+      return;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (setProductList.length === 0) {
+      dispatch(fetchProducts("/products"));
     } else {
       return;
     }

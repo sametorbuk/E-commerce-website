@@ -1,19 +1,11 @@
+import { useSelector } from "react-redux";
 import Product from "../components/product";
 
-const data = [
-  "./images/bestseller-product/best-seller-1.jpg",
-  "./images/bestseller-product/best-seller-2.jpg",
-  "./images/bestseller-product/best-seller-3.jpg",
-  "./images/bestseller-product/best-seller-4.jpg",
-  "./images/bestseller-product/best-seller-5.jpg",
-  "./images/bestseller-product/best-seller-6.jpg",
-  "./images/bestseller-product/best-seller-7.jpg",
-  "./images/bestseller-product/best-seller-8.jpg",
-];
-
 export default function BestSellerProducts({ setCurrentProduct }) {
-  const firstFour = data.slice(0, 4);
-  const secondFour = data.slice(4, 8);
+  const { productList, fetchState } = useSelector((state) => state.product);
+
+  const firstFour = productList.slice(13, 17);
+  const secondFour = productList.slice(21, 25);
 
   return (
     <>
@@ -25,7 +17,7 @@ export default function BestSellerProducts({ setCurrentProduct }) {
             Problems trying to resolve the conflict between
           </p>
         </div>
-
+        {fetchState === "FETCHING" && <div className="loading-spinner"></div>}
         <div className="flex flex-col md:flex md:flex-row justify-between">
           {firstFour.map((item, ind) => {
             return (
