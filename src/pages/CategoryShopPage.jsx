@@ -19,13 +19,15 @@ import {
   faStripe,
 } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../thunk/fetchProductsThunk";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import useAxios from "../hooks/useAxios";
-import { setProductList } from "../redux/productSlice";
 
-export default function ShopPage(props) {
+import {
+  useHistory,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
+import useAxios from "../hooks/useAxios";
+import { useSelector } from "react-redux";
+
+export default function CategoryShopPage(props) {
   const [activePage, setActivePage] = useState(1);
   const history = useHistory();
   const { setCurrentProduct, setWillNavigateCurrentCategory } = props;
@@ -33,44 +35,55 @@ export default function ShopPage(props) {
   const handlePageChange = (e, pageNumber) => {
     e.preventDefault();
     setActivePage(pageNumber);
-
     console.log(activePage);
   };
 
-  const currenPaginationData = () => {
-    let data = null;
-    if (activePage === 1) {
-      data = productList.slice(2, 14);
-    } else if (activePage === 2) {
-      data = productList.slice(12, 24);
-    } else if (activePage === 3) {
-      data = productList.slice(7, 19);
-    }
+  const { MakeRequest, METHODS, loading } = useAxios();
 
-    return data;
-  };
+  const [currentData, setCurrentData] = useState([]);
 
-  const { categories, fetchState, productList } = useSelector(
-    (state) => state.product
-  );
+  const { id } = useParams();
+  console.log(id);
 
-  const sortedCategories = [...categories].sort((a, b) => b.rating - a.rating);
-  const topFiveCategories = sortedCategories.slice(0, 5);
-
-  const dispatch = useDispatch();
   useEffect(() => {
-    if (productList.length === 0) {
-      dispatch(fetchProducts("/products"));
-    } else {
-      return;
+    if (id) {
+      MakeRequest({
+        url: `products?category=${id}`,
+        method: METHODS.GET,
+      })
+        .then((responseData) => {
+          console.log("Raw responseData:", responseData);
+          setCurrentData(responseData.products || []);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
     }
-  }, []);
+  }, [id]);
 
   const categoryNavigateHandler = (item) => {
     setWillNavigateCurrentCategory(item);
 
     history.push(`/shop/${item.gender}/${item.code}/${item.id}`);
   };
+
+  const currenPaginationData = () => {
+    let data = null;
+    if (activePage === 1) {
+      data = currentData.slice(0, 14);
+    } else if (activePage === 2) {
+      data = currentData.slice(12, 24);
+    } else if (activePage === 3) {
+      data = currentData.slice(7, 19);
+    }
+
+    return data;
+  };
+
+  const { categories } = useSelector((state) => state.product);
+
+  const sortedCategories = [...categories].sort((a, b) => b.rating - a.rating);
+  const topFiveCategories = sortedCategories.slice(0, 5);
 
   const [filterInputValue, setFilterInputValue] = useState("");
 
@@ -85,11 +98,13 @@ export default function ShopPage(props) {
   const filteredRequest = () => {
     setActivePage(1);
     doRequest({
-      url: `products?filter=${filterInputValue}`,
+      url: `products?category=${id}&filter=${filterInputValue}${
+        sortValue ? "&sort=" + sortValue : ""
+      }`,
       method: methods.GET,
     })
       .then((responseData) => {
-        dispatch(setProductList(responseData.products));
+        setCurrentData(responseData.products || []);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -107,11 +122,13 @@ export default function ShopPage(props) {
   useEffect(() => {
     setActivePage(1);
     sendRequest({
-      url: `products?sort=${sortValue}`,
+      url: `products?category=${id}${
+        filterInputValue ? "&filter=" + filterInputValue : ``
+      }&sort=${sortValue}`,
       method: chooseMethods.GET,
     })
       .then((responseData) => {
-        dispatch(setProductList(responseData.products));
+        setCurrentData(responseData.products);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -222,7 +239,7 @@ export default function ShopPage(props) {
           </div>
         </div>
 
-        {fetchState === "FETCHING" && <div className="loading-spinner"></div>}
+        {loading && <div className="loading-spinner"></div>}
         <div className="flex flex-col gap-[2.7rem] items-center">
           <div className="flex flex-col w-screen md:flex md:w-screen md:flex-col gap-[2rem]  md:gap-[5rem] items-center md:w-screen mt-[4rem] md:mt-[2rem]  ">
             <div className="flex flex-col gap-[2.5rem] md:gap-[0rem]  md:flex md:flex-row justify-between">

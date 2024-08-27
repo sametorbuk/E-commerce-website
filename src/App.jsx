@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom/cjs/react-router-dom.min";
+import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import "./App.css";
 
 import HomePage from "./pages/HomePage";
@@ -17,6 +17,7 @@ import { setUser } from "./redux/clientSlice";
 import { fetchCategories } from "./thunk/fetchCategoriesThunk";
 import { setProductList } from "./redux/productSlice";
 import { fetchProducts } from "./thunk/fetchProductsThunk";
+import CategoryShopPage from "./pages/CategoryShopPage";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -67,53 +68,72 @@ function App() {
   const womenCats = categories.filter((item) => item.gender === "k");
   const menCats = categories.filter((item) => item.gender === "e");
 
+  const [willNavigateCurrentCategory, setWillNavigateCurrentCategory] =
+    useState({});
+
   return (
     <>
       <ScrollToTop />
 
-      <Route path="/" exact>
-        <HomePage setCurrentProduct={setCurrentProduct} />
-      </Route>
+      <Switch>
+        <Route path="/" exact>
+          <HomePage setCurrentProduct={setCurrentProduct} />
+        </Route>
 
-      <Route path="/shop">
-        <ShopPage setCurrentProduct={setCurrentProduct} />
-      </Route>
+        <Route path="/shop" exact>
+          <ShopPage
+            setCurrentProduct={setCurrentProduct}
+            setWillNavigateCurrentCategory={setWillNavigateCurrentCategory}
+          />
+        </Route>
 
-      <Route path="/product-detail">
-        <ProductDetailPage currentProduct={currentProduct} />
-      </Route>
+        <Route
+          path="/shop/:gender/:code/:id"
+          render={(props) => (
+            <CategoryShopPage
+              {...props}
+              setCurrentProduct={setCurrentProduct}
+              setWillNavigateCurrentCategory={setWillNavigateCurrentCategory}
+            />
+          )}
+        />
 
-      <Route path="/contact">
-        <ContactPage />
-      </Route>
+        <Route path="/product-detail">
+          <ProductDetailPage currentProduct={currentProduct} />
+        </Route>
 
-      <Route path="/team">
-        <TeamPage />
-      </Route>
+        <Route path="/contact">
+          <ContactPage />
+        </Route>
 
-      <Route path="/about-us">
-        <AboutUsPage />
-      </Route>
+        <Route path="/team">
+          <TeamPage />
+        </Route>
 
-      <Route path="/signup">
-        <SignUpPage />
-      </Route>
+        <Route path="/about-us">
+          <AboutUsPage />
+        </Route>
 
-      <Route path="/login">
-        <LoginPage />
-      </Route>
+        <Route path="/signup">
+          <SignUpPage />
+        </Route>
 
-      {womenCats.map((cat, ind) => {
-        return (
-          <Route key={ind} path={`/shop/${cat.gender}/${cat.title}`}></Route>
-        );
-      })}
+        <Route path="/login">
+          <LoginPage />
+        </Route>
 
-      {menCats.map((cat, ind) => {
-        return (
-          <Route key={ind} path={`/shop/${cat.gender}/${cat.title}`}></Route>
-        );
-      })}
+        {womenCats.map((cat, ind) => {
+          return (
+            <Route key={ind} path={`/shop/${cat.gender}/${cat.title}`}></Route>
+          );
+        })}
+
+        {menCats.map((cat, ind) => {
+          return (
+            <Route key={ind} path={`/shop/${cat.gender}/${cat.title}`}></Route>
+          );
+        })}
+      </Switch>
     </>
   );
 }

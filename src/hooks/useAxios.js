@@ -11,31 +11,35 @@ const METHODS = {
 export default function useAxios() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState(false);
+  const [error, setError] = useState(null);
 
   const instance = axios.create({
-    baseURL: " https://workintech-fe-ecommerce.onrender.com",
+    baseURL: "https://workintech-fe-ecommerce.onrender.com",
     timeout: 1000,
     headers: { Autoauthentication: "" },
   });
 
-  const MakeRequest = ({ url = null, method, data = null }) => {
+  const MakeRequest = ({ url, method, data = null }) => {
     setLoading(true);
+    setError(null);
 
-    instance[method](url ? url : null, data ? data : null)
+    return instance[method](url, data)
       .then((response) => {
         setData(response.data);
-
         setLoading(false);
         return response.data;
       })
       .catch((err) => {
-        setErr(!err);
+        setError(err);
         if (url === "/verify") {
-          return localStorage.clear("token");
+          localStorage.clear("token");
         }
+        return err;
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
-  return { data, MakeRequest, setData, METHODS, loading };
+  return { data, MakeRequest, METHODS, loading, error, setData };
 }
