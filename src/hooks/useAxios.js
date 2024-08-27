@@ -41,5 +41,5 @@ export default function useAxios() {
       });
   };
 
-  return { data, MakeRequest, METHODS, loading, error, setData };
+  return { data, MakeRequest, METHODS, loading, error, setData, setLoading };
 }

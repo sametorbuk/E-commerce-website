@@ -29,6 +29,7 @@ import { useSelector } from "react-redux";
 
 export default function CategoryShopPage(props) {
   const [activePage, setActivePage] = useState(1);
+  
   const history = useHistory();
   const { setCurrentProduct, setWillNavigateCurrentCategory } = props;
 
@@ -38,28 +39,10 @@ export default function CategoryShopPage(props) {
     console.log(activePage);
   };
 
-  const { MakeRequest, METHODS, loading } = useAxios();
-
   const [currentData, setCurrentData] = useState([]);
 
   const { id } = useParams();
   console.log(id);
-
-  useEffect(() => {
-    if (id) {
-      MakeRequest({
-        url: `products?category=${id}`,
-        method: METHODS.GET,
-      })
-        .then((responseData) => {
-          console.log("Raw responseData:", responseData);
-          setCurrentData(responseData.products || []);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
-    }
-  }, [id]);
 
   const categoryNavigateHandler = (item) => {
     setWillNavigateCurrentCategory(item);
@@ -93,38 +76,25 @@ export default function CategoryShopPage(props) {
     setFilterInputValue(value);
   };
 
-  const { MakeRequest: doRequest, METHODS: methods } = useAxios();
-
-  const filteredRequest = () => {
-    setActivePage(1);
-    doRequest({
-      url: `products?category=${id}&filter=${filterInputValue}${
-        sortValue ? "&sort=" + sortValue : ""
-      }`,
-      method: methods.GET,
-    })
-      .then((responseData) => {
-        setCurrentData(responseData.products || []);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  };
-
+  const [filterClicked, setFilterClicked] = useState(false);
   const [sortValue, setSortValue] = useState("");
 
   const sortValueHandler = (e) => {
     const { value } = e.target;
     setSortValue(value);
   };
-  const { MakeRequest: sendRequest, METHODS: chooseMethods } = useAxios();
+  const {
+    MakeRequest: sendRequest,
+    METHODS: chooseMethods,
+    loading,
+  } = useAxios();
 
   useEffect(() => {
     setActivePage(1);
     sendRequest({
       url: `products?category=${id}${
         filterInputValue ? "&filter=" + filterInputValue : ``
-      }&sort=${sortValue}`,
+      }${sortValue ? "&sort=" + sortValue : ""}`,
       method: chooseMethods.GET,
     })
       .then((responseData) => {
@@ -133,7 +103,7 @@ export default function CategoryShopPage(props) {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [sortValue]);
+  }, [sortValue, id, filterClicked]);
 
   return (
     <>
@@ -231,7 +201,7 @@ export default function CategoryShopPage(props) {
             ></input>
 
             <button
-              onClick={filteredRequest}
+              onClick={() => setFilterClicked(!filterClicked)}
               className=" text-white font-bold p-[0.5rem] w-[6rem] rounded-md bg-[#23A6F0]"
             >
               Filter

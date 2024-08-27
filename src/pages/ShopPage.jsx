@@ -5,7 +5,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Header from "../layouts/header";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 
 import "../App.css";
 import Product from "../components/product";
@@ -20,37 +19,18 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProducts } from "../thunk/fetchProductsThunk";
+
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useAxios from "../hooks/useAxios";
-import { setProductList } from "../redux/productSlice";
+import { setOffset, setProductList } from "../redux/productSlice";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function ShopPage(props) {
-  const [activePage, setActivePage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
   const history = useHistory();
   const { setCurrentProduct, setWillNavigateCurrentCategory } = props;
 
-  const handlePageChange = (e, pageNumber) => {
-    e.preventDefault();
-    setActivePage(pageNumber);
-
-    console.log(activePage);
-  };
-
-  const currenPaginationData = () => {
-    let data = null;
-    if (activePage === 1) {
-      data = productList.slice(2, 14);
-    } else if (activePage === 2) {
-      data = productList.slice(12, 24);
-    } else if (activePage === 3) {
-      data = productList.slice(7, 19);
-    }
-
-    return data;
-  };
-
-  const { categories, fetchState, productList } = useSelector(
+  const { categories, fetchState, productList, offset } = useSelector(
     (state) => state.product
   );
 
@@ -58,13 +38,15 @@ export default function ShopPage(props) {
   const topFiveCategories = sortedCategories.slice(0, 5);
 
   const dispatch = useDispatch();
-  useEffect(() => {
+
+  /* useEffect(() => {
     if (productList.length === 0) {
       dispatch(fetchProducts("/products"));
     } else {
       return;
     }
   }, []);
+*/
 
   const categoryNavigateHandler = (item) => {
     setWillNavigateCurrentCategory(item);
@@ -80,21 +62,7 @@ export default function ShopPage(props) {
     setFilterInputValue(value);
   };
 
-  const { MakeRequest: doRequest, METHODS: methods } = useAxios();
-
-  const filteredRequest = () => {
-    setActivePage(1);
-    doRequest({
-      url: `products?filter=${filterInputValue}`,
-      method: methods.GET,
-    })
-      .then((responseData) => {
-        dispatch(setProductList(responseData.products));
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  };
+  const [filterClicked, setFilterClicked] = useState(false);
 
   const [sortValue, setSortValue] = useState("");
 
@@ -102,21 +70,40 @@ export default function ShopPage(props) {
     const { value } = e.target;
     setSortValue(value);
   };
-  const { MakeRequest: sendRequest, METHODS: chooseMethods } = useAxios();
+  const {
+    MakeRequest: sendRequest,
+    METHODS: chooseMethods,
+    loading,
+    setLoading,
+  } = useAxios();
+
+  const fetchMoreData = () => {
+    if (!loading && hasMore) {
+      setLoading(true);
+      sendRequest({
+        url: `products?${
+          filterInputValue ? "&filter=" + filterInputValue : ``
+        }${sortValue ? "&sort=" + sortValue : ""}&limit=12&offset=${offset}`,
+        method: chooseMethods.GET,
+      })
+        .then((responseData) => {
+          dispatch(setProductList([...productList, ...responseData.products]));
+          setHasMore(responseData.products.length > 0);
+          console.log(productList);
+          dispatch(setOffset(offset + 12));
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        })
+        .finally(() => setLoading(false));
+    }
+  };
 
   useEffect(() => {
-    setActivePage(1);
-    sendRequest({
-      url: `products?sort=${sortValue}`,
-      method: chooseMethods.GET,
-    })
-      .then((responseData) => {
-        dispatch(setProductList(responseData.products));
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, [sortValue]);
+    dispatch(setProductList([]));
+    dispatch(setOffset(0));
+    setOffset(0);
+  }, [sortValue, filterClicked]);
 
   return (
     <>
@@ -186,7 +173,7 @@ export default function ShopPage(props) {
             <select
               onChange={sortValueHandler}
               value={sortValue}
-              defaultValue="none"
+              defaultValue=""
               className="w-[7rem] mb-[3rem] items-center mt-[3rem]"
             >
               <option id="role_id" value="">
@@ -214,7 +201,7 @@ export default function ShopPage(props) {
             ></input>
 
             <button
-              onClick={filteredRequest}
+              onClick={() => setFilterClicked(!filterClicked)}
               className=" text-white font-bold p-[0.5rem] w-[6rem] rounded-md bg-[#23A6F0]"
             >
               Filter
@@ -223,96 +210,30 @@ export default function ShopPage(props) {
         </div>
 
         {fetchState === "FETCHING" && <div className="loading-spinner"></div>}
-        <div className="flex flex-col gap-[2.7rem] items-center">
-          <div className="flex flex-col w-screen md:flex md:w-screen md:flex-col gap-[2rem]  md:gap-[5rem] items-center md:w-screen mt-[4rem] md:mt-[2rem]  ">
-            <div className="flex flex-col gap-[2.5rem] md:gap-[0rem]  md:flex md:flex-row justify-between">
-              {currenPaginationData()
-                .slice(0, 4)
-                .map((item, ind) => {
-                  return (
-                    <Product
-                      key={ind}
-                      setCurrentProduct={setCurrentProduct}
-                      item={item}
-                    />
-                  );
-                })}
-            </div>
-            <div className="flex flex-col gap-[2.5rem] md:gap-[0rem] md:flex md:flex-row justify-between">
-              {currenPaginationData()
-                .slice(4, 8)
-                .map((item, ind) => {
-                  return (
-                    <Product
-                      key={ind}
-                      setCurrentProduct={setCurrentProduct}
-                      item={item}
-                    />
-                  );
-                })}
-            </div>
 
-            <div className="flex flex-col  gap-[2.5rem] md:gap-[0rem]  md:flex md:flex-row justify-between">
-              {currenPaginationData()
-                .slice(8, 12)
-                .map((item, ind) => {
-                  return (
+        <InfiniteScroll
+          dataLength={productList.length}
+          next={fetchMoreData}
+          hasMore={hasMore}
+          endMessage={
+            <p style={{ textAlign: "center" }}>No more items to show</p>
+          }
+        >
+          <div className="flex flex-col gap-[2rem] items-center justify-around ">
+            <div className="flex flex-col w-screen md:flex md:w-screen md:flex-col gap-[2rem] px-[3.5rem]  md:gap-[5rem] items-center md:w-screen mt-[4rem] md:mt-[2rem]  ">
+              <div className="product-container">
+                {productList.map((item) => (
+                  <div key={item.id} className="product-item">
                     <Product
-                      key={ind}
                       setCurrentProduct={setCurrentProduct}
                       item={item}
                     />
-                  );
-                })}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-
-          <Pagination aria-label="Page navigation example">
-            <PaginationItem disabled={activePage === 1}>
-              <PaginationLink
-                onClick={(e) => handlePageChange(e, 1)}
-                first
-                href="#"
-              />
-            </PaginationItem>
-            <PaginationItem disabled={activePage === 1}>
-              <PaginationLink
-                onClick={(e) => handlePageChange(e, activePage - 1)}
-                previous
-                href="#"
-              />
-            </PaginationItem>
-            <PaginationItem active={activePage === 1}>
-              <PaginationLink onClick={(e) => handlePageChange(e, 1)} href="#">
-                1
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem active={activePage === 2}>
-              <PaginationLink onClick={(e) => handlePageChange(e, 2)} href="#">
-                2
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem active={activePage === 3}>
-              <PaginationLink onClick={(e) => handlePageChange(e, 3)} href="#">
-                3
-              </PaginationLink>
-            </PaginationItem>
-            <PaginationItem disabled={activePage === 3}>
-              <PaginationLink
-                onClick={(e) => handlePageChange(e, activePage + 1)}
-                next
-                href="#"
-              />
-            </PaginationItem>
-            <PaginationItem disabled={activePage === 3}>
-              <PaginationLink
-                onClick={(e) => handlePageChange(e, 3)}
-                last
-                href="#"
-              />
-            </PaginationItem>
-          </Pagination>
-        </div>
+        </InfiniteScroll>
       </main>
 
       <div className="flex flex-col md:flex-row justify-center items-center   text-8xl mt-[3rem]  gap-[2rem] md:gap-[3.5rem]  text-gray-500">
