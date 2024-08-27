@@ -29,7 +29,7 @@ import { useSelector } from "react-redux";
 
 export default function CategoryShopPage(props) {
   const [activePage, setActivePage] = useState(1);
-  
+
   const history = useHistory();
   const { setCurrentProduct, setWillNavigateCurrentCategory } = props;
 
@@ -166,33 +166,37 @@ export default function CategoryShopPage(props) {
             </button>
           </div>
 
-          <div className="flex gap-[1.5rem] items-center">
-            <label className="mr-[1rem] font-bold" htmlFor="role_id">
-              Sort:
-            </label>
-            <select
-              onChange={sortValueHandler}
-              value={sortValue}
-              defaultValue="none"
-              className="w-[7rem] mb-[3rem] items-center mt-[3rem]"
-            >
-              <option id="role_id" value="">
-                Select
-              </option>
-              <option id="role_id" value="price:asc">
-                Price Asc
-              </option>
-              <option id="role_id" value="price:desc">
-                Price Desc
-              </option>
-              <option id="role_id" value="rating:asc">
-                Rating Asc
-              </option>
-              <option id="role_id" value="rating:desc">
-                Rating Desc
-              </option>
-            </select>
-
+          <div className="flex flex-col md:flex-row gap-[1.5rem] items-center">
+            <div className="flex flex-col md:flex-row items-center">
+              <label
+                className="mt-[2rem] md:mt-[0rem]  mr-[1rem] font-bold"
+                htmlFor="role_id"
+              >
+                Sort:
+              </label>
+              <select
+                onChange={sortValueHandler}
+                value={sortValue}
+                defaultValue="none"
+                className="w-[7rem] mb-[3rem] items-center mt-[3rem]"
+              >
+                <option id="role_id" value="">
+                  Select
+                </option>
+                <option id="role_id" value="price:asc">
+                  Price Asc
+                </option>
+                <option id="role_id" value="price:desc">
+                  Price Desc
+                </option>
+                <option id="role_id" value="rating:asc">
+                  Rating Asc
+                </option>
+                <option id="role_id" value="rating:desc">
+                  Rating Desc
+                </option>
+              </select>
+            </div>
             <input
               onChange={filterOnChangeHandler}
               type="text"
