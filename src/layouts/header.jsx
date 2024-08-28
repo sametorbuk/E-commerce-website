@@ -207,9 +207,7 @@ export default function Header() {
               {cart.length == 0 ? (
                 <FontAwesomeIcon
                   onClick={() => history.push("/shopping-cart-page")}
-                  className={`${
-                    pathname === "/shop" ? "hidden" : "block"
-                  } md:block cursor-pointer`}
+                  className={` md:block cursor-pointer`}
                   icon={faCartShopping}
                 />
               ) : (
@@ -222,9 +220,7 @@ export default function Header() {
                   className="flex gap-[0.4rem] items-center cursor-pointer"
                 >
                   <FontAwesomeIcon
-                    className={`${
-                      pathname === "/shop" ? "hidden" : "block"
-                    } md:block text-amber-500`}
+                    className={` md:block text-amber-500`}
                     icon={faCartShopping}
                   />
 

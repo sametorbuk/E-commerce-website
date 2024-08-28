@@ -81,7 +81,7 @@ export default function CartPageProductComp({ prdct }) {
           <h2>SEPETİNİZDE ÜRÜN BULUNMAMAKTADIR</h2>
         </div>
       )}
-      <div className="flex  mt-[1rem] w-[60rem] gap-[5rem] items-center">
+      <div className="flex  mt-[1rem] px-[1.5rem] md:px-[0rem] md:w-[60rem] md:gap-[5rem] items-center">
         <input
           onChange={checkboxOnChangeHandler}
           type="checkbox"
@@ -92,7 +92,7 @@ export default function CartPageProductComp({ prdct }) {
         <label className="flex items-center gap-[1.9rem]" htmlFor={product.id}>
           <img className="w-[8rem] h-[8rem]" src={images[0].url} alt="" />
 
-          <div className="flex flex-col w-[30rem] gap-[0.2rem]">
+          <div className="hidden md:flex flex-col w-[30rem] gap-[0.2rem]">
             <h2>{description}</h2>
 
             <div className="flex">
@@ -105,7 +105,7 @@ export default function CartPageProductComp({ prdct }) {
           <div className="flex text-2xl items-center h-[3rem] ">
             <button
               onClick={productCountDecreaseHandler}
-              className="text-5xl w-[2rem] rounded-md flex items-center justify-center h-full  border border-gray-500"
+              className="md:-5xl w-[2rem] rounded-md flex items-center justify-center h-full  border border-gray-500"
             >
               -
             </button>
@@ -116,14 +116,14 @@ export default function CartPageProductComp({ prdct }) {
 
             <button
               onClick={productCountIncreaseHandler}
-              className="text-4xl w-[2rem]  rounded-md flex items-center justify-center h-full text-amber-500 border border-gray-500"
+              className="md:text-4xl w-[2rem]  rounded-md flex items-center justify-center h-full text-amber-500 border border-gray-500"
             >
               +
             </button>
           </div>
         </label>
 
-        <p className="text-2xl font-bold text-amber-500">{count * price}TL</p>
+        <p className="md:text-2xl font-bold text-amber-500">{count * price}TL</p>
         <button onClick={toggle}>
           <FontAwesomeIcon
             className="text-gray-500 font-bold text-xl"

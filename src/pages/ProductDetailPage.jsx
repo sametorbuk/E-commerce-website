@@ -85,7 +85,7 @@ export default function ProductDetailPage({
           <p className="text-[#9e9e9e]">Shop</p>
         </div>
 
-        <div className="flex flex-col justify-center items-center justify-around w-full md:flex-row">
+        <div className="flex flex-col mt-[2rem] md:mt-[0rem] justify-center items-center justify-around w-full gap-[2rem] md:gap-[0rem] md:flex-row">
           <button
             onClick={() => history.goBack()}
             className="text-4xl absolute left-[5rem]"
@@ -94,7 +94,7 @@ export default function ProductDetailPage({
           </button>
           <img className="w-[19rem] rounded-md" src={images[0].url} alt="" />
 
-          <div className="flex flex-col bg-stone-100 w-[20rem] p-[2rem] w-[50%] gap-[2rem] rounded-lg">
+          <div className="flex flex-col bg-stone-100 w-[23.5rem] md:w-[38rem] p-[2rem] w-[50%] gap-[2rem] rounded-lg">
             <p className="font-bold text-lg">{name}</p>
             <p className="font-bold text-xl">{price}₺</p>
 
@@ -175,7 +175,7 @@ export default function ProductDetailPage({
               <div
                 onMouseEnter={() => setHoveredCartPreviewArea(true)}
                 onMouseLeave={() => setHoveredCartPreviewArea(false)}
-                className="flex flex-col p-[1.2rem] h-[17rem]  overflow-y-auto scrollable-div bg-stone-200 rounded-lg  w-[23rem] absolute top-[48rem]"
+                className="flex flex-col p-[1.2rem] h-[17rem]  overflow-y-auto scrollable-div bg-stone-200 rounded-lg  w-[23rem] absolute top-[50rem]"
               >
                 <div className="flex  gap-[1rem] font-bold text-lg">
                   <p>Sepetim:</p>

@@ -17,15 +17,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ContactCard from "../components/contact-card";
 import Footer from "../layouts/footer";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { useSelector } from "react-redux";
 
 const icons = [faPhone, faLocationDot, faEnvelope];
 
 export default function ContactPage() {
+  const { cart } = useSelector((state) => state.shoppingCart);
+  const { pathname } = useLocation();
   const history = useHistory();
   return (
     <>
       <InnerPagesHeader />
+
       <main className=" flex-col  md:flex md:flex-col items-center justify-center  md:px-[5rem] gap-[2rem]">
         <div className="flex md:hidden justify-around items-center mt-[1.4rem] mb-[1.4rem]   md:flex  md:justify-between md:w-screen md:px-[3rem]">
           <div className=" md:flex md:justify-between md:grow-[0.4]">
@@ -39,7 +46,39 @@ export default function ContactPage() {
 
           <div className="flex justiy-between gap-[2rem] ">
             <FontAwesomeIcon icon={faMagnifyingGlass} />
-            <FontAwesomeIcon icon={faCartShopping} />
+
+            {cart.length == 0 ? (
+              <FontAwesomeIcon
+                onClick={() => history.push("/shopping-cart-page")}
+                className={`${
+                  pathname === "/shop" ? "hidden" : "block"
+                } md:block cursor-pointer`}
+                icon={faCartShopping}
+              />
+            ) : (
+              ""
+            )}
+
+            {cart.length > 0 ? (
+              <div
+                onClick={() => history.push("/shopping-cart-page")}
+                className="flex gap-[0.4rem] items-center cursor-pointer"
+              >
+                <FontAwesomeIcon
+                  className={`${
+                    pathname === "/shop" ? "hidden" : "block"
+                  } md:block text-amber-500`}
+                  icon={faCartShopping}
+                />
+
+                <button className="rounded-full text-white font-bold items-center justify-center w-[1.4rem] bg-amber-500">
+                  {cart.length}
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+
             <FontAwesomeIcon className="hidden md:block" icon={faHeart} />
             <FontAwesomeIcon className="md:hidden" icon={faBarsStaggered} />
           </div>
@@ -78,8 +117,8 @@ export default function ContactPage() {
             <p className="text-xl">Fax : +451 215 215</p>
 
             <div className="flex gap-[1.5rem] text-2xl ">
-             <FontAwesomeIcon icon={faTwitter} />
-              <FontAwesomeIcon icon={faFacebook} /> 
+              <FontAwesomeIcon icon={faTwitter} />
+              <FontAwesomeIcon icon={faFacebook} />
               <FontAwesomeIcon icon={faInstagram} />
               <FontAwesomeIcon icon={faLinkedin} />
             </div>
