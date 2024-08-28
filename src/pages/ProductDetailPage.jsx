@@ -12,7 +12,7 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../thunk/fetchProductThunk";
 import BestSellerProducts from "../layouts/best-seller-products-area";
@@ -25,6 +25,8 @@ import {
   faRedditAlien,
   faStripe,
 } from "@fortawesome/free-brands-svg-icons";
+import { setCart } from "../redux/shoppingCartSlice";
+import CartPreviewProduct from "../components/cartPreviewProductComp";
 
 export default function ProductDetailPage({
   currentProduct,
@@ -44,6 +46,35 @@ export default function ProductDetailPage({
   const { product } = useSelector((state) => state.product);
   console.log(product);
   const { name, rating, stock, images, description, price } = product;
+
+  const { cart } = useSelector((state) => state.shoppingCart);
+
+  const addShoppingCartHandler = () => {
+    const available = cart.filter((prdct) => product.id === prdct.product.id);
+    if (available.length > 0) {
+      const prdct = cart.find((prdct) => prdct.product.id === product.id);
+
+      const newCart = cart.filter(
+        (item) => item.product.id !== prdct.product.id
+      );
+      dispatch(
+        setCart([
+          ...newCart,
+          { ...prdct, count: prdct.count + 1, checked: true, product: product },
+        ])
+      );
+    } else {
+      dispatch(
+        setCart([...cart, { count: 1, checked: true, product: product }])
+      );
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
+  const [hoveredMyCartBtn, setHoveredMyCartBtn] = useState(false);
+  const [hoveredCartPreviewArea, setHoveredCartPreviewArea] = useState(false);
+
   return (
     <>
       <Header />
@@ -94,16 +125,77 @@ export default function ProductDetailPage({
             </div>
 
             <div className="flex mt-[3rem] gap-[1.8rem] items-center">
-              <button className="btnBlueWithWhiteText w-[14rem] rounded-md h-[2.5rem] font-bold">
+              <button className="btnBlueWithWhiteText bg-orange-700 w-[14rem] rounded-md h-[2.5rem] font-bold">
                 Select Options
               </button>
-
-              <div className="flex items-center text-xl gap-[1.6rem]">
+              <button
+                onClick={addShoppingCartHandler}
+                className="btnBlueWithWhiteText w-[14rem] rounded-md h-[2.5rem] font-bold"
+              >
+                Add to cart
+              </button>
+            </div>
+            <div className="flex items-center text-xl gap-[1.6rem]">
+              <div className="flex">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
-                <FontAwesomeIcon icon={faCartShopping} />
+              </div>
+
+              <div className="flex">
                 <FontAwesomeIcon className="hidden md:block" icon={faEye} />
               </div>
+
+              <div className="flex items-center cursor-pointer gap-[0.4rem]">
+                <div
+                  onMouseEnter={() => setHoveredMyCartBtn(true)}
+                  onMouseLeave={() => setHoveredMyCartBtn(false)}
+                  className={`${
+                    cart.length == 0 ? "hidden" : "flex"
+                  }  items-center text-amber-500  gap-[0.4rem]`}
+                >
+                  <FontAwesomeIcon icon={faCartShopping} />
+                  <p>Sepetim</p>
+                  <button className="rounded-full text-white font-bold items-center justify-center w-[1.8rem] bg-amber-500">
+                    {cart.length}
+                  </button>
+                </div>
+
+                <div
+                  className={`${
+                    cart.length == 0 ? "flex" : "hidden"
+                  }  items-center   gap-[0.4rem]`}
+                >
+                  <FontAwesomeIcon icon={faCartShopping} />
+                  <p>Sepetim</p>
+                </div>
+              </div>
             </div>
+
+            {(hoveredMyCartBtn || hoveredCartPreviewArea) && (
+              <div
+                onMouseEnter={() => setHoveredCartPreviewArea(true)}
+                onMouseLeave={() => setHoveredCartPreviewArea(false)}
+                className="flex flex-col p-[1.2rem]  overflow-y-auto scrollable bg-stone-200 rounded-lg h-[19rem] w-[23rem] absolute top-[48rem]"
+              >
+                <div className="flex  gap-[1rem] font-bold text-lg">
+                  <p>Sepetim:</p>
+                  <p>({cart.length} ürün) </p>
+                </div>
+
+                {cart.map((item, ind) => {
+                  return <CartPreviewProduct key={ind} item={item} />;
+                })}
+
+                <div className="flex w-full justify-around mt-[1rem]">
+                  <button className="btnBlueWithWhiteText w-[9rem] h-[2.5rem] rounded-md bg-amber-500">
+                    Sepete git
+                  </button>
+
+                  <button className="btnBlueWithWhiteText w-[9rem] h-[2.5rem] rounded-md">
+                    Sipariş tamamla
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

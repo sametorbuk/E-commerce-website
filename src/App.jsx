@@ -68,7 +68,6 @@ function App() {
 
   const womenCats = categories.filter((item) => item.gender === "k");
   const menCats = categories.filter((item) => item.gender === "e");
-
   const [willNavigateCurrentCategory, setWillNavigateCurrentCategory] =
     useState({});
 
@@ -104,7 +103,10 @@ function App() {
           path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId"
           exact
         >
-          <ProductDetailPage currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />
+          <ProductDetailPage
+            currentProduct={currentProduct}
+            setCurrentProduct={setCurrentProduct}
+          />
         </Route>
 
         <Route path="/contact">

@@ -22,10 +22,8 @@ export default function Product(props) {
       .replace(/^-+|-+$/g, "");
   }
 
-  console.log(categories[category_id - 1].code);
-
   const productSlugName = slugify(description);
-  console.log(categories);
+
   const navigateToDetailPageHandler = () => {
     history.push(
       `/shop/${categories[category_id - 1].gender}/${
