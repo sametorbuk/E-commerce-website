@@ -28,6 +28,7 @@ import {
 
 export default function Header() {
   const { user } = useSelector((state) => state.client);
+  const { cart } = useSelector((state) => state.shoppingCart);
   const { pathname } = useLocation();
   const history = useHistory();
 
@@ -195,19 +196,46 @@ export default function Header() {
               )}
             </div>
 
-            <div className="flex justiy-between gap-[2rem] ">
+            <div className="flex justiy-between items-center gap-[1rem] ">
               <FontAwesomeIcon
                 className={`${
                   pathname === "/shop" ? "hidden" : "block"
                 } md:block`}
                 icon={faMagnifyingGlass}
               />
-              <FontAwesomeIcon
-                className={`${
-                  pathname === "/shop" ? "hidden" : "block"
-                } md:block`}
-                icon={faCartShopping}
-              />
+
+              {cart.length == 0 ? (
+                <FontAwesomeIcon
+                  onClick={() => history.push("/shopping-cart-page")}
+                  className={`${
+                    pathname === "/shop" ? "hidden" : "block"
+                  } md:block cursor-pointer`}
+                  icon={faCartShopping}
+                />
+              ) : (
+                ""
+              )}
+
+              {cart.length > 0 ? (
+                <div
+                  onClick={() => history.push("/shopping-cart-page")}
+                  className="flex gap-[0.4rem] items-center cursor-pointer"
+                >
+                  <FontAwesomeIcon
+                    className={`${
+                      pathname === "/shop" ? "hidden" : "block"
+                    } md:block text-amber-500`}
+                    icon={faCartShopping}
+                  />
+
+                  <button className="rounded-full text-white font-bold items-center justify-center w-[1.4rem] bg-amber-500">
+                    {cart.length}
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
+
               <FontAwesomeIcon className="hidden md:block" icon={faHeart} />
               <FontAwesomeIcon className="md:hidden" icon={faBarsStaggered} />
             </div>

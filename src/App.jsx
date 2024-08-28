@@ -18,6 +18,7 @@ import { fetchCategories } from "./thunk/fetchCategoriesThunk";
 import { setProductList } from "./redux/productSlice";
 import { fetchProducts } from "./thunk/fetchProductsThunk";
 import CategoryShopPage from "./pages/CategoryShopPage";
+import ShoppingCartPage from "./pages/shoppingCartPage";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -107,6 +108,10 @@ function App() {
             currentProduct={currentProduct}
             setCurrentProduct={setCurrentProduct}
           />
+        </Route>
+
+        <Route path="/shopping-cart-page">
+          <ShoppingCartPage />
         </Route>
 
         <Route path="/contact">

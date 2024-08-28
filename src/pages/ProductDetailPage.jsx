@@ -146,6 +146,7 @@ export default function ProductDetailPage({
 
               <div className="flex items-center cursor-pointer gap-[0.4rem]">
                 <div
+                  onClick={() => history.push("/shopping-cart-page")}
                   onMouseEnter={() => setHoveredMyCartBtn(true)}
                   onMouseLeave={() => setHoveredMyCartBtn(false)}
                   className={`${
@@ -174,7 +175,7 @@ export default function ProductDetailPage({
               <div
                 onMouseEnter={() => setHoveredCartPreviewArea(true)}
                 onMouseLeave={() => setHoveredCartPreviewArea(false)}
-                className="flex flex-col p-[1.2rem]  overflow-y-auto scrollable bg-stone-200 rounded-lg h-[19rem] w-[23rem] absolute top-[48rem]"
+                className="flex flex-col p-[1.2rem] h-[17rem]  overflow-y-auto scrollable-div bg-stone-200 rounded-lg  w-[23rem] absolute top-[48rem]"
               >
                 <div className="flex  gap-[1rem] font-bold text-lg">
                   <p>Sepetim:</p>
@@ -186,7 +187,10 @@ export default function ProductDetailPage({
                 })}
 
                 <div className="flex w-full justify-around mt-[1rem]">
-                  <button className="btnBlueWithWhiteText w-[9rem] h-[2.5rem] rounded-md bg-amber-500">
+                  <button
+                    onClick={() => history.push("/shopping-cart-page")}
+                    className="btnBlueWithWhiteText w-[9rem] h-[2.5rem] rounded-md bg-amber-500"
+                  >
                     Sepete git
                   </button>
 
