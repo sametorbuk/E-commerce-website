@@ -81,7 +81,7 @@ export default function CartPageProductComp({ prdct }) {
           <h2>SEPETİNİZDE ÜRÜN BULUNMAMAKTADIR</h2>
         </div>
       )}
-      <div className="flex  mt-[1rem] px-[1.5rem] md:px-[0rem] md:w-[60rem] md:gap-[5rem] items-center">
+      <div className="flex  mt-[1rem] px-[1.5rem] md:px-[0rem] md:p-[1rem] md:w-[60rem] md:gap-[5rem] items-center">
         <input
           onChange={checkboxOnChangeHandler}
           type="checkbox"
@@ -123,7 +123,9 @@ export default function CartPageProductComp({ prdct }) {
           </div>
         </label>
 
-        <p className="md:text-2xl font-bold text-amber-500">{count * price}TL</p>
+        <p className="md:text-2xl font-bold text-amber-500">
+          {count * price}TL
+        </p>
         <button onClick={toggle}>
           <FontAwesomeIcon
             className="text-gray-500 font-bold text-xl"
