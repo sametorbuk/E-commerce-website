@@ -27,6 +27,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { setCart } from "../redux/shoppingCartSlice";
 import CartPreviewProduct from "../components/cartPreviewProductComp";
+import { toast } from "react-toastify";
 
 export default function ProductDetailPage({
   currentProduct,
@@ -74,6 +75,16 @@ export default function ProductDetailPage({
 
   const [hoveredMyCartBtn, setHoveredMyCartBtn] = useState(false);
   const [hoveredCartPreviewArea, setHoveredCartPreviewArea] = useState(false);
+
+  const navigateShoppingCartPage = () => {
+    history.push("/shopping-cart-page");
+
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    if (!token) {
+      toast.warning("please log in first");
+    }
+  };
 
   return (
     <>
@@ -146,7 +157,7 @@ export default function ProductDetailPage({
 
               <div className="flex items-center cursor-pointer gap-[0.4rem]">
                 <div
-                  onClick={() => history.push("/shopping-cart-page")}
+                  onClick={navigateShoppingCartPage}
                   onMouseEnter={() => setHoveredMyCartBtn(true)}
                   onMouseLeave={() => setHoveredMyCartBtn(false)}
                   className={`${
@@ -166,7 +177,12 @@ export default function ProductDetailPage({
                   }  items-center   gap-[0.4rem]`}
                 >
                   <FontAwesomeIcon icon={faCartShopping} />
-                  <p>Sepetim</p>
+                  <p
+                    onClick={navigateShoppingCartPage}
+                    className="cursor-pointer"
+                  >
+                    Sepetim
+                  </p>
                 </div>
               </div>
             </div>

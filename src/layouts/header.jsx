@@ -25,6 +25,7 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
+import { toast } from "react-toastify";
 
 export default function Header() {
   const { user } = useSelector((state) => state.client);
@@ -39,6 +40,16 @@ export default function Header() {
 
   const womenCats = categories.filter((item) => item.gender === "k");
   const menCats = categories.filter((item) => item.gender === "e");
+
+  const navigateShoppingCartPage = () => {
+    history.push("/shopping-cart-page");
+
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    if (!token) {
+      toast.warning("please log in first");
+    }
+  };
 
   return (
     <>
@@ -206,7 +217,7 @@ export default function Header() {
 
               {cart.length == 0 ? (
                 <FontAwesomeIcon
-                  onClick={() => history.push("/shopping-cart-page")}
+                  onClick={navigateShoppingCartPage}
                   className={` md:block cursor-pointer`}
                   icon={faCartShopping}
                 />
@@ -216,7 +227,7 @@ export default function Header() {
 
               {cart.length > 0 ? (
                 <div
-                  onClick={() => history.push("/shopping-cart-page")}
+                  onClick={navigateShoppingCartPage}
                   className="flex gap-[0.4rem] items-center cursor-pointer"
                 >
                   <FontAwesomeIcon

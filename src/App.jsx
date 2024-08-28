@@ -19,6 +19,8 @@ import { setProductList } from "./redux/productSlice";
 import { fetchProducts } from "./thunk/fetchProductsThunk";
 import CategoryShopPage from "./pages/CategoryShopPage";
 import ShoppingCartPage from "./pages/shoppingCartPage";
+import PrivateRoute from "./components/PrivateRoute";
+import { toast } from "react-toastify";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -77,6 +79,10 @@ function App() {
       <ScrollToTop />
 
       <Switch>
+        <Route path="/login">
+          <LoginPage />
+        </Route>
+
         <Route path="/" exact>
           <HomePage setCurrentProduct={setCurrentProduct} />
         </Route>
@@ -110,10 +116,6 @@ function App() {
           />
         </Route>
 
-        <Route path="/shopping-cart-page">
-          <ShoppingCartPage />
-        </Route>
-
         <Route path="/contact">
           <ContactPage />
         </Route>
@@ -130,10 +132,6 @@ function App() {
           <SignUpPage />
         </Route>
 
-        <Route path="/login">
-          <LoginPage />
-        </Route>
-
         {womenCats.map((cat, ind) => {
           return (
             <Route key={ind} path={`/shop/${cat.gender}/${cat.title}`}></Route>
@@ -145,6 +143,12 @@ function App() {
             <Route key={ind} path={`/shop/${cat.gender}/${cat.title}`}></Route>
           );
         })}
+
+        <PrivateRoute>
+          <Route path="/shopping-cart-page" exact>
+            <ShoppingCartPage />
+          </Route>
+        </PrivateRoute>
       </Switch>
     </>
   );
