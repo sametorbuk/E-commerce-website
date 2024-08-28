@@ -21,6 +21,9 @@ import CategoryShopPage from "./pages/CategoryShopPage";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
+
+  const { categories } = useSelector((state) => state.product);
+
   const { MakeRequest, data, METHODS } = useAxios();
   const dispatch = useDispatch();
 
@@ -57,8 +60,6 @@ function App() {
     }
   }, []);
 
-  const { categories } = useSelector((state) => state.product);
-
   useEffect(() => {
     if (categories.length === 0) {
       dispatch(fetchCategories("/categories"));
@@ -89,6 +90,7 @@ function App() {
 
         <Route
           path="/shop/:gender/:code/:id"
+          exact
           render={(props) => (
             <CategoryShopPage
               {...props}
@@ -98,8 +100,11 @@ function App() {
           )}
         />
 
-        <Route path="/product-detail">
-          <ProductDetailPage currentProduct={currentProduct} />
+        <Route
+          path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId"
+          exact
+        >
+          <ProductDetailPage currentProduct={currentProduct} setCurrentProduct={setCurrentProduct} />
         </Route>
 
         <Route path="/contact">

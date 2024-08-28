@@ -1,22 +1,39 @@
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Product(props) {
   const { item, setCurrentProduct } = props;
   const history = useHistory();
 
+  setCurrentProduct(item);
+  const { categories } = useSelector((state) => state.product);
+
+  const { description, images, name, price, rating, category_id, id } = item;
+
+  function slugify(text) {
+    return text
+      .toString()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9 -]/g, "")
+      .trim()
+      .replace(/[\s -]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  console.log(categories[category_id - 1].code);
+
+  const productSlugName = slugify(description);
+  console.log(categories);
   const navigateToDetailPageHandler = () => {
-    history.push("/product-detail");
+    history.push(
+      `/shop/${categories[category_id - 1].gender}/${
+        categories[category_id - 1].code
+      }/${category_id}/${productSlugName}/${id}`
+    );
     setCurrentProduct(item);
   };
-
-  const {
-    description,
-
-    images,
-    name,
-    price,
-    rating,
-  } = item;
 
   return (
     <>

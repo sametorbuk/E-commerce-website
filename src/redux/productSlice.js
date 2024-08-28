@@ -8,7 +8,23 @@ const initialState = {
   offset: 0,
   filter: "",
   fetchState: "NOT_FETCHED",
-  data: null,
+  product: {
+    id: 15,
+    name: "Minimal Kalp Baskılı",
+    description: "Minimal Kalp Baskılı Siyah Oversize Tshirt",
+    price: 85,
+    stock: 56,
+    store_id: 1,
+    category_id: 1,
+    rating: 4.42,
+    sell_count: 686,
+    images: [
+      {
+        url: "https://cdn.dsmcdn.com/ty900/product/media/images/20230523/16/356806190/516079941/1/1_org_zoom.jpg",
+        index: 0,
+      },
+    ],
+  },
 };
 
 const productSlice = createSlice({
@@ -17,6 +33,9 @@ const productSlice = createSlice({
   reducers: {
     setFetchState: (state, action) => {
       state.fetchState = action.payload;
+    },
+    setProduct: (state, action) => {
+      state.product = action.payload;
     },
 
     setCategories: (state, action) => {
@@ -51,6 +70,7 @@ export const {
   setLimit,
   setOffset,
   setFilter,
+  setProduct,
 } = productSlice.actions;
 
 export default productSlice.reducer;
