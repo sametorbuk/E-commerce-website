@@ -19,11 +19,11 @@ export default function useAxios() {
     headers: { Autoauthentication: "" },
   });
 
-  const MakeRequest = ({ url, method, data = null }) => {
+  const MakeRequest = ({ url, method, data = null, headers = {} }) => {
     setLoading(true);
     setError(null);
 
-    return instance[method](url, data)
+    return instance[method](url, data, { headers })
       .then((response) => {
         setData(response.data);
         setLoading(false);
@@ -32,7 +32,7 @@ export default function useAxios() {
       .catch((err) => {
         setError(err);
         if (url === "/verify") {
-          localStorage.clear("token");
+          localStorage.removeItem("token");
         }
         return err;
       })

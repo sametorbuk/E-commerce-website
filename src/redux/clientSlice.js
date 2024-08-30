@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: JSON.parse(localStorage.getItem("user")) || {},
-  adressList: [],
+  addressList: [],
   creditCards: [],
   roles: [],
   theme: "",
@@ -34,9 +34,13 @@ const clientSlice = createSlice({
       const { newLang } = action.payload;
       state.language = newLang;
     },
+    setAddressList: (state, action) => {
+      state.addressList = action.payload;
+    },
   },
 });
 
-export const { setRoles, setLanguage, setTheme, setUser } = clientSlice.actions;
+export const { setRoles, setLanguage, setTheme, setUser, setAddressList } =
+  clientSlice.actions;
 
 export default clientSlice.reducer;

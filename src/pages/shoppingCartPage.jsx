@@ -4,9 +4,11 @@ import Header from "../layouts/header";
 import CartPageProductComp from "../components/CartPageProductComponent";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function ShoppingCartPage() {
   const { cart } = useSelector((state) => state.shoppingCart);
+  const history = useHistory();
 
   const tickedProducts = cart.filter((item) => item.checked === true);
   let total = 0;
@@ -45,7 +47,10 @@ export default function ShoppingCartPage() {
             <p className="text-amber-500 font-bold">-29,99 TL</p>
           </div>
 
-          <button className="flex items-center gap-[1rem] justify-center rounded-sm h-[2rem] btnBlueWithWhiteText bg-amber-500 w-[10rem]">
+          <button
+            onClick={() => history.push("/create-order-page")}
+            className="flex items-center gap-[1rem] justify-center rounded-sm h-[2rem] btnBlueWithWhiteText bg-amber-500 w-[10rem]"
+          >
             Sepeti onayla
             <FontAwesomeIcon icon={faArrowRight} />
           </button>

@@ -20,7 +20,8 @@ import { fetchProducts } from "./thunk/fetchProductsThunk";
 import CategoryShopPage from "./pages/CategoryShopPage";
 import ShoppingCartPage from "./pages/shoppingCartPage";
 import PrivateRoute from "./components/PrivateRoute";
-import { toast } from "react-toastify";
+
+import CreateOrderPage from "./pages/createOrderPage";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -144,9 +145,13 @@ function App() {
           );
         })}
 
+        <Route path="/shopping-cart-page" exact>
+          <ShoppingCartPage />
+        </Route>
+
         <PrivateRoute>
-          <Route path="/shopping-cart-page" exact>
-            <ShoppingCartPage />
+          <Route path="/create-order-page">
+            <CreateOrderPage />
           </Route>
         </PrivateRoute>
       </Switch>
