@@ -9,7 +9,7 @@ import useAxios from "../hooks/useAxios";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-export default function AddressRadioComponent({ data }) {
+export default function AddressRadioComponent({ data, isSelected, onSelect }) {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -99,10 +99,9 @@ export default function AddressRadioComponent({ data }) {
 
   return (
     <>
-      <div className="flex flex-col  w-[100%]">
+      <div className={` cursor-pointer rounded-lg  flex flex-col  w-[100%] `}>
         <div className="flex gap-[0.5rem] w-full justify-between mb-[0.4rem]">
           <div className="flex gap-[0.4rem]">
-            <input type="radio" id="addresRadio" />
             <p>{title}</p>
           </div>
 
@@ -111,24 +110,27 @@ export default function AddressRadioComponent({ data }) {
           </button>
         </div>
 
-        <label htmlFor="addresRadio">
-          <div className="p-[1rem] flex flex-col border-1 border-solid border-gray-300 rounded-md">
-            <div className="flex justify-between">
-              <div className="flex items-center gap-[0.4rem]">
-                <FontAwesomeIcon icon={faUser} style={{ color: "#f41a1a" }} />
-                <p>{name}</p>
-              </div>
-
-              <div className="flex items-center gap-[0.4rem] ">
-                <FontAwesomeIcon icon={faMobileScreenButton} />
-                <p>{phone}</p>
-              </div>
+        <div
+          onClick={() => onSelect(data)}
+          className={`p-[1rem] flex flex-col border-1 border-solid border-gray-300 rounded-md  ${
+            isSelected ? "border-2 border-solid border-amber-400" : ""
+          }`}
+        >
+          <div className="flex justify-between">
+            <div className="flex items-center gap-[0.4rem]">
+              <FontAwesomeIcon icon={faUser} style={{ color: "#f41a1a" }} />
+              <p>{name}</p>
             </div>
 
-            <p>{neighborhood}</p>
-            <p>{city}</p>
+            <div className="flex items-center gap-[0.4rem] ">
+              <FontAwesomeIcon icon={faMobileScreenButton} />
+              <p>{phone}</p>
+            </div>
           </div>
-        </label>
+
+          <p>{neighborhood}</p>
+          <p>{city}</p>
+        </div>
 
         <div className="">
           <Modal className="relative  " isOpen={modal} toggle={toggle}>
@@ -149,7 +151,7 @@ export default function AddressRadioComponent({ data }) {
                     })}
                   />
                   {errors.title && (
-                    <p className="font-bold text-red-500">
+                    <p className="font-bold text-red-300">
                       {errors.title.message}
                     </p>
                   )}
@@ -169,7 +171,7 @@ export default function AddressRadioComponent({ data }) {
                     })}
                   />
                   {errors.name && (
-                    <p className="font-bold text-red-500">
+                    <p className="font-bold text-red-300">
                       {errors.name.message}
                     </p>
                   )}
@@ -189,7 +191,7 @@ export default function AddressRadioComponent({ data }) {
                     })}
                   />
                   {errors.surname && (
-                    <p className="font-bold text-red-500">
+                    <p className="font-bold text-red-300">
                       {errors.surname.message}
                     </p>
                   )}
@@ -209,7 +211,7 @@ export default function AddressRadioComponent({ data }) {
                     })}
                   />
                   {errors.phone && (
-                    <p className="font-bold text-red-500">
+                    <p className="font-bold text-red-300">
                       {errors.phone.message}
                     </p>
                   )}
@@ -249,7 +251,7 @@ export default function AddressRadioComponent({ data }) {
                     })}
                   />
                   {errors.district && (
-                    <p className="font-bold text-red-500">
+                    <p className="font-bold text-red-300">
                       {errors.district.message}
                     </p>
                   )}
@@ -271,7 +273,7 @@ export default function AddressRadioComponent({ data }) {
                     })}
                   />
                   {errors.neighborhood && (
-                    <p className="font-bold text-red-500">
+                    <p className="font-bold text-red-300">
                       {errors.neighborhood.message}
                     </p>
                   )}

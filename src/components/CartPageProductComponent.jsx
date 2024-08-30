@@ -81,7 +81,7 @@ export default function CartPageProductComp({ prdct }) {
           <h2>SEPETİNİZDE ÜRÜN BULUNMAMAKTADIR</h2>
         </div>
       )}
-      <div className="flex  mt-[1rem] px-[1.5rem] md:px-[0rem] md:p-[1rem] md:w-[60rem] md:gap-[5rem] items-center">
+      <div className="flex  mt-[1rem] px-[1.5rem] md:px-[0rem] justify-between md:p-[1rem] md:w-[50rem] md:gap-[2rem] items-center">
         <input
           onChange={checkboxOnChangeHandler}
           type="checkbox"

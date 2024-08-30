@@ -21,7 +21,7 @@ export default function ShoppingCartPage() {
     <>
       <Header />
 
-      <main className="flex flex-col md:flex-row justify-around  w-full">
+      <main className="flex flex-col md:flex-row   justify-around  w-full">
         <div className="flex flex-col">
           {cart.map((prdct, ind) => (
             <CartPageProductComp key={ind} prdct={prdct} />
@@ -49,7 +49,17 @@ export default function ShoppingCartPage() {
 
           <button
             onClick={() => history.push("/create-order-page")}
-            className="flex items-center gap-[1rem] justify-center rounded-sm h-[2rem] btnBlueWithWhiteText bg-amber-500 w-[10rem]"
+            className="flex   items-center gap-[1rem] justify-center rounded-sm h-[2rem] btnBlueWithWhiteText bg-amber-500 w-[10rem]"
+          >
+            Sepeti onayla
+            <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+        </div>
+
+        <div className="flex md:hidden mt-[3rem] w-full justify-center items-center">
+          <button
+            onClick={() => history.push("/create-order-page")}
+            className="flex md:hidden   items-center gap-[1rem] justify-center rounded-sm h-[2rem] btnBlueWithWhiteText bg-amber-500 w-[10rem]"
           >
             Sepeti onayla
             <FontAwesomeIcon icon={faArrowRight} />
@@ -57,7 +67,7 @@ export default function ShoppingCartPage() {
         </div>
       </main>
 
-      <div className="w-full text-2xl font-bold gap-[1rem] mt-[3rem] flex justify-end px-[14rem] ">
+      <div className="w-full text-2xl font-bold gap-[1rem] mt-[3rem] flex justify-center md:justify-end px-[14rem] ">
         <p>Toplam:</p>
         <p className="text-amber-600 ">
           {total >= 150 ? total : total + 29.99} TL

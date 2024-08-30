@@ -14,6 +14,11 @@ import { iller } from "../city-data";
 import { toast } from "react-toastify";
 
 export default function CreateOrderPage() {
+  const [selectedAddress, setSelectedAdress] = useState(null);
+
+  const handleAddressSelect = (address) => {
+    setSelectedAdress(address);
+  };
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -82,8 +87,8 @@ export default function CreateOrderPage() {
     <>
       <Header />
 
-      <main className=" flex-col  md:flex md:flex-row mt-[3rem] justify-center  md:px-[5rem] gap-[2rem]">
-        <div className="flex flex-col w-[70%]">
+      <main className=" flex flex-col   md:flex md:flex-row mt-[3rem] justify-center ml-[2.8rem] md:ml-[0rem] md:px-[3rem] gap-[2rem]">
+        <div className="flex flex-col  w-[90%] md:w-[70%] justify-center">
           <div className="flex w-full justify-between">
             <div className="flex flex-col p-[1rem]">
               <h3 className="font-bold text-lg">Adres Bilgileri</h3>
@@ -100,7 +105,7 @@ export default function CreateOrderPage() {
           <div className="flex flex-col p-[1rem] border-1 border-solid border-gray-500">
             <h2 className="font-bold">Teslimat adresi</h2>
 
-            <div className="w-full grid grid-cols-2 gap-[1.5rem] mt-[2rem] items-center">
+            <div className="w-full flex flex-col md:grid md:grid-cols-2 gap-[1.5rem] mt-[2rem] items-center">
               <button
                 onClick={toggle}
                 className="w-full h-full bg-stone-200 rounded-md flex flex-col justify-center items-center"
@@ -110,7 +115,14 @@ export default function CreateOrderPage() {
               </button>
 
               {addressList.map((data, ind) => {
-                return <AddressRadioComponent key={ind} data={data} />;
+                return (
+                  <AddressRadioComponent
+                    key={ind}
+                    onSelect={handleAddressSelect}
+                    isSelected={selectedAddress === data}
+                    data={data}
+                  />
+                );
               })}
             </div>
           </div>
