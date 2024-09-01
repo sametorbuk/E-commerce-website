@@ -113,7 +113,7 @@ export default function AddressRadioComponent({ data, isSelected, onSelect }) {
         <div
           onClick={() => onSelect(data)}
           className={`p-[1rem] flex flex-col border-1 border-solid border-gray-300 rounded-md  ${
-            isSelected ? "border-2 border-solid border-amber-400" : ""
+            isSelected ? "border-2 border-solid border-amber-500" : ""
           }`}
         >
           <div className="flex justify-between">
