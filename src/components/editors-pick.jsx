@@ -11,12 +11,12 @@ export default function EditorsPick() {
 
         <div className="flex md:gap-[0rem] flex-col md:justify-between md:flex md:ml-[7rem]  md:flex-row md:h-[20rem] md:w-[60rem] ">
           <img
-            className="md:grow-[0.5]"
+            className="md:grow-[0.5]  md:w-[15rem]"
             src="./images/editors-pick/editors-pick-img-1.jpg"
             alt=""
           />
 
-          <button className="btn ml-[1rem]  bottom-[5rem] w-[10rem] md:h-[3rem] md:top-[80rem] md:ml-[1.5rem] md:px-[3rem]">
+          <button className="btn ml-[1rem] bg-white  bottom-[5rem] w-[10rem] md:h-[3rem] md:top-[80rem] md:ml-[1.5rem] md:px-[3rem]">
             MEN
           </button>
 
@@ -27,7 +27,7 @@ export default function EditorsPick() {
               alt=""
             />
 
-            <button className="btn  ml-[1rem] bottom-[5rem]     md:top-[80rem] md:h-[3rem]   md:ml-[1.5rem] md:px-[3rem]">
+            <button className="btn  ml-[1rem] bottom-[5rem] bg-white    md:top-[80rem] md:h-[3rem]   md:ml-[1.5rem] md:px-[3rem]">
               WOMEN
             </button>
 
@@ -38,7 +38,7 @@ export default function EditorsPick() {
                 alt=""
               />
 
-              <button className="btn  ml-[1rem] bottom-[5rem] md:h-[2.5rem] md:top-[71rem] md:ml-[0.6rem] md:py-[0.4rem] md:px-[0.5rem]">
+              <button className="btn  bg-white ml-[1rem] bottom-[5rem] md:h-[2.5rem] md:top-[71rem] md:ml-[0.6rem] md:py-[0.4rem] md:px-[0.5rem]">
                 ACCESORRIES
               </button>
 
@@ -48,7 +48,7 @@ export default function EditorsPick() {
                 alt=""
               />
 
-              <button className="btn  ml-[1rem]  bottom-[5rem] md:h-[2.5rem] md:top-[81.5rem] md:ml-[1rem] md:py-[0.4rem] md:px-[1.5rem]">
+              <button className="btn bg-white  ml-[1rem]  bottom-[5rem] md:h-[2.5rem] md:top-[81.5rem] md:ml-[1rem] md:py-[0.4rem] md:px-[1.5rem]">
                 KIDS
               </button>
             </div>

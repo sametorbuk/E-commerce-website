@@ -288,7 +288,7 @@ export default function PaymentArea({ selectedAddress }) {
                 </Modal>
               </div>
 
-              <div className="w-[50%] p-[1rem] flex border-Simple ">
+              <div className="md:w-[50%]  p-[1rem] flex border-Simple ">
                 <div className="flex flex-col w-[50%] ">
                   <div className="flex justify-center  font-bold border-Simple ">
                     Number of instalments
