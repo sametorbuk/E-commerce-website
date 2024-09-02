@@ -46,6 +46,7 @@ export default function AddressRadioComponent({ data, isSelected, onSelect }) {
   const formData = watch();
   const token = localStorage.getItem("token");
   const { MakeRequest, METHODS } = useAxios();
+
   const addressUpdateHandler = () => {
     MakeRequest({
       url: "/user/address",
@@ -85,18 +86,6 @@ export default function AddressRadioComponent({ data, isSelected, onSelect }) {
       .catch();
   };
 
-  /* doRequest({
-    url: `/user/address/${id}`,
-    method: methods.DELETE,
-    data: null,
-    headers: {
-      Authorization: token,
-    },
-  });
-
-  toggle();
-*/
-
   return (
     <>
       <div className={` cursor-pointer rounded-lg  flex flex-col  w-[100%] `}>
@@ -113,7 +102,7 @@ export default function AddressRadioComponent({ data, isSelected, onSelect }) {
         <div
           onClick={() => onSelect(data)}
           className={`p-[1rem] flex flex-col border-1 border-solid border-gray-300 rounded-md  ${
-            isSelected ? "border-2 border-solid border-amber-500" : ""
+            isSelected ? "border-2 border-solid border-yellow-500" : ""
           }`}
         >
           <div className="flex justify-between">

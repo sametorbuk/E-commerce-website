@@ -37,10 +37,19 @@ const clientSlice = createSlice({
     setAddressList: (state, action) => {
       state.addressList = action.payload;
     },
+    setCreditCards: (state, action) => {
+      state.creditCards = action.payload;
+    },
   },
 });
 
-export const { setRoles, setLanguage, setTheme, setUser, setAddressList } =
-  clientSlice.actions;
+export const {
+  setRoles,
+  setLanguage,
+  setTheme,
+  setUser,
+  setAddressList,
+  setCreditCards,
+} = clientSlice.actions;
 
 export default clientSlice.reducer;

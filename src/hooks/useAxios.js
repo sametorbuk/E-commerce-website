@@ -23,7 +23,11 @@ export default function useAxios() {
     setLoading(true);
     setError(null);
 
-    return instance[method](url, data, { headers })
+    return instance[method](
+      url,
+      data ? data : "",
+      headers !== null ? { headers } : ""
+    )
       .then((response) => {
         setData(response.data);
         setLoading(false);

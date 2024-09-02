@@ -24,6 +24,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import useAxios from "../hooks/useAxios";
 import { setOffset, setProductList } from "../redux/productSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchProducts } from "../thunk/fetchProductsThunk";
 
 export default function ShopPage(props) {
   const [hasMore, setHasMore] = useState(true);
@@ -39,14 +40,13 @@ export default function ShopPage(props) {
 
   const dispatch = useDispatch();
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (productList.length === 0) {
       dispatch(fetchProducts("/products"));
     } else {
       return;
     }
   }, []);
-*/
 
   const categoryNavigateHandler = (item) => {
     setWillNavigateCurrentCategory(item);
@@ -103,6 +103,13 @@ export default function ShopPage(props) {
     dispatch(setProductList([]));
     dispatch(setOffset(0));
     setOffset(0);
+    dispatch(
+      fetchProducts(
+        `/products?${filterInputValue ? "&filter=" + filterInputValue : ``}${
+          sortValue ? "&sort=" + sortValue : ""
+        }`
+      )
+    );
   }, [sortValue, filterClicked]);
 
   return (

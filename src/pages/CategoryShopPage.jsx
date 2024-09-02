@@ -214,6 +214,11 @@ export default function CategoryShopPage(props) {
         </div>
 
         {loading && <div className="loading-spinner"></div>}
+        {currenPaginationData().length === 0 ? (
+          <h2 className="font-bold text-4xl">product not found</h2>
+        ) : (
+          ""
+        )}
         <div className="flex flex-col gap-[2.7rem] items-center">
           <div className="flex flex-col w-screen md:flex md:w-screen md:flex-col gap-[2rem]  md:gap-[5rem] items-center md:w-screen mt-[4rem] md:mt-[2rem]  ">
             <div className="flex flex-col gap-[2.5rem] md:gap-[0rem]  md:flex md:flex-row justify-between">

@@ -25,7 +25,6 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
-import { toast } from "react-toastify";
 
 export default function Header() {
   const { user } = useSelector((state) => state.client);
@@ -43,12 +42,6 @@ export default function Header() {
 
   const navigateShoppingCartPage = () => {
     history.push("/shopping-cart-page");
-
-    const token = JSON.parse(localStorage.getItem("token"));
-
-    if (!token) {
-      toast.warning("please log in first");
-    }
   };
 
   return (
@@ -132,7 +125,9 @@ export default function Header() {
                         return (
                           <button
                             onClick={() =>
-                              history.push(`shop/${item.gender}/${item.title}`)
+                              history.push(
+                                `/shop/${item.gender}/${item.code}/${item.id}`
+                              )
                             }
                             key={ind}
                             className="catAreaBtn"

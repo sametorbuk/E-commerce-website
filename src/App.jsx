@@ -23,8 +23,6 @@ import PrivateRoute from "./components/PrivateRoute";
 
 import CreateOrderPage from "./pages/createOrderPage";
 
-
-
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
 
@@ -54,7 +52,7 @@ function App() {
         localStorage.setItem("token", data.token);
       }
     } else {
-      return;
+      localStorage.clear();
     }
   }, []);
 
