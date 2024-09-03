@@ -16,7 +16,7 @@ export default function useAxios() {
   const instance = axios.create({
     baseURL: "https://workintech-fe-ecommerce.onrender.com",
     timeout: 1000,
-    headers: { Autoauthentication: "" },
+    headers: { Authorization: "" },
   });
 
   const MakeRequest = ({ url, method, data = null, headers = {} }) => {
@@ -25,8 +25,8 @@ export default function useAxios() {
 
     return instance[method](
       url,
-      data ? data : "",
-      headers !== null ? { headers } : ""
+      data ? data : null,
+      headers !== null ? { headers } : null
     )
       .then((response) => {
         setData(response.data);

@@ -6,7 +6,6 @@ import axios from "axios";
 import { setCreditCards } from "../redux/clientSlice";
 import { useForm } from "react-hook-form";
 import CreditCard from "./creditCardComponent";
-import useAxios from "../hooks/useAxios";
 
 const months = [
   "01",
@@ -36,6 +35,7 @@ console.log(years);
 export default function PaymentArea({ selectedAddress }) {
   const { creditCards } = useSelector((state) => state.client);
   const [modal, setModal] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   const toggle = () => setModal(!modal);
   const dispatch = useDispatch();
@@ -71,27 +71,35 @@ export default function PaymentArea({ selectedAddress }) {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      expiryDateMonth: "",
-      expiryDateYear: "",
-      cardNo: "",
+      expire_month: "",
+      expire_year: "",
+      card_no: "",
       CVV: "",
-      nameSurname: "",
+      name_on_card: "",
     },
+    mode: "onBlur",
   });
 
   const formData = watch();
   console.log(formData);
-  const { MakeRequest, METHODS } = useAxios();
 
+  const requiredFormat = { ...formData };
+  delete requiredFormat.CVV;
   const onSubmit = () => {
-    MakeRequest({
-      url: "/user/card",
-      data: formData,
-      method: METHODS.POST,
-      headers: {
-        Authorization: token,
-      },
-    });
+    axios
+      .post(
+        "https://workintech-fe-ecommerce.onrender.com/user/card",
+        requiredFormat,
+        {
+          headers: { Authorization: token },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -116,7 +124,7 @@ export default function PaymentArea({ selectedAddress }) {
             <h2 className="font-bold">Pay by credit card</h2>
 
             <div className="w-full flex flex-col md:flex-row gap-[1.5rem] mt-[2rem] items-center">
-              <div className="w-[50%] flex flex-col">
+              <div className="w-full md:w-[50%]  items-center md:items-start flex flex-col">
                 <button
                   onClick={toggle}
                   className="w-full h-[2.5rem] bg-stone-200 rounded-md flex flex-col justify-center items-center"
@@ -124,7 +132,14 @@ export default function PaymentArea({ selectedAddress }) {
                   <p>Pay with another card</p>
                 </button>
                 {creditCards.map((data, ind) => {
-                  return <CreditCard data={data} key={ind} />;
+                  return (
+                    <CreditCard
+                      setSelectedCard={setSelectedCard}
+                      isSelected={selectedCard === data}
+                      data={data}
+                      key={ind}
+                    />
+                  );
                 })}
               </div>
 
@@ -140,37 +155,37 @@ export default function PaymentArea({ selectedAddress }) {
                       onSubmit={handleSubmit(onSubmit)}
                     >
                       <div className="flex flex-col gap-[0.5rem]">
-                        <label className="font-bold" htmlFor="cardNo">
+                        <label className="font-bold" htmlFor="card_no">
                           Card no
                         </label>
                         <input
                           className="bg-stone-300 rounded-sm h-[2rem]"
                           type="text"
-                          id="cardNo"
-                          {...register("cardNo", {
-                            required: "Kart numarası boş olamaz",
+                          id="card_no"
+                          {...register("card_no", {
+                            required: "Card field cannot be empty",
                             pattern: {
                               value: /^\d{16}$/,
                               message: "Card number must be 16 digits",
                             },
                           })}
                         />
-                        {errors.cardNo && (
-                          <h2 className=" text-red-500">
-                            {errors.cardNo.message}
-                          </h2>
+                        {errors.card_no && (
+                          <p className=" text-red-400">
+                            {errors.card_no.message}
+                          </p>
                         )}
                       </div>
 
                       <div className="flex flex-col gap-[0.5rem]">
-                        <label className="font-bold" htmlFor="nameSurname">
+                        <label className="font-bold" htmlFor="name_on_card">
                           Name
                         </label>
                         <input
                           className="bg-stone-300 rounded-sm h-[2rem]"
                           type="text"
-                          id="nameSurname"
-                          {...register("nameSurname", {
+                          id="name_on_card"
+                          {...register("name_on_card", {
                             required: "Name field cannot be empty",
                             minLength: {
                               value: 6,
@@ -179,9 +194,9 @@ export default function PaymentArea({ selectedAddress }) {
                             },
                           })}
                         />
-                        {errors.nameSurname && (
+                        {errors.name_on_card && (
                           <h2 className=" text-red-500">
-                            {errors.nameSurname.message}
+                            {errors.name_on_card.message}
                           </h2>
                         )}
                       </div>
@@ -198,8 +213,8 @@ export default function PaymentArea({ selectedAddress }) {
                             <div className="flex flex-col">
                               <select
                                 className="bg-stone-300 rounded-md w-[4rem] h-[2rem]"
-                                id="expiryDateMonth"
-                                {...register("expiryDateMonth", {
+                                id="expire_month"
+                                {...register("expire_month", {
                                   required: "Month field cannot be empty",
                                 })}
                               >
@@ -210,17 +225,17 @@ export default function PaymentArea({ selectedAddress }) {
                                   </option>
                                 ))}
                               </select>
-                              {errors.expiryDateMonth && (
+                              {errors.expire_month && (
                                 <h2 className="text-red-500">
-                                  {errors.expiryDateMonth.message}
+                                  {errors.expire_month.message}
                                 </h2>
                               )}
                             </div>
                             <div className="flex flex-col">
                               <select
                                 className="bg-stone-300 rounded-md w-[4rem] h-[2rem]"
-                                id="expiryDateYear"
-                                {...register("expiryDateYear", {
+                                id="expire_year"
+                                {...register("expire_year", {
                                   required: "Year field cannot be empty",
                                 })}
                               >
@@ -231,9 +246,9 @@ export default function PaymentArea({ selectedAddress }) {
                                   </option>
                                 ))}
                               </select>
-                              {errors.expiryDateYear && (
+                              {errors.expire_year && (
                                 <h2 className=" text-red-500">
-                                  {errors.expiryDateYear.message}
+                                  {errors.expire_year.message}
                                 </h2>
                               )}
                             </div>
@@ -288,7 +303,7 @@ export default function PaymentArea({ selectedAddress }) {
                 </Modal>
               </div>
 
-              <div className="md:w-[50%]  p-[1rem] flex border-Simple ">
+              <div className="w-[23rem]   md:w-[50%]  p-[1rem] flex border-Simple ">
                 <div className="flex flex-col w-[50%] ">
                   <div className="flex justify-center  font-bold border-Simple ">
                     Number of instalments
@@ -321,7 +336,7 @@ export default function PaymentArea({ selectedAddress }) {
                   })}
                 </div>
 
-                <div className="flex flex-col w-[50%] border-Simple">
+                <div className="flex flex-col  w-[50%] border-Simple">
                   <div className="flex justify-center font-bold border-Simple">
                     Monthly Payment
                   </div>

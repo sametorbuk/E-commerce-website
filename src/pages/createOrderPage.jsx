@@ -19,7 +19,7 @@ export default function CreateOrderPage() {
   const [selectedAddress, setSelectedAdress] = useState([]);
   const [contractApproval, setContractApproval] = useState(false);
   const [addressAndContractCompleted, setAddressAndContractCompleted] =
-    useState(false);
+    useState(localStorage.getItem("addressAndContractCompleted") || false);
 
   const contractChangeHandler = (e) => {
     setContractApproval(e.target.checked);
@@ -30,6 +30,7 @@ export default function CreateOrderPage() {
       toast.warning("Lütfen adresi seçiniz ardından sözleşmeyi onaylayınız");
     } else {
       setAddressAndContractCompleted(true);
+      localStorage.setItem("addressAndContractCompleted", true);
     }
   };
 
