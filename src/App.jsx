@@ -51,8 +51,6 @@ function App() {
         dispatch(setUser(data));
         localStorage.setItem("token", data.token);
       }
-    } else {
-      localStorage.clear();
     }
   }, []);
 
