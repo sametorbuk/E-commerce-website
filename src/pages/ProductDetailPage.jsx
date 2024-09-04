@@ -78,12 +78,6 @@ export default function ProductDetailPage({
 
   const navigateShoppingCartPage = () => {
     history.push("/shopping-cart-page");
-
-    const token = JSON.parse(localStorage.getItem("token"));
-
-    if (!token) {
-      toast.warning("please log in first");
-    }
   };
 
   return (

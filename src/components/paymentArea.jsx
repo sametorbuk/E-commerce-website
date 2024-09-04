@@ -6,6 +6,8 @@ import axios from "axios";
 import { setCreditCards } from "../redux/clientSlice";
 import { useForm } from "react-hook-form";
 import CreditCard from "./creditCardComponent";
+import { toast } from "react-toastify";
+import useAxios from "../hooks/useAxios";
 
 const months = [
   "01",
@@ -36,6 +38,10 @@ export default function PaymentArea({ selectedAddress }) {
   const { creditCards } = useSelector((state) => state.client);
   const [modal, setModal] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [contractApproval, setContractApproval] = useState(false);
+  const contractChangeHandler = (e) => {
+    setContractApproval(e.target.checked);
+  };
 
   const toggle = () => setModal(!modal);
   const dispatch = useDispatch();
@@ -96,10 +102,58 @@ export default function PaymentArea({ selectedAddress }) {
       )
       .then((res) => {
         console.log(res.data);
+        toast.success("Card successfully added");
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  console.log(selectedCard);
+
+  const { MakeRequest, METHODS } = useAxios();
+
+  const orderRequestHandler = () => {
+    if (!(contractApproval && selectedCard)) {
+      toast.warning("Please select the card and confirm the contract");
+    } else {
+      const date = new Date();
+      const currentCard = creditCards.find(
+        (card) => card.id === selectedCard.id
+      );
+
+      let products = [];
+
+      for (let i = 0; i < cart.length; i++) {
+        products.push({
+          product_id: cart[i].product.id,
+          count: cart[i].count,
+          detail: cart[i].product.description,
+        });
+      }
+      console.log(products);
+
+      const requiredFormatOfOrderData = {
+        address_id: selectedAddress.id,
+        order_date: date,
+        card_no: selectedCard.card_no,
+        card_name: selectedCard.name_on_card,
+        card_expire_month: selectedCard.expire_month,
+        card_expire_year: selectedCard.expire_year,
+        card_ccv: null,
+        price: total,
+        products: products,
+      };
+
+      MakeRequest({
+        url: "/order",
+        method: METHODS.POST,
+        data: requiredFormatOfOrderData,
+        headers: {
+          Authorization: token,
+        },
+      });
+    }
   };
 
   return (
@@ -394,7 +448,7 @@ export default function PaymentArea({ selectedAddress }) {
           </div>
 
           <div className="flex items-center">
-            <input type="checkbox" />
+            <input type="checkbox" onChange={contractChangeHandler} />
             <div className="ml-2">
               <p className="underline cursor-pointer">
                 Prior information conditions
@@ -408,9 +462,12 @@ export default function PaymentArea({ selectedAddress }) {
           </div>
 
           <div>
-            <p className="btnBlueWithWhiteText cursor-pointer flex items-center justify-center font-bold w-[10rem] rounded-md h-[2.5rem] bg-sky-500">
+            <button
+              onClick={orderRequestHandler}
+              className="btnBlueWithWhiteText cursor-pointer flex items-center justify-center font-bold w-[10rem] rounded-md h-[2.5rem] bg-sky-500"
+            >
               Make the payment
-            </p>
+            </button>
           </div>
         </div>
       </main>

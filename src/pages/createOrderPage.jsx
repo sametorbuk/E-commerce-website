@@ -16,7 +16,9 @@ import PaymentArea from "../components/paymentArea";
 import { setAddressList } from "../redux/clientSlice";
 
 export default function CreateOrderPage() {
-  const [selectedAddress, setSelectedAdress] = useState([]);
+  const [selectedAddress, setSelectedAdress] = useState(
+    JSON.parse(localStorage.getItem("selectedAddress")) || []
+  );
   const [contractApproval, setContractApproval] = useState(false);
   const [addressAndContractCompleted, setAddressAndContractCompleted] =
     useState(localStorage.getItem("addressAndContractCompleted") || false);
@@ -36,6 +38,7 @@ export default function CreateOrderPage() {
 
   const handleAddressSelect = (address) => {
     setSelectedAdress(address);
+    localStorage.setItem("selectedAddress", JSON.stringify(address));
   };
   const [modal, setModal] = useState(false);
 
@@ -72,6 +75,7 @@ export default function CreateOrderPage() {
 
       district: "",
     },
+    mode: "all",
   });
 
   const formData = watch();
