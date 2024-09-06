@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import useAxios from "../hooks/useAxios";
+
 import Footer from "../layouts/footer";
 import Header from "../layouts/header";
 import axios from "axios";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import PreviousOrder from "../components/PreviousOrderComp";
 
 export default function PreviousOrderPage() {
