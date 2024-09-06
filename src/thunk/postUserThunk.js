@@ -27,6 +27,9 @@ export const loginUser = createAsyncThunk(
         if (rememberMe) {
           localStorage.setItem("token", token);
           localStorage.setItem("user", JSON.stringify(user));
+        } else {
+          sessionStorage.setItem("token", token);
+          sessionStorage.setItem("user", JSON.stringify(user));
         }
 
         toast.success(`Merhaba, hoşgeldin ${user.name}!`);

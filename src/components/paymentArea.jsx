@@ -55,7 +55,10 @@ export default function PaymentArea({ selectedAddress }) {
     total = total + tickedProducts[i].count * tickedProducts[i].product.price;
   }
 
-  const token = localStorage.getItem("token");
+  const token =
+    localStorage.getItem("token") === null
+      ? sessionStorage.getItem("token")
+      : localStorage.getItem("token");
   useEffect(() => {
     axios
       .get("https://workintech-fe-ecommerce.onrender.com/user/card", {

@@ -24,12 +24,6 @@ export default function ShoppingCartPage() {
     } else {
       toast.warning("Please add items to your basket first");
     }
-
-    const token = JSON.parse(localStorage.getItem("token"));
-
-    if (!token) {
-      toast.warning("please log in first");
-    }
   };
 
   return (

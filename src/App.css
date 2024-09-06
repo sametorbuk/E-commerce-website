@@ -207,3 +207,8 @@ input:checked + .slider:before {
   @apply border-solid border-gray-500;
   border-width: 1px;
 }
+
+.order-detail {
+  overflow: hidden;
+  transition: 0.6s ease-out;
+}

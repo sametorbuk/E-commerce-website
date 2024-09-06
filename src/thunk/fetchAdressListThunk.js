@@ -11,7 +11,10 @@ export const fetchAddressList = createAsyncThunk(
       return Promise.resolve();
     }
 
-    const token = localStorage.getItem("token");
+    const token =
+      localStorage.getItem("token") === null
+        ? sessionStorage.getItem("token")
+        : localStorage.getItem("token");
     dispatch(setFetchState("FETCHING"));
     return axios
       .get(`https://workintech-fe-ecommerce.onrender.com${endpoint}`, {

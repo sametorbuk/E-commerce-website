@@ -22,6 +22,7 @@ import ShoppingCartPage from "./pages/shoppingCartPage";
 import PrivateRoute from "./components/PrivateRoute";
 
 import CreateOrderPage from "./pages/createOrderPage";
+import PreviousOrderPage from "./pages/PreviousOrderPage";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
@@ -32,7 +33,10 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token =
+      localStorage.getItem("token") === null
+        ? sessionStorage.getItem("token")
+        : localStorage.getItem("token");
 
     if (token) {
       const requestData = {
@@ -72,6 +76,18 @@ function App() {
   const menCats = categories.filter((item) => item.gender === "e");
   const [willNavigateCurrentCategory, setWillNavigateCurrentCategory] =
     useState({});
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      sessionStorage.removeItem("user");
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <>
@@ -150,6 +166,10 @@ function App() {
         <PrivateRoute>
           <Route path="/create-order-page">
             <CreateOrderPage />
+          </Route>
+
+          <Route path="/previous-orders">
+            <PreviousOrderPage />
           </Route>
         </PrivateRoute>
       </Switch>

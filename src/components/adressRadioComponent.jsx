@@ -44,7 +44,10 @@ export default function AddressRadioComponent({ data, isSelected, onSelect }) {
     },
   });
   const formData = watch();
-  const token = localStorage.getItem("token");
+  const token =
+    localStorage.getItem("token") === null
+      ? sessionStorage.getItem("token")
+      : localStorage.getItem("token");
   const { MakeRequest, METHODS } = useAxios();
 
   const addressUpdateHandler = () => {

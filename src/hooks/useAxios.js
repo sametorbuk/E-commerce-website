@@ -29,7 +29,7 @@ export default function useAxios() {
 
     return instance[method](
       url,
-      data ? data : null,
+      data ? data : "",
       headers !== null ? { headers } : null
     )
       .then((response) => {

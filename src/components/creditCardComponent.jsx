@@ -54,7 +54,10 @@ export default function CreditCard({ data, isSelected, setSelectedCard }) {
       setUpdateModal(false);
     }
   }, [modal]);
-  const token = localStorage.getItem("token");
+  const token =
+    localStorage.getItem("token") === null
+      ? sessionStorage.getItem("token")
+      : localStorage.getItem("token");
 
   const deleteCardHandler = () => {
     axios

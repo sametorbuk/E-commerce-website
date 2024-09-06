@@ -17,8 +17,11 @@ import { setAddressList } from "../redux/clientSlice";
 
 export default function CreateOrderPage() {
   const [selectedAddress, setSelectedAdress] = useState(
-    JSON.parse(localStorage.getItem("selectedAddress")) || []
+    JSON.parse(localStorage.getItem("selectedAddress")) ||
+      JSON.parse(sessionStorage.getItem("selectedAddress")) ||
+      []
   );
+
   const [contractApproval, setContractApproval] = useState(false);
   const [addressAndContractCompleted, setAddressAndContractCompleted] =
     useState(localStorage.getItem("addressAndContractCompleted") || false);
@@ -39,6 +42,7 @@ export default function CreateOrderPage() {
   const handleAddressSelect = (address) => {
     setSelectedAdress(address);
     localStorage.setItem("selectedAddress", JSON.stringify(address));
+    sessionStorage.setItem("selectedAddress", JSON.stringify(address));
   };
   const [modal, setModal] = useState(false);
 
@@ -80,7 +84,10 @@ export default function CreateOrderPage() {
 
   const formData = watch();
 
-  const token = localStorage.getItem("token");
+  const token =
+    localStorage.getItem("token") === null
+      ? sessionStorage.getItem("token")
+      : localStorage.getItem("token");
   console.log(token);
 
   const { MakeRequest, METHODS } = useAxios();
