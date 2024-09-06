@@ -1,18 +1,9 @@
 import { faCaretDown, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 export default function PreviousOrder({ data }) {
   const [orderDetailArea, setOrderDetailArea] = useState(false);
-  const contentRef = useRef(null);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      contentRef.current.style.height = orderDetailArea
-        ? `${contentRef.current.scrollHeight}px`
-        : "0px";
-    }
-  }, [orderDetailArea]);
 
   return (
     <div className="flex flex-col w-[80%]">
@@ -39,16 +30,31 @@ export default function PreviousOrder({ data }) {
       </div>
 
       <div
-        ref={contentRef}
-        className={`overflow-hidden transition-all duration-600 ease-out flex gap-[1rem] w-full bg-gray-300 items-center justify-between px-[2.5rem] rounded-md`}
-        style={{ height: "0px" }}
+        className={`overflow-hidden transition-all duration-800 ease-out flex gap-[1rem] w-full bg-gray-300 items-center justify-between px-[2.5rem] rounded-md`}
+        style={{ maxHeight: orderDetailArea ? "500px" : "0px" }}
       >
-        <div className="w-[50%] grid grid-cols-3 gap-4">
-          {data.products.map((item, ind) => (
-            <img src={item.images[0].url} alt="" key={ind} />
-          ))}
+        <div className="w-[70%] grid grid-cols-3 gap-4 p-[1rem]">
+          {data.products.map((item, ind) => {
+            console.log(item);
+            return (
+              <div key={ind} className="flex gap-[0.5rem] flex-col">
+                <img src={item.images[0].url} alt="" />
+                <p className="text-center mt-[0.5rem]">{item.description}</p>
+                <div className="flex w-full justify-center gap-[0.5rem]">
+                  <p className="font-bold">Count:</p>
+                  <p>{item.count}</p>
+                </div>
+                <div className="flex w-full justify-center gap-[0.5rem]">
+                  <p className="font-bold">Price:</p>
+                  <p>{item.price} ₺</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        <div className="w-[50%]"></div>
+        <div className="w-[30%]">
+          <h2>SAMET</h2>
+        </div>
       </div>
     </div>
   );

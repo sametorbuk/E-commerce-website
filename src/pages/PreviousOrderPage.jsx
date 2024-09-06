@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import useAxios from "../hooks/useAxios";
+
 import Footer from "../layouts/footer";
 import Header from "../layouts/header";
 import axios from "axios";
-import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import PreviousOrder from "../components/PreviousOrderComp";
 
 export default function PreviousOrderPage() {
@@ -36,15 +35,15 @@ export default function PreviousOrderPage() {
       <Header />
 
       <main className="flex flex-col  md:flex md:flex-row  justify-center  md:px-[5rem] ">
-        {previousOrdersData.length !== 0 && (
-          <PreviousOrder data={previousOrdersData[0]} />
-        )}
-
         {previousOrdersData.length === 0 && (
           <h2 className="text-4xl font-bold">There is no order</h2>
         )}
-      </main>
 
+        {previousOrdersData.length !== 0 &&
+          previousOrdersData.map((item, ind) => {
+            <PreviousOrder key={ind} data={item} />;
+          })}
+      </main>
       <Footer />
     </>
   );
