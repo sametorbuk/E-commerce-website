@@ -23,8 +23,8 @@ const items = [
     caption: "Slide 2",
     key: 2,
     imgClass:
-      " w-[20rem] h-[23rem] absolute left-[4rem] top-[28rem]  md:w-[30rem] md:h-[40rem] md:absolute md:top-[5rem] md:left-[48rem]  bg-[#23856D]",
-    class: "w-screen h-[45rem]   md:w-screen md:h-[45rem] ",
+      " w-[17rem] h-[20rem] absolute left-[0rem] top-[12rem]  md:w-[30rem] md:h-[40rem] md:absolute md:top-[5rem] md:left-[48rem]  bg-[#23856D]",
+    class: "w-screen h-[27.7rem]   md:w-screen md:h-[45rem] ",
   },
 ];
 

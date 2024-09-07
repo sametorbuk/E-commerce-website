@@ -332,9 +332,11 @@ export default function Header() {
           pathname === "/shop" ? "hidden" : ""
         } gap-[1.5rem] font-bold text-gray-500 md:hidden`}
       >
-        <button className="font-normal">Home</button>
+        <button onClick={() => history.push("/")} className="font-normal">
+          Home
+        </button>
         <button>Product</button>
-        <button>Pricing</button>
+        <button onClick={() => history.push("/shop")}>Shop</button>
         <button onClick={() => history.push("/contact")}>Contact</button>
       </div>
 
@@ -372,7 +374,10 @@ export default function Header() {
         )}
 
         {user["name"] && (
-          <div className="flex items-center gap-[1rem] text-[#23A6F0]">
+          <div
+            onClick={() => setUserDropdownMenu(!userDropDownMenu)}
+            className="flex items-center gap-[1rem] text-[#23A6F0]"
+          >
             <div className="flex items-center gap-[0.5rem]">
               <img
                 src={user.gravatarUrl}
