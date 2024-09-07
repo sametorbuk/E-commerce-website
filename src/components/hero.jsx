@@ -23,7 +23,7 @@ const items = [
     caption: "Slide 2",
     key: 2,
     imgClass:
-      " w-[17rem] h-[20rem] absolute left-[0rem] top-[12rem]  md:w-[30rem] md:h-[40rem] md:absolute md:top-[5rem] md:left-[48rem]  bg-[#23856D]",
+      " w-[14rem] h-[20rem] absolute left-[0rem] top-[12rem]  md:w-[30rem] md:h-[40rem] md:absolute md:top-[5rem] md:left-[48rem]  bg-[#23856D]",
     class: "w-screen h-[27.7rem]   md:w-screen md:h-[45rem] ",
   },
 ];
@@ -61,7 +61,7 @@ function Hero(args) {
         <div className={`${item.class}  bg-[#23856D] mt-[3rem] md:mt-[0rem] `}>
           <img className={item.imgClass} src={item.src} alt={item.altText} />
 
-          <div className="absolute gap-[] top-[6.5rem] left-[5rem] md:top-[11rem] md:left-[13rem] md:absolute md:z-5 md:text-2xl">
+          <div className="absolute gap-[] top-[6.5rem] left-[7.5rem] md:top-[11rem] md:left-[13rem] md:absolute md:z-5 md:text-2xl">
             {item.altText === "Slide 1" && (
               <div className=" flex flex-col gap-[2rem] items-center md:items-start  md:flex md:flex-col text-white font-bold  md:gap-[2.5rem] ">
                 <h3>Summer 2020</h3>
@@ -97,7 +97,7 @@ function Hero(args) {
                   <h1 className=" text-3xl md:text-6xl">Product</h1>
                 </div>
 
-                <h2 className=" hidden md:block font-normal  w-[16rem] md:w-[29rem]">
+                <h2 className=" hidden md:block font-normal  w-[13rem] md:w-[29rem]">
                   We know how large objects will act, We know how large objects
                   will act , We know
                 </h2>

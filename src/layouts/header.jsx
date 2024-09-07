@@ -15,6 +15,7 @@ import {
   faBarsStaggered,
   faCartShopping,
   faChevronDown,
+  faChevronUp,
   faGear,
   faMagnifyingGlass,
   faPhone,
@@ -376,7 +377,7 @@ export default function Header() {
         {user["name"] && (
           <div
             onClick={() => setUserDropdownMenu(!userDropDownMenu)}
-            className="flex items-center gap-[1rem] text-[#23A6F0]"
+            className="flex cursor-pointer items-center gap-[1rem] text-[#23A6F0]"
           >
             <div className="flex items-center gap-[0.5rem]">
               <img
@@ -385,6 +386,31 @@ export default function Header() {
                 className="w-8 h-8 rounded-full"
               />
               <p className="font-bold">{user.name}</p>
+              <FontAwesomeIcon icon={faChevronUp} />
+            </div>
+          </div>
+        )}
+
+        {userDropDownMenu && (
+          <div className="user-dropdown-menu  flex flex-col p-[1rem] gap-[0.5rem] absolute justify-center items-center w-[15rem]  border-solid border-2 border-gray-300 bg-white rounded-md top-[9.5rem] right-[6.5rem] z-10">
+            <div
+              onClick={() => history.push("/previous-orders")}
+              className="catAreaBtn cursor-pointer flex items-center gap-[0.3rem]"
+            >
+              <p>Previous Orders</p>
+              <FontAwesomeIcon icon={faBagShopping} />
+            </div>
+            <div className="catAreaBtn cursor-pointer flex items-center gap-[3.5rem]">
+              <p>Settings</p>
+              <FontAwesomeIcon icon={faGear} />
+            </div>
+            <div
+              onClick={toggle}
+              className="catAreaBtn cursor-pointer flex items-center gap-[3.7rem]"
+            >
+              <p>Log out</p>
+
+              <FontAwesomeIcon icon={faRightFromBracket} />
             </div>
           </div>
         )}

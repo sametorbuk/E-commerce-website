@@ -93,13 +93,13 @@ export default function ProductDetailPage({
         <div className="flex flex-col mt-[2rem] md:mt-[0rem] justify-center items-center justify-around w-full gap-[2rem] md:gap-[0rem] md:flex-row">
           <button
             onClick={() => history.goBack()}
-            className="text-4xl absolute left-[5rem]"
+            className="text-4xl absolute left-[23rem] bottom-[-0.3rem] md:left-[5rem]"
           >
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <img className="w-[19rem] rounded-md" src={images[0].url} alt="" />
 
-          <div className="flex flex-col bg-stone-100 w-[23.5rem] md:w-[38rem] p-[2rem] w-[50%] gap-[2rem] rounded-lg">
+          <div className="flex flex-col bg-stone-100 w-[25.5rem] md:w-[38rem] p-[2rem] w-[50%] gap-[2rem] rounded-lg">
             <p className="font-bold text-lg">{name}</p>
             <p className="font-bold text-xl">{price}₺</p>
 
