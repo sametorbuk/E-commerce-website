@@ -1,12 +1,14 @@
 import { faCaretDown, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import CreditCard from "./creditCardComponent";
 
-export default function PreviousOrder({ data }) {
+export default function PreviousOrder(props) {
   const [orderDetailArea, setOrderDetailArea] = useState(false);
-
+  const { data } = props;
+  console.log("samet");
   return (
-    <div className="flex flex-col w-[80%]">
+    <div className="flex   flex-col w-[90%]">
       <div
         onClick={() => setOrderDetailArea(!orderDetailArea)}
         className="flex gap-[1rem] w-full h-[2.5rem] bg-gray-300 items-center justify-between px-[2.5rem] rounded-md cursor-pointer"
@@ -31,11 +33,10 @@ export default function PreviousOrder({ data }) {
 
       <div
         className={`overflow-hidden transition-all duration-800 ease-out flex gap-[1rem] w-full bg-gray-300 items-center justify-between px-[2.5rem] rounded-md`}
-        style={{ maxHeight: orderDetailArea ? "500px" : "0px" }}
+        style={{ maxHeight: orderDetailArea ? "1000px" : "0px" }}
       >
         <div className="w-[70%] grid grid-cols-3 gap-4 p-[1rem]">
           {data.products.map((item, ind) => {
-            console.log(item);
             return (
               <div key={ind} className="flex gap-[0.5rem] flex-col">
                 <img src={item.images[0].url} alt="" />
@@ -53,7 +54,23 @@ export default function PreviousOrder({ data }) {
           })}
         </div>
         <div className="w-[30%]">
-          <h2>SAMET</h2>
+          <div
+            className={` cursor-pointer p-[1rem] px-[1.5rem] w-[18rem] flex flex-col gap-[1.5rem]
+           border-2 border-solid border-blue-600 ${"border-3 border-solid border-blue-600"} rounded-lg`}
+          >
+            <p className="font-bold text-xl">Credit Card</p>
+            <p className="text-blue-500">{data.card_no}</p>
+
+            <div className="flex w-full justify-between">
+              <p className="text-red-500">{data.card_name}</p>
+
+              <div className="flex text-green-600">
+                <p>{data.card_expire_month}</p>
+                <p>/</p>
+                <p>{data.card_expire_year}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
