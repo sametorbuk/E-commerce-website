@@ -1,14 +1,13 @@
 import { faCaretDown, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import CreditCard from "./creditCardComponent";
 
 export default function PreviousOrder(props) {
   const [orderDetailArea, setOrderDetailArea] = useState(false);
   const { data } = props;
   console.log("samet");
   return (
-    <div className="flex   flex-col w-[90%]">
+    <div className="flex   flex-col w-[90%] border border-1 border-black rounded-md">
       <div
         onClick={() => setOrderDetailArea(!orderDetailArea)}
         className="flex gap-[1rem] w-full h-[2.5rem] bg-gray-300 items-center justify-between px-[2.5rem] rounded-md cursor-pointer"
@@ -21,7 +20,7 @@ export default function PreviousOrder(props) {
           )}
 
           <p>
-            Order dated {">"} {data.order_date.split("T")[0]}
+            Order date {">"} {data.order_date.split("T")[0]}
           </p>
         </div>
 
@@ -35,7 +34,7 @@ export default function PreviousOrder(props) {
         className={`overflow-hidden transition-all duration-800 ease-out flex gap-[1rem] w-full bg-gray-300 items-center justify-between px-[2.5rem] rounded-md`}
         style={{ maxHeight: orderDetailArea ? "1000px" : "0px" }}
       >
-        <div className="w-[70%] grid grid-cols-3 gap-4 p-[1rem]">
+        <div className="w-[100%]   md:w-[70%] grid grid-cols-3 gap-4 p-[1rem]">
           {data.products.map((item, ind) => {
             return (
               <div key={ind} className="flex gap-[0.5rem] flex-col">
@@ -53,9 +52,9 @@ export default function PreviousOrder(props) {
             );
           })}
         </div>
-        <div className="w-[30%]">
+        <div className=" w-[0%]    md:w-[30%]">
           <div
-            className={` cursor-pointer p-[1rem] px-[1.5rem] w-[18rem] flex flex-col gap-[1.5rem]
+            className={` cursor-pointer hidden md:flex p-[1rem] px-[1.5rem] w-[18rem] flex flex-col gap-[1.5rem]
            border-2 border-solid border-blue-600 ${"border-3 border-solid border-blue-600"} rounded-lg`}
           >
             <p className="font-bold text-xl">Credit Card</p>

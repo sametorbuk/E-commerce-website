@@ -35,7 +35,7 @@ export default function PreviousOrderPage() {
     <>
       <Header />
 
-      <main className="flex flex-col  md:flex md:flex-row   justify-center  md:px-[5rem] ">
+      <main className="flex flex-col mt-[2rem]  md:flex md:flex-row   justify-center  md:px-[5rem] ">
         {previousOrdersData.length === 0 && (
           <h2 className="text-4xl font-bold">There is no order</h2>
         )}{" "}
