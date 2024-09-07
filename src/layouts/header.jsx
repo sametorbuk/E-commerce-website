@@ -29,6 +29,7 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
+import { toast } from "react-toastify";
 
 export default function Header() {
   const { user } = useSelector((state) => state.client);
@@ -63,6 +64,14 @@ export default function Header() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const logOutHandler = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+
+    history.push("/");
+    toast.success("Successful exit and we are waiting for you again");
+  };
 
   return (
     <>
@@ -238,7 +247,10 @@ export default function Header() {
                     <p>Settings</p>
                     <FontAwesomeIcon icon={faGear} />
                   </div>
-                  <div className="catAreaBtn cursor-pointer flex items-center gap-[3.7rem]">
+                  <div
+                    onClick={logOutHandler}
+                    className="catAreaBtn cursor-pointer flex items-center gap-[3.7rem]"
+                  >
                     <p>Log out</p>
                     <FontAwesomeIcon icon={faRightFromBracket} />
                   </div>
