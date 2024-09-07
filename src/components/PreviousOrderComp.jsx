@@ -1,21 +1,13 @@
 import { faCaretDown, faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
-export default function PreviousOrder({ data }) {
+export default function PreviousOrder(props) {
   const [orderDetailArea, setOrderDetailArea] = useState(false);
-  const contentRef = useRef(null);
-
-  useEffect(() => {
-    if (contentRef.current) {
-      contentRef.current.style.height = orderDetailArea
-        ? `${contentRef.current.scrollHeight}px`
-        : "0px";
-    }
-  }, [orderDetailArea]);
-
+  const { data } = props;
+  console.log("samet");
   return (
-    <div className="flex flex-col w-[80%]">
+    <div className="flex   flex-col w-[90%] border border-1 border-black rounded-md">
       <div
         onClick={() => setOrderDetailArea(!orderDetailArea)}
         className="flex gap-[1rem] w-full h-[2.5rem] bg-gray-300 items-center justify-between px-[2.5rem] rounded-md cursor-pointer"
@@ -28,7 +20,7 @@ export default function PreviousOrder({ data }) {
           )}
 
           <p>
-            Order dated {">"} {data.order_date.split("T")[0]}
+            Order date {">"} {data.order_date.split("T")[0]}
           </p>
         </div>
 
@@ -39,16 +31,46 @@ export default function PreviousOrder({ data }) {
       </div>
 
       <div
-        ref={contentRef}
-        className={`overflow-hidden transition-all duration-600 ease-out flex gap-[1rem] w-full bg-gray-300 items-center justify-between px-[2.5rem] rounded-md`}
-        style={{ height: "0px" }}
+        className={`overflow-hidden transition-all duration-800 ease-out flex gap-[1rem] w-full bg-gray-300 items-center justify-between px-[2.5rem] rounded-md`}
+        style={{ maxHeight: orderDetailArea ? "1000px" : "0px" }}
       >
-        <div className="w-[50%] grid grid-cols-3 gap-4">
-          {data.products.map((item, ind) => (
-            <img src={item.images[0].url} alt="" key={ind} />
-          ))}
+        <div className="w-[100%]   md:w-[70%] grid grid-cols-3 gap-4 p-[1rem]">
+          {data.products.map((item, ind) => {
+            return (
+              <div key={ind} className="flex gap-[0.5rem] flex-col">
+                <img src={item.images[0].url} alt="" />
+                <p className="text-center mt-[0.5rem]">{item.description}</p>
+                <div className="flex w-full justify-center gap-[0.5rem]">
+                  <p className="font-bold">Count:</p>
+                  <p>{item.count}</p>
+                </div>
+                <div className="flex w-full justify-center gap-[0.5rem]">
+                  <p className="font-bold">Price:</p>
+                  <p>{item.price} ₺</p>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        <div className="w-[50%]"></div>
+        <div className=" w-[0%]    md:w-[30%]">
+          <div
+            className={` cursor-pointer hidden md:flex p-[1rem] px-[1.5rem] w-[18rem] flex flex-col gap-[1.5rem]
+           border-2 border-solid border-blue-600 ${"border-3 border-solid border-blue-600"} rounded-lg`}
+          >
+            <p className="font-bold text-xl">Credit Card</p>
+            <p className="text-blue-500">{data.card_no}</p>
+
+            <div className="flex w-full justify-between">
+              <p className="text-red-500">{data.card_name}</p>
+
+              <div className="flex text-green-600">
+                <p>{data.card_expire_month}</p>
+                <p>/</p>
+                <p>{data.card_expire_year}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

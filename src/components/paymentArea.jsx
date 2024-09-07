@@ -105,6 +105,8 @@ export default function PaymentArea({ selectedAddress }) {
       )
       .then((res) => {
         console.log(res.data);
+        dispatch(setCreditCards([...creditCards, res.data]));
+
         toast.success("Card successfully added");
       })
       .catch((err) => {
