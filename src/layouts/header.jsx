@@ -24,6 +24,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 import {
   useHistory,
@@ -32,6 +33,9 @@ import {
 import { toast } from "react-toastify";
 
 export default function Header() {
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+
   const { user } = useSelector((state) => state.client);
   const { cart } = useSelector((state) => state.shoppingCart);
   const { pathname } = useLocation();
@@ -248,14 +252,36 @@ export default function Header() {
                     <FontAwesomeIcon icon={faGear} />
                   </div>
                   <div
-                    onClick={logOutHandler}
+                    onClick={toggle}
                     className="catAreaBtn cursor-pointer flex items-center gap-[3.7rem]"
                   >
                     <p>Log out</p>
+
                     <FontAwesomeIcon icon={faRightFromBracket} />
                   </div>
                 </div>
               )}
+
+              <div>
+                <Modal isOpen={modal} toggle={toggle}>
+                  <ModalHeader toggle={toggle}>Exit</ModalHeader>
+                  <ModalBody>Are you sure you want to log out ?</ModalBody>
+                  <ModalFooter className="flex gap-[3rem]">
+                    <button
+                      className="btnBlueWithWhiteText rounded-md h-[2rem]"
+                      onClick={logOutHandler}
+                    >
+                      Yes
+                    </button>{" "}
+                    <button
+                      className="btnBlueWithWhiteText rounded-md bg-red-500 h-[2rem]"
+                      onClick={toggle}
+                    >
+                      Cancel
+                    </button>
+                  </ModalFooter>
+                </Modal>
+              </div>
             </div>
 
             <div className="flex justiy-between items-center gap-[1rem] ">
