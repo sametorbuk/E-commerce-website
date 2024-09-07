@@ -20,7 +20,10 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  useLocation,
+} from "react-router-dom/cjs/react-router-dom.min";
 import useAxios from "../hooks/useAxios";
 import { setOffset, setProductList } from "../redux/productSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -77,40 +80,43 @@ export default function ShopPage(props) {
     setLoading,
   } = useAxios();
 
+  const location = useLocation();
+  useEffect(() => {
+    const queryParams = new URLSearchParams();
+    if (filterInputValue) queryParams.append("filter", filterInputValue);
+    if (sortValue) queryParams.append("sort", sortValue);
+    queryParams.append("limit", "12");
+    queryParams.append("offset", offset);
+
+    history.push({ search: queryParams.toString() });
+
+    dispatch(fetchProducts(`/products?${queryParams.toString()}`));
+  }, [filterInputValue, sortValue, filterClicked]);
+
   const fetchMoreData = () => {
     if (!loading && hasMore) {
       setLoading(true);
+      const queryParams = new URLSearchParams();
+      if (filterInputValue) queryParams.append("filter", filterInputValue);
+      if (sortValue) queryParams.append("sort", sortValue);
+      queryParams.append("limit", "12");
+      queryParams.append("offset", offset);
+
       sendRequest({
-        url: `products?${
-          filterInputValue ? "&filter=" + filterInputValue : ``
-        }${sortValue ? "&sort=" + sortValue : ""}&limit=12&offset=${offset}`,
+        url: `products?${queryParams.toString()}`,
         method: chooseMethods.GET,
       })
         .then((responseData) => {
           dispatch(setProductList([...productList, ...responseData.products]));
           setHasMore(responseData.products.length > 0);
-          console.log(productList);
           dispatch(setOffset(offset + 12));
         })
         .catch((error) => {
-          console.error("Error fetching data:", error);
+          console.error("Veri çekme hatası:", error);
         })
         .finally(() => setLoading(false));
     }
   };
-
-  useEffect(() => {
-    dispatch(setProductList([]));
-    dispatch(setOffset(0));
-    setOffset(0);
-    dispatch(
-      fetchProducts(
-        `/products?${filterInputValue ? "&filter=" + filterInputValue : ``}${
-          sortValue ? "&sort=" + sortValue : ""
-        }`
-      )
-    );
-  }, [sortValue, filterClicked]);
 
   return (
     <>

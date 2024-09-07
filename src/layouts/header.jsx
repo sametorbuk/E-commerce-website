@@ -24,7 +24,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 import {
   useHistory,
@@ -239,10 +239,14 @@ export default function Header() {
               )}
 
               {userDropDownMenu && (
-                <div className="user-dropdown-menu  flex flex-col p-[1rem] gap-[0.5rem] absolute w-[10rem]  border-solid border-2 border-gray-300 bg-white rounded-md top-[7.5rem] right-[9rem] z-10">
+                <div
+                  className={`user-dropdown-menu  flex flex-col p-[1rem] gap-[0.5rem] absolute w-[10rem]  border-solid border-2 border-gray-300 bg-white rounded-md top-[7.5rem] right-[9rem] z-10  ${
+                    pathname === "/shop" ? "right-[13rem]" : ""
+                  }`}
+                >
                   <div
                     onClick={() => history.push("/previous-orders")}
-                    className="catAreaBtn cursor-pointer flex items-center gap-[0.3rem]"
+                    className={`catAreaBtn cursor-pointer flex items-center gap-[0.3rem]`}
                   >
                     <p>Previous Orders</p>
                     <FontAwesomeIcon icon={faBagShopping} />

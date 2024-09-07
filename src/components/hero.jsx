@@ -61,7 +61,7 @@ function Hero(args) {
         <div className={`${item.class}  bg-[#23856D] mt-[3rem] md:mt-[0rem] `}>
           <img className={item.imgClass} src={item.src} alt={item.altText} />
 
-          <div className="absolute gap-[] top-[6.5rem] left-[5rem] md:top-[11rem] md:left-[13rem] md:absolute md:z-5 md:text-2xl">
+          <div className="absolute gap-[] top-[6.5rem] left-[7.5rem] md:top-[11rem] md:left-[13rem] md:absolute md:z-5 md:text-2xl">
             {item.altText === "Slide 1" && (
               <div className=" flex flex-col gap-[2rem] items-center md:items-start  md:flex md:flex-col text-white font-bold  md:gap-[2.5rem] ">
                 <h3>Summer 2020</h3>
