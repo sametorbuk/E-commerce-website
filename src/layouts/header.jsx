@@ -71,6 +71,7 @@ export default function Header() {
   }, []);
 
   const logOutHandler = () => {
+    toggle();
     localStorage.clear();
     sessionStorage.clear();
 
