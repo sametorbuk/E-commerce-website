@@ -164,7 +164,7 @@ export default function CreateOrderPage() {
 
               <div className="flex justify-between w-full">
                 <p>Sum of products:</p>
-                <p className="text-amber-500 font-bold flex grow-[0.5] ">
+                <p className="text-amber-500 justify-end font-bold flex grow-[0.5] ">
                   {total !== 0
                     ? (total >= 150 ? total : total + 29.99).toFixed(2)
                     : 0}

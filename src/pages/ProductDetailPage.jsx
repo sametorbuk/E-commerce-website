@@ -99,7 +99,7 @@ export default function ProductDetailPage({
           </button>
           <img className="w-[19rem] rounded-md" src={images[0].url} alt="" />
 
-          <div className="flex flex-col bg-stone-100 w-[25.5rem] md:w-[38rem] p-[2rem] w-[50%] gap-[2rem] rounded-lg">
+          <div className="flex flex-col bg-stone-100 w-[26.5rem] md:w-[38rem] p-[2rem] w-[50%] gap-[2rem] rounded-lg">
             <p className="font-bold text-lg">{name}</p>
             <p className="font-bold text-xl">{price}₺</p>
 

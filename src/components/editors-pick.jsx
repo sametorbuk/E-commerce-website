@@ -9,14 +9,14 @@ export default function EditorsPick() {
           Problems trying to resolve the conflict between
         </p>
 
-        <div className="flex md:gap-[0rem] flex-col md:justify-between md:flex md:ml-[7rem]  md:flex-row md:h-[20rem] md:w-[60rem] ">
+        <div className="flex md:gap-[0rem] flex-col md:justify-between md:flex md:mr-[4.5rem]  md:flex-row md:h-[20rem] md:w-[60rem] ">
           <img
-            className="md:grow-[0.5]  md:w-[15rem]"
+            className="md:grow-[0.2] md:ml-[8rem] md:w-[17rem]  "
             src="./images/editors-pick/editors-pick-img-1.jpg"
             alt=""
           />
 
-          <button className="btn ml-[1rem] bg-white  bottom-[5rem] w-[10rem] md:h-[3rem] md:top-[80rem] md:ml-[1.5rem] md:px-[3rem]">
+          <button className="btn ml-[1rem] bg-white  bottom-[5rem] w-[10rem] md:h-[3rem] md:top-[80rem] md:ml-[9.5rem] md:px-[3rem]">
             MEN
           </button>
 
