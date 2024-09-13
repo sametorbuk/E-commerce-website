@@ -212,3 +212,7 @@ input:checked + .slider:before {
   overflow: hidden;
   transition: 0.6s ease-out;
 }
+img {
+  object-fit: cover;
+  object-position: top;
+}

@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { loginUser } from "../thunk/postUserThunk";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { useState } from "react";
 import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
-  const { user } = useSelector((state) => state.client);
+
   const history = useHistory();
   const dispatch = useDispatch();
   const {
