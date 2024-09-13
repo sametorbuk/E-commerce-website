@@ -77,18 +77,6 @@ function App() {
   const [willNavigateCurrentCategory, setWillNavigateCurrentCategory] =
     useState({});
 
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      sessionStorage.removeItem("user");
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-
   return (
     <>
       <ScrollToTop />

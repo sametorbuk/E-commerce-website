@@ -27,7 +27,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { setCart } from "../redux/shoppingCartSlice";
 import CartPreviewProduct from "../components/cartPreviewProductComp";
-import { toast } from "react-toastify";
 
 export default function ProductDetailPage({
   currentProduct,

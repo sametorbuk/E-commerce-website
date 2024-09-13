@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { loginUser } from "../thunk/postUserThunk";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
-
+  const { user } = useSelector((state) => state.client);
   const history = useHistory();
   const dispatch = useDispatch();
   const {
@@ -27,8 +28,14 @@ export default function LoginPage() {
     const formData = { ...data, rememberMe };
     console.log(formData);
     dispatch(loginUser(formData))
-      .then(() => {
-        history.goBack();
+      .then((response) => {
+        console.log(response);
+        if (response.payload.token) {
+          history.goBack();
+          toast.success(`Merhaba, hoşgeldin ${response.payload.name}!`);
+        } else {
+          toast.warning("Login failed! Please check your details.");
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -45,7 +52,10 @@ export default function LoginPage() {
         />
 
         <div className="flex-flex-col w-full md:w-[40%] p-[1.5rem] ">
-          <h2 className="font-bold text-3xl text-center md:text-left">
+          <h2
+            onClick={() => history.push("/")}
+            className="font-bold cursor-pointer text-3xl text-center md:text-left"
+          >
             Bandage
           </h2>
 
