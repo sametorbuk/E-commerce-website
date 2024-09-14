@@ -228,9 +228,12 @@ export default function ShopPage(props) {
         >
           <div className="flex flex-col gap-[2rem] items-center justify-around ">
             <div className="flex flex-col w-screen md:flex md:w-screen md:flex-col gap-[2rem] px-[3.5rem]  md:gap-[5rem] items-center md:w-screen mt-[4rem] md:mt-[2rem]  ">
-              <div className="product-container">
+              <div className="product-container  ">
                 {productList.map((item) => (
-                  <div key={item.id} className="product-item">
+                  <div
+                    key={item.id}
+                    className="product-item flex justify-center"
+                  >
                     <Product
                       setCurrentProduct={setCurrentProduct}
                       item={item}

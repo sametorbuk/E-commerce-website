@@ -288,7 +288,7 @@ export default function Header() {
 
             <div className="flex justiy-between items-center gap-[1rem] ">
               <FontAwesomeIcon
-                className={`${
+                className={`hidden  ${
                   pathname === "/shop" ? "hidden" : "block"
                 } md:block`}
                 icon={faMagnifyingGlass}
@@ -297,7 +297,7 @@ export default function Header() {
               {cart.length == 0 ? (
                 <FontAwesomeIcon
                   onClick={navigateShoppingCartPage}
-                  className={` md:block cursor-pointer`}
+                  className={`hidden md:block cursor-pointer`}
                   icon={faCartShopping}
                 />
               ) : (
@@ -307,7 +307,7 @@ export default function Header() {
               {cart.length > 0 ? (
                 <div
                   onClick={navigateShoppingCartPage}
-                  className="flex gap-[0.4rem] items-center cursor-pointer"
+                  className="flex hidden md:flex gap-[0.4rem] items-center cursor-pointer"
                 >
                   <FontAwesomeIcon
                     className={` md:block text-sky-500`}
@@ -322,8 +322,41 @@ export default function Header() {
                 ""
               )}
 
-              <FontAwesomeIcon className="hidden md:block" icon={faHeart} />
-              <FontAwesomeIcon className="md:hidden" icon={faBarsStaggered} />
+              <div className="flex  text-[#23A6F0] items-center text-lg justiy-between gap-[1rem] ">
+                <FontAwesomeIcon
+                  className="md:hidden"
+                  icon={faMagnifyingGlass}
+                />
+
+                {cart.length == 0 ? (
+                  <FontAwesomeIcon
+                    onClick={navigateShoppingCartPage}
+                    className={`block md:hidden cursor-pointer`}
+                    icon={faCartShopping}
+                  />
+                ) : (
+                  ""
+                )}
+
+                {cart.length > 0 ? (
+                  <div
+                    onClick={navigateShoppingCartPage}
+                    className="flex md:hidden gap-[0.4rem] items-center cursor-pointer"
+                  >
+                    <FontAwesomeIcon
+                      className={` md:block text-sky-500`}
+                      icon={faCartShopping}
+                    />
+
+                    <button className="rounded-full text-white font-bold items-center justify-center w-[1.6rem] h-[1.6rem] bg-sky-500">
+                      {cart.length}
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
+                <FontAwesomeIcon className="md:block" icon={faHeart} />
+              </div>
             </div>
           </div>
         </div>
@@ -415,12 +448,6 @@ export default function Header() {
             </div>
           </div>
         )}
-
-        <div className="flex flex-col text-[#23A6F0] text-lg justiy-between gap-[2rem] ">
-          <FontAwesomeIcon className="" icon={faMagnifyingGlass} />
-          <FontAwesomeIcon className="" icon={faCartShopping} />
-          <FontAwesomeIcon className="" icon={faHeart} />
-        </div>
       </div>
     </>
   );

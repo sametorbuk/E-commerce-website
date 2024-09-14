@@ -81,7 +81,7 @@ export default function ShoppingCartPage() {
 
       <div className="w-full text-2xl font-bold gap-[1rem] mt-[3rem] flex justify-center md:justify-end px-[14rem] ">
         <p>Total:</p>
-        <p className="text-sky-600 ">
+        <p className="text-sky-500 ">
           {total !== 0 ? (total >= 150 ? total : total + 29.99).toFixed(2) : 0}
           TL
         </p>
