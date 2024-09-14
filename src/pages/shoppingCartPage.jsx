@@ -36,12 +36,12 @@ export default function ShoppingCartPage() {
             <CartPageProductComp key={ind} prdct={prdct} />
           ))}
         </div>
-        <div className="hidden md:flex flex-col items-center p-[0.8rem] gap-[1.2rem] w-[13rem] h-[17rem] bg-stone-100 rounded-lg border-1  border-gray-300 border-solid">
+        <div className="hidden md:flex flex-col items-center p-[0.3rem] gap-[1.2rem] w-[13rem] md:mt-[3.5rem] h-[17rem] bg-stone-100 rounded-lg border-1  border-gray-300 border-solid">
           <p className="font-bold">Order Summary</p>
 
           <div className="flex justify-between w-full">
             <p>Sum of products:</p>
-            <p className="text-amber-500 font-bold flex grow-[0.5] ">
+            <p className="text-sky-500  font-bold flex justify-end grow-[0.5] ">
               {total !== 0
                 ? (total >= 150 ? total : total + 29.99).toFixed(2)
                 : 0}
@@ -50,13 +50,13 @@ export default function ShoppingCartPage() {
           </div>
           <div className="flex justify-between w-full">
             <p>Cargo total:</p>
-            <p className="text-amber-500 font-bold ">29.99TL</p>
+            <p className="text-sky-500 font-bold ">29.99TL</p>
           </div>
-          <div className="flex justify-around w-full justify-center items-center">
+          <div className="flex justify-between w-full justify-center items-center">
             <p className="w-[8rem] ">
               150 TL and over free shipping (seller pays)
             </p>
-            <p className="text-amber-500 font-bold">-29,99 TL</p>
+            <p className="text-sky-500 font-bold">-29,99 TL</p>
           </div>
 
           <button
@@ -81,7 +81,7 @@ export default function ShoppingCartPage() {
 
       <div className="w-full text-2xl font-bold gap-[1rem] mt-[3rem] flex justify-center md:justify-end px-[14rem] ">
         <p>Total:</p>
-        <p className="text-amber-600 ">
+        <p className="text-sky-600 ">
           {total !== 0 ? (total >= 150 ? total : total + 29.99).toFixed(2) : 0}
           TL
         </p>

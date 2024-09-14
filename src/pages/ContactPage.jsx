@@ -67,11 +67,11 @@ export default function ContactPage() {
                 <FontAwesomeIcon
                   className={`${
                     pathname === "/shop" ? "hidden" : "block"
-                  } md:block text-amber-500`}
+                  } md:block text-sky-500`}
                   icon={faCartShopping}
                 />
 
-                <button className="rounded-full text-white font-bold items-center justify-center w-[1.4rem] bg-amber-500">
+                <button className="rounded-full text-white font-bold items-center justify-center w-[1.4rem] bg-sky-500">
                   {cart.length}
                 </button>
               </div>

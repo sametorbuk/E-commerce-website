@@ -39,7 +39,11 @@ export default function PreviousOrderPage() {
         {previousOrdersData.length === 0 && (
           <h2 className="text-4xl font-bold">There is no order</h2>
         )}{" "}
-        <div className="flex flex-col w-full justify-center items-center">
+        <div
+          className={`flex flex-col w-full justify-center items-center ${
+            previousOrdersData.length == 0 ? "hidden" : "flex"
+          }`}
+        >
           {previousOrdersData.map((item, ind) => {
             return <PreviousOrder data={item} key={ind} />;
           })}

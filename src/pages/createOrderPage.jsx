@@ -119,7 +119,7 @@ export default function CreateOrderPage() {
         <main className=" flex flex-col   md:flex md:flex-row mt-[3rem] justify-center ml-[2.8rem] md:ml-[0rem] md:px-[3rem] gap-[2rem]">
           <div className="flex flex-col  w-[90%] md:w-[70%] justify-center">
             <div className="flex w-full justify-between mb-[2rem] ">
-              <div className="flex flex-col p-[1rem] w-[50%] border-t-2 border-l-2 border-r-2 border-b-4 border-t-gray-200 border-l-gray-200 border-r-gray-200 border-b-orange-500 rounded-lg">
+              <div className="flex flex-col p-[1rem] w-[50%] border-t-2 border-l-2 border-r-2 border-b-4 border-t-gray-200 border-l-gray-200 border-r-gray-200 border-b-sky-500 rounded-lg">
                 <h3 className="font-bold text-lg">Address Details</h3>
                 <p>{selectedAddress.title}</p>
                 <p>{selectedAddress.neighborhood}</p>
@@ -140,7 +140,7 @@ export default function CreateOrderPage() {
                   onClick={toggle}
                   className="w-full h-full bg-stone-200 rounded-md flex flex-col justify-center items-center"
                 >
-                  <p className="text-4xl font-bold text-amber-500">+</p>
+                  <p className="text-4xl font-bold text-sky-500">+</p>
                   <p>Add new address</p>
                 </button>
 
@@ -164,7 +164,7 @@ export default function CreateOrderPage() {
 
               <div className="flex justify-between w-full">
                 <p>Sum of products:</p>
-                <p className="text-amber-500 justify-end font-bold flex grow-[0.5] ">
+                <p className="text-sky-500 justify-end font-bold flex grow-[0.5] ">
                   {total !== 0
                     ? (total >= 150 ? total : total + 29.99).toFixed(2)
                     : 0}
@@ -173,17 +173,17 @@ export default function CreateOrderPage() {
               </div>
               <div className="flex justify-between w-full">
                 <p>Cargo total:</p>
-                <p className="text-amber-500 font-bold ">29.99TL</p>
+                <p className="text-sky-500 font-bold ">29.99TL</p>
               </div>
               <div className="flex justify-between w-full justify-center items-center">
                 <p className="w-[8rem] ">
                   150 TL and over free shipping (seller pays)
                 </p>
-                <p className="text-amber-500 font-bold">-29,99 TL</p>
+                <p className="text-sky-500 font-bold">-29,99 TL</p>
               </div>
               <div className="w-full text-md font-bold gap-[1rem] ml-[0rem] flex justify-center md:justify-end  ">
                 <p>Total:</p>
-                <p className="text-amber-600 ">
+                <p className="text-sky-600 ">
                   {(total >= 150 ? total : total + 29.99).toFixed(2)}
                   TL
                 </p>

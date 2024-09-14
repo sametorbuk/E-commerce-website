@@ -123,13 +123,11 @@ export default function ProductDetailPage({
                 .
               </button>
               <button className="rounded-full w-[1.4rem] bg-sky-500">.</button>
-              <button className="rounded-full w-[1.4rem] bg-amber-500">
-                .
-              </button>
+              <button className="rounded-full w-[1.4rem] bg-sky-500">.</button>
             </div>
 
             <div className="flex mt-[3rem] gap-[1.8rem] items-center">
-              <button className="btnBlueWithWhiteText bg-orange-700 w-[14rem] rounded-md h-[2.5rem] font-bold">
+              <button className="btnBlueWithWhiteText bg-amber-500 w-[14rem] rounded-md h-[2.5rem] font-bold">
                 Select Options
               </button>
               <button
@@ -155,11 +153,11 @@ export default function ProductDetailPage({
                   onMouseLeave={() => setHoveredMyCartBtn(false)}
                   className={`${
                     cart.length == 0 ? "hidden" : "flex"
-                  }  items-center text-amber-500  gap-[0.4rem]`}
+                  }  items-center text-sky-500  gap-[0.4rem]`}
                 >
                   <FontAwesomeIcon icon={faCartShopping} />
                   <p>Sepetim</p>
-                  <button className="rounded-full text-white font-bold items-center justify-center w-[1.8rem] bg-amber-500">
+                  <button className="rounded-full text-white font-bold items-center justify-center w-[1.8rem] bg-sky-500">
                     {cart.length}
                   </button>
                 </div>
@@ -198,7 +196,7 @@ export default function ProductDetailPage({
                 <div className="flex w-full justify-around mt-[1rem]">
                   <button
                     onClick={navigateShoppingCartPage}
-                    className="btnBlueWithWhiteText w-[9rem] h-[2.5rem] rounded-md bg-amber-500"
+                    className="btnBlueWithWhiteText w-[9rem] h-[2.5rem] rounded-md bg-sky-500"
                   >
                     Sepete git
                   </button>

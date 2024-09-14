@@ -13,7 +13,7 @@ export default function CartPreviewProduct({ item }) {
             <p className="text-gray-400 font-bold">Adet: {count}</p>
           </div>
 
-          <p className="text-xl text-amber-500">{price} TL</p>
+          <p className="text-xl text-sky-500">{price} TL</p>
         </div>
       </div>
     </>

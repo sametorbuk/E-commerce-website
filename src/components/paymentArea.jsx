@@ -173,7 +173,7 @@ export default function PaymentArea({ selectedAddress }) {
               <p>{selectedAddress.city}</p>
             </div>
 
-            <div className="flex flex-col p-[1rem] w-[50%] border-t-2 border-l-2 border-r-2 border-b-4 border-t-gray-200 border-l-gray-200 border-r-gray-200 border-b-orange-500 rounded-lg">
+            <div className="flex flex-col p-[1rem] w-[50%] border-t-2 border-l-2 border-r-2 border-b-4 border-t-gray-200 border-l-gray-200 border-r-gray-200 border-b-sky-500 rounded-lg">
               <h3 className="font-bold text-lg">Payment options</h3>
               <p>You can pay by bank credit card</p>
             </div>
@@ -427,7 +427,7 @@ export default function PaymentArea({ selectedAddress }) {
 
             <div className="flex justify-between w-full">
               <p>Sum of products:</p>
-              <p className="text-amber-500 justify-end font-bold flex grow-[0.5] ">
+              <p className="text-sky-500 justify-end font-bold flex grow-[0.5] ">
                 {total !== 0
                   ? (total >= 150 ? total : total + 29.99).toFixed(2)
                   : 0}
@@ -436,17 +436,17 @@ export default function PaymentArea({ selectedAddress }) {
             </div>
             <div className="flex justify-between w-full">
               <p>Cargo total:</p>
-              <p className="text-amber-500 font-bold ">29.99TL</p>
+              <p className="text-sky-500 font-bold ">29.99TL</p>
             </div>
             <div className="flex justify-between w-full justify-center items-center">
               <p className="w-[8rem] ">
                 150 TL and over free shipping (seller pays)
               </p>
-              <p className="text-amber-500 font-bold">-29,99 TL</p>
+              <p className="text-sky-500 font-bold">-29,99 TL</p>
             </div>
             <div className="w-full text-md font-bold gap-[1rem] ml-[0rem] flex justify-center md:justify-end  ">
               <p>Total:</p>
-              <p className="text-amber-600 ">
+              <p className="text-sky-600 ">
                 {(total >= 150 ? total : total + 29.99).toFixed(2)} TL
               </p>
             </div>

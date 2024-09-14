@@ -310,11 +310,11 @@ export default function Header() {
                   className="flex gap-[0.4rem] items-center cursor-pointer"
                 >
                   <FontAwesomeIcon
-                    className={` md:block text-amber-500`}
+                    className={` md:block text-sky-500`}
                     icon={faCartShopping}
                   />
 
-                  <button className="rounded-full text-white font-bold items-center justify-center w-[1.4rem] bg-amber-500">
+                  <button className="rounded-full text-white font-bold items-center justify-center w-[1.4rem] bg-sky-500">
                     {cart.length}
                   </button>
                 </div>

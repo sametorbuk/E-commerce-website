@@ -99,7 +99,7 @@ export default function CartPageProductComp({ prdct }) {
               <p className="text-gray-400 font-bold">Adet: {count}</p>
             </div>
 
-            <p className="text-xl text-amber-500">{price} TL</p>
+            <p className="text-xl text-sky-500">{price} TL</p>
           </div>
 
           <div className="flex text-2xl items-center h-[3rem] ">
@@ -116,16 +116,14 @@ export default function CartPageProductComp({ prdct }) {
 
             <button
               onClick={productCountIncreaseHandler}
-              className="md:text-4xl w-[2rem]  rounded-md flex items-center justify-center h-full text-amber-500 border border-gray-500"
+              className="md:text-4xl w-[2rem]  rounded-md flex items-center justify-center h-full text-sky-500 border border-gray-500"
             >
               +
             </button>
           </div>
         </label>
 
-        <p className="md:text-2xl font-bold text-amber-500">
-          {count * price}TL
-        </p>
+        <p className="md:text-2xl font-bold text-sky-500">{count * price}TL</p>
         <button onClick={toggle}>
           <FontAwesomeIcon
             className="text-gray-500 font-bold text-xl"
