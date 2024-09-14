@@ -35,7 +35,14 @@ export default function ShoppingCartPage() {
           {cart.map((prdct, ind) => (
             <CartPageProductComp key={ind} prdct={prdct} />
           ))}
+
+          {cart.length == 0 && (
+            <h2 className="font-bold text-3xl text-center mt-[3.5rem]">
+              THERE IS NO PRODUCT IN YOUR BASKET
+            </h2>
+          )}
         </div>
+
         <div className="hidden md:flex flex-col items-center p-[0.3rem] gap-[1.2rem] w-[13rem] md:mt-[3.5rem] h-[17rem] bg-stone-100 rounded-lg border-1  border-gray-300 border-solid">
           <p className="font-bold">Order Summary</p>
 

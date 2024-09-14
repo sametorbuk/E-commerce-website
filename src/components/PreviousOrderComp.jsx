@@ -26,7 +26,7 @@ export default function PreviousOrder(props) {
 
         <div className="flex gap-[1rem]">
           <p className="font-bold">Price:</p>
-          <p>{data.price} TL</p>
+          <p className="font-bold">{data.price} TL</p>
         </div>
       </div>
 

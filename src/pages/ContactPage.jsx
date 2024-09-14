@@ -13,7 +13,6 @@ import {
   faMagnifyingGlass,
   faCartShopping,
   faHeart,
-  faBarsStaggered,
 } from "@fortawesome/free-solid-svg-icons";
 import ContactCard from "../components/contact-card";
 import Footer from "../layouts/footer";
@@ -44,8 +43,11 @@ export default function ContactPage() {
             </h2>
           </div>
 
-          <div className="flex justiy-between gap-[2rem] ">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          <div className="flex justiy-between items-center gap-[2rem] ">
+            <FontAwesomeIcon
+              className="text-sky-500"
+              icon={faMagnifyingGlass}
+            />
 
             {cart.length == 0 ? (
               <FontAwesomeIcon
@@ -71,7 +73,7 @@ export default function ContactPage() {
                   icon={faCartShopping}
                 />
 
-                <button className="rounded-full text-white font-bold items-center justify-center w-[1.4rem] bg-sky-500">
+                <button className="rounded-full text-white font-bold text-center justify-center w-[1.4rem] bg-sky-500">
                   {cart.length}
                 </button>
               </div>
@@ -80,7 +82,6 @@ export default function ContactPage() {
             )}
 
             <FontAwesomeIcon className="hidden md:block" icon={faHeart} />
-            <FontAwesomeIcon className="md:hidden" icon={faBarsStaggered} />
           </div>
         </div>
 

@@ -78,7 +78,7 @@ export default function CartPageProductComp({ prdct }) {
     <>
       {cart.length === 0 && (
         <div>
-          <h2>SEPETİNİZDE ÜRÜN BULUNMAMAKTADIR</h2>
+          <h2>THERE IS NO PRODUCT IN YOUR BASKET</h2>
         </div>
       )}
       <div className="flex  mt-[1rem] px-[1.5rem] md:px-[0rem] justify-between md:p-[1rem] md:w-[50rem] md:gap-[2rem] items-center">
@@ -135,7 +135,8 @@ export default function CartPageProductComp({ prdct }) {
       <div className="">
         <Modal className="relative top-[7rem] " isOpen={modal} toggle={toggle}>
           <ModalBody>
-            Ürünü sepetinizden silmek istediğinize emin misiniz ?
+            {" "}
+            Are you sure you want to delete the product from your basket?
           </ModalBody>
           <ModalFooter className="flex gap-[2rem] h-[4rem]">
             <button

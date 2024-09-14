@@ -12,7 +12,6 @@ import {
 import {
   faAngleDown,
   faBagShopping,
-  faBarsStaggered,
   faCartShopping,
   faChevronDown,
   faChevronUp,
