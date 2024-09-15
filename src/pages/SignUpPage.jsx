@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoles } from "../thunk/fetchRolesThunk";
-import DownloadMarketComponent from "../components/download-market-comp";
 
 export default function SignUpPage() {
   const dispatch = useDispatch();
@@ -108,26 +107,26 @@ export default function SignUpPage() {
 
   return (
     <>
-      <main className="bg-sky-700 bg-opacity-85 flex w-screen h-screen  md:px-[9rem] md:py-[3rem]">
-        <div className="flex flex-col md:flex-row  items-center shine-border w-full bg-sky-900 h-full rounded-3xl">
-          <div className="hidden order-[1] mt-[3rem] mb-[2rem]  md:mt-[0rem] md:ml-[4.6rem] md:flex flex-col gap-[1rem] 2xl:gap-[5rem]">
-            <img
-              className="w-[33%] absolute bottom-[2rem] left-[3rem] h-[86%] 2xl:w-[25%] 2xl:static 2xl:h-[60%] rounded-xl"
-              src="./images/sign-up-page/signup-page-vase.jpg"
-              alt=""
-            />
+      <main className="flex flex-col  md:flex md:flex-row  justify-center  md:px-[5rem] ">
+        <img
+          className="hidden md:block w-[60%] rounded-xl"
+          src="./images/login-page/login-page-img.jpg"
+          alt=""
+        />
 
-            <div className="hidden  md:hidden 2xl:flex 2xl:flex-col gap-[1rem] ">
-              <DownloadMarketComponent color="black" market="apple" />
-              <DownloadMarketComponent color="black" market="google" />
-            </div>
-          </div>
-          <div className=" w-[89%] md:w-[68%] scrollable-div static md:absolute   md:left-[26rem] h-[100.3%] bg-white rounded-l-3xl rounded-r-md md:rounded-r-sm md:rounded-l-3xl p-[2rem] md:p-[4rem]">
-            <div className="w-full flex justify-center items-center mb-[3rem]">
-              <h2 className="text-2xl font-bold text-center">
-                WELCOME TO THE BANDAGE
-              </h2>
-            </div>
+        <div className="flex-flex-col w-full md:w-[40%] p-[1.5rem] ">
+          <h2
+            onClick={() => history.push("/")}
+            className="font-bold cursor-pointer text-3xl text-center md:text-left"
+          >
+            Bandage
+          </h2>
+
+          <div className="flex flex-col mt-[3rem]">
+            <h3 className="font-bold text-xl text-center md:text-left ">
+              Welcome to the Bandage
+            </h3>
+
             <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4">
                 <label
@@ -247,7 +246,7 @@ export default function SignUpPage() {
               {console.log(selectedRoleId)}
 
               {selectedRoleId == 2 && (
-                <div className="text-black  font-bold mt-[3rem] ">
+                <div className="text-black  font-bold  ">
                   <div className="mb-4">
                     <label
                       htmlFor="storeName"
@@ -352,14 +351,35 @@ export default function SignUpPage() {
                   </div>
                 </div>
               )}
+              <div className="flex flex-col justify-center gap-[2.5rem]">
+                <button
+                  className="btnBlueWithWhiteText w-[19rem]  md:w-[25.1rem] rounded-lg  cursor-pointer h-[2.5rem] font-bold"
+                  disabled={!isValid}
+                  type="submit"
+                >
+                  Sign up
+                </button>
 
-              <button
-                className="bg-sky-700  w-[8rem] h-[2rem] text-white font-bold rounded-lg"
-                type="submit"
-                disabled={!isValid}
-              >
-                SUBMIT
-              </button>
+                <button className="w-[19rem]  md:w-[25.1rem] text-white rounded-lg bg-[#1b1b1b]  flex justify-center items-center gap-[0.5rem]  cursor-pointer h-[2.5rem] ">
+                  <img
+                    className="w-[2rem] bg-black"
+                    src="./images/login-page/google-logo-black.png"
+                    alt=""
+                  />
+                  Or sign in with Google
+                </button>
+
+                <div className="w-[19rem]  md:w-[25.1rem]  flex justify-around">
+                  <p>Do you already have an account ?</p>
+
+                  <p
+                    onClick={() => history.push("/login")}
+                    className="text-[#007AFF] forgotPassword"
+                  >
+                    Sign in now
+                  </p>
+                </div>
+              </div>
             </form>
           </div>
         </div>

@@ -182,7 +182,7 @@ export default function ProductDetailPage({
               <div
                 onMouseEnter={() => setHoveredCartPreviewArea(true)}
                 onMouseLeave={() => setHoveredCartPreviewArea(false)}
-                className="flex flex-col p-[1.2rem]   overflow-y-auto scrollable-div bg-stone-200 rounded-lg  w-[23rem] absolute top-[48rem]"
+                className="flex flex-col p-[1.2rem]   overflow-y-auto scrollable-div bg-stone-200 rounded-lg  w-[23rem] absolute top-[49rem]"
               >
                 <div className="flex  gap-[1rem] font-bold text-lg">
                   <p>Sepetim:</p>
