@@ -73,7 +73,7 @@ export default function LoginPage() {
                   Email
                 </label>
                 <input
-                  className="w-[19rem]  md:w-[25.1rem] h-[3rem] bg-gray-300 rounded-lg"
+                  className="w-[19rem]  md:w-[25.1rem] p-2  bg-gray-200 rounded-lg"
                   type="email"
                   id="email"
                   placeholder="     Enter email"
@@ -98,7 +98,7 @@ export default function LoginPage() {
                   Password
                 </label>
                 <input
-                  className="w-[19rem]  md:w-[25.1rem] h-[3rem] bg-gray-300 rounded-lg"
+                  className="w-[19rem]  md:w-[25.1rem] p-2  bg-gray-200 rounded-lg"
                   type="password"
                   id="password"
                   placeholder="     Enter password"
