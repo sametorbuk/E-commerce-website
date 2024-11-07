@@ -25,6 +25,7 @@ import useAxios from "../hooks/useAxios";
 import { setOffset, setProductList } from "../redux/productSlice";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchProducts } from "../thunk/fetchProductsThunk";
+import axios from "axios";
 
 export default function ShopPage(props) {
   const [hasMore, setHasMore] = useState(true);
@@ -111,6 +112,8 @@ export default function ShopPage(props) {
       )
     );
   }, [sortValue, filterClicked]);
+
+
 
   return (
     <>

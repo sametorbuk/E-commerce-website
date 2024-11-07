@@ -136,7 +136,8 @@ export default function SignUpPage() {
                   Name
                 </label>
                 <input
-                  className="bg-gray-200 border border-gray-300 p-2 rounded w-full"
+                  className="bg-gray-200 border border-gray-300 
+                  rounded w-full"
                   type="text"
                   id="name"
                   {...register("name", {

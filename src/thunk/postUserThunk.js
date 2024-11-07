@@ -7,10 +7,13 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   ({ email, password, rememberMe }, { dispatch }) => {
     return axios
-      .post("https://workintech-fe-ecommerce.onrender.com/login", {
-        email,
-        password,
-      })
+      .post(
+        "https://e-commerce-backend-with-java-and-spring-qx2p.onrender.com/teknotik/auth/login",
+        {
+          email,
+          password,
+        }
+      )
       .then((response) => {
         const { token, name, email, role_id } = response.data;
 
