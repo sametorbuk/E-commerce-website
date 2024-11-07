@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRoles } from "../thunk/fetchRolesThunk";
+import axios from "axios";
 
 export default function SignUpPage() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ export default function SignUpPage() {
   const formData = getValues();
   console.log(formData);
 
-  const theFormDataRequiredFormat = {
+  const theFormDataRequiredFormatRoleId2 = {
     name: formData.name,
     email: formData.email,
     password: formData.password,
@@ -61,48 +62,30 @@ export default function SignUpPage() {
     },
   };
 
+  const theFormDataRequiredFormat = {
+    name: formData.name,
+    email: formData.email,
+    password: formData.password,
+    role_id: formData.role_id,
+  };
+
   console.log(theFormDataRequiredFormat);
 
-  const onSubmit = async () => {
-    const Request = new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("Data submitted successfully");
-      }, 3000);
-    });
-
-    try {
-      await toast.promise(Request, {
-        pending: {
-          render() {
-            return (
-              <div className="spinner-container">
-                <div className="spinner"></div>
-                <span>Receiving user registration...</span>
-              </div>
-            );
-          },
-          icon: false,
-        },
-        success: {
-          render() {
-            toast.warning(
-              "You need to click link in email to activate your account!"
-            );
-            history.goBack();
-            return "Registration received successfully";
-          },
-          icon: "🟢",
-        },
-        error: {
-          render({ data }) {
-            return `Registration failed: ${data.message}`;
-          },
-          icon: "🔴",
-        },
+  const onSubmit = () => {
+    axios
+      .post(
+        "https://e-commerce-backend-with-java-and-spring-qx2p.onrender.com/teknotik/auth/register",
+        formData.role_id == 2
+          ? theFormDataRequiredFormatRoleId2
+          : theFormDataRequiredFormat
+      )
+      .then((response) => {
+        console.log(response.data);
+        toast.success("Registration happened successfully");
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    } catch (error) {
-      console.error("Registration failed:", error);
-    }
   };
 
   return (
