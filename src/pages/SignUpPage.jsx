@@ -69,15 +69,16 @@ export default function SignUpPage() {
     role_id: formData.role_id,
   };
 
-  console.log(theFormDataRequiredFormat);
+  const requestData =
+    formData.role_id == 2
+      ? theFormDataRequiredFormatRoleId2
+      : theFormDataRequiredFormat;
 
   const onSubmit = () => {
     axios
       .post(
         "https://e-commerce-backend-with-java-and-spring-qx2p.onrender.com/teknotik/auth/register",
-        formData.role_id == 2
-          ? theFormDataRequiredFormatRoleId2
-          : theFormDataRequiredFormat
+        requestData
       )
       .then((response) => {
         console.log(response.data);
