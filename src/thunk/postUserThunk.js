@@ -15,9 +15,9 @@ export const loginUser = createAsyncThunk(
         }
       )
       .then((response) => {
-        const { token, name, email, role_id } = response.data;
+        const { token, name, email } = response.data;
 
-        const user = { name, email, role_id };
+        const user = { name, email };
 
         const gravatarHash = md5(email.trim().toLowerCase());
         const gravatarUrl = `https://www.gravatar.com/avatar/${gravatarHash}`;
