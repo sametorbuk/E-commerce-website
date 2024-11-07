@@ -47,7 +47,6 @@ export default function SignUpPage() {
   }, [dispatch, fetchState]);
 
   const formData = getValues();
-  console.log(formData);
 
   const theFormDataRequiredFormatRoleId2 = {
     name: formData.name,
@@ -82,7 +81,7 @@ export default function SignUpPage() {
       )
       .then((response) => {
         console.log(response.data);
-        toast.success("Registration happened successfully");
+        toast.success("Registration happened successfully. Please login again");
       })
       .catch((err) => {
         console.log(err);
