@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { setUser } from "../redux/clientSlice";
 import md5 from "md5";
+import { toast } from "react-toastify";
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
@@ -38,6 +39,7 @@ export const loginUser = createAsyncThunk(
       })
       .catch((error) => {
         console.log(error);
+        toast.warning(error);
         return 0;
       });
   }
