@@ -9,7 +9,7 @@ export const loginUser = createAsyncThunk(
   ({ email, password, rememberMe }, { dispatch }) => {
     return axios
       .post(
-        "https://e-commerce-backend-with-java-and-spring--boot.fly.dev/teknotik/auth/login",
+        "https://e-commerce-backend-with-java-and-spring.onrender.com/teknotik/auth/login",
         {
           email,
           password,
