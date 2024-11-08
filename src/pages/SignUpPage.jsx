@@ -75,11 +75,15 @@ export default function SignUpPage() {
 
   const onSubmit = () => {
     axios
-      .post("http://localhost:8080/teknotik/auth/register", requestData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(
+        "https://e-commerce-backend-with-java-and-spring-qx2p.onrender.com/teknotik/auth/register",
+        requestData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         console.log(response.data);
         toast.success("Registration happened successfully. Please login again");
