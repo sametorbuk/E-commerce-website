@@ -77,7 +77,12 @@ export default function SignUpPage() {
     axios
       .post(
         "https://e-commerce-backend-with-java-and-spring-qx2p.onrender.com/teknotik/auth/register",
-        requestData
+        requestData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then((response) => {
         console.log(response.data);
