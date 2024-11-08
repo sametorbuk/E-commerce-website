@@ -13,6 +13,11 @@ export const loginUser = createAsyncThunk(
         {
           email,
           password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       )
       .then((response) => {
