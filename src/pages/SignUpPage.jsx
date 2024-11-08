@@ -52,7 +52,7 @@ export default function SignUpPage() {
     name: formData.name,
     email: formData.email,
     password: formData.password,
-    role_id: formData.role_id,
+    roleId: formData.role_id,
     store: {
       name: formData.storeName,
       phone: formData.storePhone,
@@ -65,7 +65,7 @@ export default function SignUpPage() {
     name: formData.name,
     email: formData.email,
     password: formData.password,
-    role_id: formData.role_id,
+    roleId: formData.role_id,
   };
 
   const requestData =
@@ -75,15 +75,11 @@ export default function SignUpPage() {
 
   const onSubmit = () => {
     axios
-      .post(
-        "https://e-commerce-backend-with-java-and-spring-qx2p.onrender.com/teknotik/auth/register",
-        requestData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
+      .post("http://localhost:8080/teknotik/auth/register", requestData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
         console.log(response.data);
         toast.success("Registration happened successfully. Please login again");
