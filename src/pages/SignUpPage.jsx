@@ -73,10 +73,12 @@ export default function SignUpPage() {
       ? theFormDataRequiredFormatRoleId2
       : theFormDataRequiredFormat;
 
+  const urlEndpoint = formData.role_id == 2 ? "storeRegister" : "register";
+
   const onSubmit = () => {
     axios
       .post(
-        "https://e-commerce-backend-with-java-and-spring.onrender.com/teknotik/auth/register",
+        `https://e-commerce-backend-with-java-and-spring.onrender.com/teknotik/auth/${urlEndpoint}`,
         requestData,
         {
           headers: {
