@@ -78,7 +78,7 @@ export default function SignUpPage() {
   const onSubmit = () => {
     axios
       .post(
-        `https://e-commerce-backend-with-java-and-spring.onrender.com/teknotik/auth/${urlEndpoint}`,
+        `https://e-commerce-withspring.onrender.com/teknotik/auth/${urlEndpoint}`,
         requestData,
         {
           headers: {
