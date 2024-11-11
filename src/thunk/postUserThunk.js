@@ -43,8 +43,7 @@ export const loginUser = createAsyncThunk(
         return response.data;
       })
       .catch((error) => {
-        console.log(error);
-        toast.warning(error);
+        toast.warning(error.response.data.message);
         return 0;
       });
   }
