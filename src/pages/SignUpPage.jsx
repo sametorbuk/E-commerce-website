@@ -91,7 +91,7 @@ export default function SignUpPage() {
         toast.success("Registration happened successfully. Please login again");
       })
       .catch((err) => {
-        console.log(err);
+        toast.warning(err.data.message);
       });
   };
 
