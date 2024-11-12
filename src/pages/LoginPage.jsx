@@ -33,8 +33,6 @@ export default function LoginPage() {
         if (response.payload.token) {
           history.goBack();
           toast.success(`Merhaba, hoşgeldin ${response.payload.name}!`);
-        } else {
-          toast.warning("Login failed! Please check your details.");
         }
       })
       .catch((err) => {
