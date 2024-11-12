@@ -97,7 +97,7 @@ export default function PaymentArea({ selectedAddress }) {
   const onSubmit = () => {
     axios
       .post(
-        "https://workintech-fe-ecommerce.onrender.com/user/card",
+        "https://e-commerce-withspring.onrender.com/user/card",
         requiredFormat,
         {
           headers: { Authorization: token },
