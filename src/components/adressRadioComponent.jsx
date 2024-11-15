@@ -50,16 +50,15 @@ export default function AddressRadioComponent({ data, isSelected, onSelect }) {
       : localStorage.getItem("token");
   const { MakeRequest, METHODS } = useAxios();
 
+  MakeRequest({
+    url: "/user/address",
+    data: formData,
+    method: METHODS.PUT,
+    headers: {
+      Authorization: token,
+    },
+  });
   const addressUpdateHandler = () => {
-    MakeRequest({
-      url: "/user/address",
-      data: formData,
-      method: METHODS.PUT,
-      headers: {
-        Authorization: token,
-      },
-    });
-
     toggle();
 
     setTimeout(() => {
