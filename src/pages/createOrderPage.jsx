@@ -92,7 +92,8 @@ export default function CreateOrderPage() {
 
   const { MakeRequest, METHODS } = useAxios();
 
-  const addAddressHandler = () => {
+  const addAddressHandler = (e) => {
+    e.preventDefault();
     MakeRequest({
       url: "/user/address",
       data: formData,
