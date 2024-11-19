@@ -99,6 +99,7 @@ export default function CreateOrderPage() {
       method: METHODS.POST,
       headers: {
         Authorization: token,
+        "Cache-Control": "no-cache",
       },
     });
 
@@ -144,16 +145,18 @@ export default function CreateOrderPage() {
                   <p>Add new address</p>
                 </button>
 
-                {addressList.map((data, ind) => {
-                  return (
-                    <AddressRadioComponent
-                      key={ind}
-                      onSelect={handleAddressSelect}
-                      isSelected={selectedAddress === data}
-                      data={data}
-                    />
-                  );
-                })}
+                {(Array.isArray(addressList) ? addressList : []).map(
+                  (data, ind) => {
+                    return (
+                      <AddressRadioComponent
+                        key={ind}
+                        onSelect={handleAddressSelect}
+                        isSelected={selectedAddress === data}
+                        data={data}
+                      />
+                    );
+                  }
+                )}
               </div>
             </div>
           </div>

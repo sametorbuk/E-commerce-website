@@ -17,7 +17,7 @@ export const fetchAddressList = createAsyncThunk(
         : localStorage.getItem("token");
     dispatch(setFetchState("FETCHING"));
     return axios
-      .get(`https://e-commerce-withspring.onrender.com${endpoint}`, {
+      .get(`http://localhost:8080${endpoint}`, {
         headers: {
           Authorization: token,
         },
