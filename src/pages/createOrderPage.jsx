@@ -113,6 +113,11 @@ export default function CreateOrderPage() {
     }, 1000);
   };
 
+  const handleAddressSubmit = (e) => {
+    e.preventDefault();
+    addAddressHandler();
+  };
+
   return (
     <>
       <Header />
@@ -218,7 +223,7 @@ export default function CreateOrderPage() {
           <div className="">
             <Modal className="relative  " isOpen={modal} toggle={toggle}>
               <ModalBody>
-                <form onSubmit={handleSubmit(addAddressHandler)}>
+                <form onSubmit={handleSubmit(handleAddressSubmit)}>
                   <div className="flex flex-col gap-[0.5rem]">
                     <label htmlFor="title">Adress Title</label>
                     <input
