@@ -32,6 +32,7 @@ function App() {
   const { MakeRequest, data, METHODS } = useAxios();
   const dispatch = useDispatch();
 
+  /*
   useEffect(() => {
     const token =
       localStorage.getItem("token") === null
@@ -45,18 +46,23 @@ function App() {
         },
       };
 
-      MakeRequest({
-        url: "/verify",
-        method: METHODS.GET,
-        data: requestData,
-      });
+      const fetchData = async () => {
+        const response = await MakeRequest({
+          url: "/verify",
+          method: METHODS.GET,
+          data: requestData,
+        });
 
-      if (data !== null) {
-        dispatch(setUser(data));
-        localStorage.setItem("token", data.token);
-      }
+        if (response && response.data) {
+          dispatch(setUser(response.data));
+          localStorage.setItem("token", response.data.token);
+        }
+      };
+
+      fetchData();
     }
   }, []);
+  */
 
   useEffect(() => {
     if (setProductList.length === 0) {

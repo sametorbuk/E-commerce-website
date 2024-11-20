@@ -13,13 +13,13 @@ export const fetchAddressList = createAsyncThunk(
 
     const token =
       localStorage.getItem("token") === null
-        ? sessionStorage.getItem("token")
-        : localStorage.getItem("token");
+        ? sessionStorage.getItem("token").trim()
+        : localStorage.getItem("token").trim();
     dispatch(setFetchState("FETCHING"));
     return axios
       .get(`http://localhost:8080${endpoint}`, {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {

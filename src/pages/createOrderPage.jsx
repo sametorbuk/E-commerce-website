@@ -76,7 +76,6 @@ export default function CreateOrderPage() {
       surname: "",
       phone: "",
       city: "",
-
       district: "",
     },
     mode: "all",
@@ -88,34 +87,26 @@ export default function CreateOrderPage() {
     localStorage.getItem("token") === null
       ? sessionStorage.getItem("token")
       : localStorage.getItem("token");
-  console.log(token);
 
-  const { MakeRequest, METHODS } = useAxios();
-
-  const addAddressHandler = (e) => {
-    e.preventDefault();
+  const { MakeRequest, METHODS, loading, setLoading } = useAxios();
+  const addAddressHandler = () => {
+    if (loading) return;
+    setLoading(true);
     MakeRequest({
       url: "/user/address",
       data: formData,
       method: METHODS.POST,
       headers: {
-        Authorization: token,
-        "Cache-Control": "no-cache",
+        Authorization: `Bearer ${token.trim()}`,
       },
-    });
-
-    dispatch(setAddressList([...addressList, formData]));
-
-    toggle();
-
-    setTimeout(() => {
-      toast.success("Address başarıyla kaydedildi");
-    }, 1000);
-  };
-
-  const handleAddressSubmit = (e) => {
-    e.preventDefault();
-    addAddressHandler();
+    })
+      .then((response) => {
+        // dispatch(setAddressList([...addressList, response]));
+      })
+      .catch((err) => {
+        toast.warning("There was an error adding the address");
+        console.error(err);
+      });
   };
 
   return (
@@ -223,7 +214,7 @@ export default function CreateOrderPage() {
           <div className="">
             <Modal className="relative  " isOpen={modal} toggle={toggle}>
               <ModalBody>
-                <form onSubmit={handleSubmit(handleAddressSubmit)}>
+                <form onSubmit={handleSubmit(addAddressHandler)}>
                   <div className="flex flex-col gap-[0.5rem]">
                     <label htmlFor="title">Adress Title</label>
                     <input
