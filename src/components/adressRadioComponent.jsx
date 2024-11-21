@@ -69,14 +69,11 @@ export default function AddressRadioComponent({ data, isSelected, onSelect }) {
 
   const addressDeleteHandler = () => {
     axios
-      .delete(
-        `https://workintech-fe-ecommerce.onrender.com/user/address/${id}`,
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      )
+      .delete(`http://localhost:8080/user/address/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         console.log(res.data);
 

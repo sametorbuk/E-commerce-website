@@ -13,7 +13,6 @@ import useAxios from "../hooks/useAxios";
 import { iller } from "../city-data";
 import { toast } from "react-toastify";
 import PaymentArea from "../components/paymentArea";
-import { setAddressList } from "../redux/clientSlice";
 
 export default function CreateOrderPage() {
   const [selectedAddress, setSelectedAdress] = useState(
@@ -97,11 +96,12 @@ export default function CreateOrderPage() {
       data: formData,
       method: METHODS.POST,
       headers: {
-        Authorization: `Bearer ${token.trim()}`,
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => {
-        // dispatch(setAddressList([...addressList, response]));
+        console.log(response.data);
+        toast.success("Address başarıyla kaydedildi");
       })
       .catch((err) => {
         toast.warning("There was an error adding the address");
