@@ -61,8 +61,8 @@ export default function PaymentArea({ selectedAddress }) {
       : localStorage.getItem("token");
   useEffect(() => {
     axios
-      .get("https://workintech-fe-ecommerce.onrender.com/user/card", {
-        headers: { Authorization: token },
+      .get("http://localhost:8080/user/card", {
+        headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
         console.log(res.data);
@@ -96,13 +96,9 @@ export default function PaymentArea({ selectedAddress }) {
   delete requiredFormat.CVV;
   const onSubmit = () => {
     axios
-      .post(
-        "https://e-commerce-withspring.onrender.com/user/card",
-        requiredFormat,
-        {
-          headers: { Authorization: token },
-        }
-      )
+      .post("http://localhost:8080/user/card", requiredFormat, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         console.log(res.data);
         dispatch(setCreditCards([...creditCards, res.data]));

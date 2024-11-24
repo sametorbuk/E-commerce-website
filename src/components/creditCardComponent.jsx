@@ -61,9 +61,9 @@ export default function CreditCard({ data, isSelected, setSelectedCard }) {
 
   const deleteCardHandler = () => {
     axios
-      .delete(`https://workintech-fe-ecommerce.onrender.com/user/card/${id}`, {
+      .delete(`http://localhost:8080/user/card/${id}`, {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
@@ -99,9 +99,9 @@ export default function CreditCard({ data, isSelected, setSelectedCard }) {
 
   const onSubmit = () => {
     axios
-      .put(`https://workintech-fe-ecommerce.onrender.com/user/card`, formData, {
+      .put(`http://localhost:8080/user/card`, formData, {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
