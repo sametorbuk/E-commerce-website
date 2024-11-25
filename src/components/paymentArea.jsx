@@ -100,6 +100,7 @@ export default function PaymentArea({ selectedAddress }) {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
+        transformRequest: [(data) => JSON.stringify(data)],
       })
       .then((res) => {
         console.log(res.data);
@@ -139,11 +140,11 @@ export default function PaymentArea({ selectedAddress }) {
       const requiredFormatOfOrderData = {
         address_id: selectedAddress.id,
         order_date: date,
-        card_no: selectedCard.card_no,
-        card_name: selectedCard.name_on_card,
-        card_expire_month: selectedCard.expire_month,
-        card_expire_year: selectedCard.expire_year,
-        card_ccv: null,
+        card_no: selectedCard.cardNo,
+        card_name: selectedCard.nameOnCard,
+        card_expire_month: selectedCard.expireMonth,
+        card_expire_year: selectedCard.expireYear,
+        card_ccv: selectedCard.CVV,
         price: total,
         products: products,
       };
@@ -153,9 +154,17 @@ export default function PaymentArea({ selectedAddress }) {
         method: METHODS.POST,
         data: requiredFormatOfOrderData,
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-      });
+        timeout: 5000,
+      })
+        .then((resp) => {
+          console.log(resp);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 

@@ -16,9 +16,10 @@ export default function PreviousOrderPage() {
 
   useEffect(() => {
     axios
-      .get("https://workintech-fe-ecommerce.onrender.com/order", {
+      .get("http://localhost:8080/order", {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {

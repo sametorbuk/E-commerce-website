@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function PreviousOrder(props) {
   const [orderDetailArea, setOrderDetailArea] = useState(false);
   const { data } = props;
-  console.log("samet");
+  console.log(data);
   return (
     <div className="flex   flex-col w-[90%] border border-1 border-black rounded-md">
       <div
@@ -38,8 +38,7 @@ export default function PreviousOrder(props) {
           {data.products.map((item, ind) => {
             return (
               <div key={ind} className="flex gap-[0.5rem] flex-col">
-                <img src={item.images[0].url} alt="" />
-                <p className="text-center mt-[0.5rem]">{item.description}</p>
+                <p className="text-center mt-[0.5rem]">{item.detail}</p>
                 <div className="flex w-full justify-center gap-[0.5rem]">
                   <p className="font-bold">Count:</p>
                   <p>{item.count}</p>

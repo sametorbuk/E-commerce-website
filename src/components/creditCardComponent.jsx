@@ -101,6 +101,7 @@ export default function CreditCard({ data, isSelected, setSelectedCard }) {
       .put(`http://localhost:8080/user/card`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {
