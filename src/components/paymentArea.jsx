@@ -93,11 +93,13 @@ export default function PaymentArea({ selectedAddress }) {
   console.log(formData);
 
   const requiredFormat = { ...formData };
-  delete requiredFormat.CVV;
   const onSubmit = () => {
     axios
       .post("http://localhost:8080/user/card", requiredFormat, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       })
       .then((res) => {
         console.log(res.data);

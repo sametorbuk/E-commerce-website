@@ -31,8 +31,7 @@ for (let i = 0; i <= 10; i++) {
 export default function CreditCard({ data, isSelected, setSelectedCard }) {
   const [deleteModal, setDeleteModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);
-  const { expire_month, expire_year, card_no, name_on_card, id, user_id } =
-    data;
+  const { expireMonth, expireYear, cardNo, nameOnCard, id, userId } = data;
   const [modal, setModal] = useState(false);
   const dispatch = useDispatch();
   const { creditCards } = useSelector((state) => state.client);
@@ -85,12 +84,12 @@ export default function CreditCard({ data, isSelected, setSelectedCard }) {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      expire_month: expire_month,
-      expire_year: expire_year,
-      card_no: card_no,
-      name_on_card: name_on_card,
+      expire_month: expireMonth,
+      expire_year: expireYear,
+      card_no: cardNo,
+      name_on_card: nameOnCard,
       id: id,
-      user_id: user_id,
+      user_id: userId,
     },
     mode: "all",
   });
@@ -144,15 +143,15 @@ export default function CreditCard({ data, isSelected, setSelectedCard }) {
            } rounded-lg`}
         >
           <p className="font-bold text-xl">Credit Card</p>
-          <p className="text-blue-500">{card_no}</p>
+          <p className="text-blue-500">{cardNo}</p>
 
           <div className="flex w-full justify-between">
-            <p className="text-red-500">{name_on_card}</p>
+            <p className="text-red-500">{nameOnCard}</p>
 
             <div className="flex text-green-600">
-              <p>{expire_month}</p>
+              <p>{expireMonth}</p>
               <p>/</p>
-              <p>{expire_year}</p>
+              <p>{expireYear}</p>
             </div>
           </div>
         </div>
