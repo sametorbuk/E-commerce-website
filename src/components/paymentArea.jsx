@@ -61,7 +61,7 @@ export default function PaymentArea({ selectedAddress }) {
       : localStorage.getItem("token");
   useEffect(() => {
     axios
-      .get("http://localhost:8080/user/card", {
+      .get("https://e-commerce-withspring.onrender.com/user/card", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -95,13 +95,17 @@ export default function PaymentArea({ selectedAddress }) {
   const requiredFormat = { ...formData };
   const onSubmit = () => {
     axios
-      .post("http://localhost:8080/user/card", requiredFormat, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        transformRequest: [(data) => JSON.stringify(data)],
-      })
+      .post(
+        "https://e-commerce-withspring.onrender.com/user/card",
+        requiredFormat,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          transformRequest: [(data) => JSON.stringify(data)],
+        }
+      )
       .then((res) => {
         console.log(res.data);
         dispatch(setCreditCards([...creditCards, res.data]));
