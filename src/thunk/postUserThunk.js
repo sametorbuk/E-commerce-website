@@ -9,7 +9,7 @@ export const loginUser = createAsyncThunk(
   ({ email, password, rememberMe }, { dispatch }) => {
     return axios
       .post(
-        "http://localhost:8080/auth/login",
+        "https://e-commerce-withspring.onrender.com/auth/login",
         {
           email,
           password,

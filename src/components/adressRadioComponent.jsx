@@ -69,7 +69,7 @@ export default function AddressRadioComponent({ data, isSelected, onSelect }) {
 
   const addressDeleteHandler = () => {
     axios
-      .delete(`http://localhost:8080/user/address/${id}`, {
+      .delete(`https://e-commerce-withspring.onrender.com/user/address/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

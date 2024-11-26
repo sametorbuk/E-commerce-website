@@ -98,7 +98,7 @@ export default function CreditCard({ data, isSelected, setSelectedCard }) {
 
   const onSubmit = () => {
     axios
-      .put(`http://localhost:8080/user/card`, formData, {
+      .put(`https://e-commerce-withspring.onrender.com/user/card`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",

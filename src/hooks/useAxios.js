@@ -18,7 +18,7 @@ export default function useAxios() {
   const history = useHistory();
 
   const instance = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "https://e-commerce-withspring.onrender.com",
     timeout: 5000,
     headers: { Authorization: "" },
   });
