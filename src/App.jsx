@@ -11,9 +11,7 @@ import AboutUsPage from "./pages/AboutUsPage";
 import SignUpPage from "./pages/SignUpPage";
 import ScrollToTop from "./hooks/ScrollToTop";
 import LoginPage from "./pages/LoginPage";
-import useAxios from "./hooks/useAxios";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "./redux/clientSlice";
 import { fetchCategories } from "./thunk/fetchCategoriesThunk";
 import { setProductList } from "./redux/productSlice";
 import { fetchProducts } from "./thunk/fetchProductsThunk";
@@ -23,46 +21,67 @@ import PrivateRoute from "./components/PrivateRoute";
 
 import CreateOrderPage from "./pages/createOrderPage";
 import PreviousOrderPage from "./pages/PreviousOrderPage";
+import axios from "axios";
 
 function App() {
   const [currentProduct, setCurrentProduct] = useState(null);
 
   const { categories } = useSelector((state) => state.product);
 
-  const { MakeRequest, data, METHODS } = useAxios();
   const dispatch = useDispatch();
 
-  /*
   useEffect(() => {
     const token =
       localStorage.getItem("token") === null
         ? sessionStorage.getItem("token")
         : localStorage.getItem("token");
 
+    const refreshToken =
+      localStorage.getItem("refreshToken") === null
+        ? sessionStorage.getItem("refreshToken")
+        : localStorage.getItem("refreshToken");
+
+    const tokenSavedArea =
+      localStorage.getItem("token") === null ? "session" : "local";
+
     if (token) {
       const requestData = {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         },
       };
 
-      const fetchData = async () => {
-        const response = await MakeRequest({
-          url: "/verify",
-          method: METHODS.GET,
-          data: requestData,
+      axios
+        .get("http://localhost:8080/verify", requestData)
+        .then((res) => {
+          console.log(res.data);
+          tokenSavedArea === "local"
+            ? localStorage.setItem("token", res.data.token)
+            : sessionStorage.setItem("token", res.data.token);
+        })
+        .catch((err) => {
+          if (err.response && err.response.status === 401) {
+            console.log("This token expired");
+
+            axios
+              .post("http://localhost:8080/refresh-token", refreshToken)
+              .then((res) => {
+                const { token, refreshToken, email } = res.data;
+                if (tokenSavedArea == "local") {
+                  localStorage.setItem("token", token);
+                  localStorage.setItem("refreshToken", refreshToken);
+                } else {
+                  sessionStorage.setItem("token", token);
+                  sessionStorage.setItem("refreshToken", refreshToken);
+                }
+              })
+              .catch((err) => {
+                console.log(err.response.data.message);
+              });
+          }
         });
-
-        if (response && response.data) {
-          dispatch(setUser(response.data));
-          localStorage.setItem("token", response.data.token);
-        }
-      };
-
-      fetchData();
     }
   }, []);
-  */
 
   useEffect(() => {
     if (setProductList.length === 0) {

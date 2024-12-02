@@ -21,7 +21,7 @@ export const loginUser = createAsyncThunk(
         }
       )
       .then((response) => {
-        const { token, name, email } = response.data;
+        const { token, name, email, refreshToken } = response.data;
 
         const user = { name, email };
 
@@ -34,9 +34,11 @@ export const loginUser = createAsyncThunk(
 
         if (rememberMe) {
           localStorage.setItem("token", token);
+          localStorage.setItem("refreshToken", refreshToken);
           localStorage.setItem("user", JSON.stringify(user));
         } else {
           sessionStorage.setItem("token", token);
+          localStorage.setItem("refreshToken", refreshToken);
           sessionStorage.setItem("user", JSON.stringify(user));
         }
 
