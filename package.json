@@ -44,13 +44,11 @@
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
     "tailwindcss": "^3.4.10",
-    "vite": "^5.4.1"
-  }
-,
-  "proxy":{
+    "vite": "^5.4.11"
+  },
+  "proxy": {
     "name": "react-uygulamasi",
     "version": "0.1.0",
-    "proxy": "https://e-commerce-backend-with-java-and-spring-qx2p.onrender.com" 
-   
+    "proxy": "https://e-commerce-backend-with-java-and-spring-qx2p.onrender.com"
   }
 }

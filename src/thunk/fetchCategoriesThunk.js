@@ -12,7 +12,7 @@ export const fetchCategories = createAsyncThunk(
 
     dispatch(setFetchState("FETCHING"));
     return axios
-      .get(`https://e-commerce-withspring.onrender.com${endpoint}`)
+      .get(`https://workintech-fe-ecommerce.onrender.com${endpoint}`)
       .then((response) => {
         dispatch(setCategories(response.data));
         dispatch(setFetchState("FETCHED"));
